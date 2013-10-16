@@ -1,6 +1,9 @@
 var sliders = {};
+var scene_sliders = {};
 var pickers = {};
 var picker_timer = null;
+
+var scene_slider_timer = null;
 
 function rgbToHsl(r, g, b){
   r /= 255, g /= 255, b /= 255;
@@ -167,6 +170,7 @@ $(document).ready(function() {
     });
   });
 
+  /* Sliders for individual lights ***********************************************************************************/
   $('.js-slider-bri').on('change', function() {
     window.setTimeout(slider_process, 500);
     slider = $(this);
@@ -178,12 +182,62 @@ $(document).ready(function() {
     slider = $(this);
     sliders[slider.attr('name')] = { current: { ct: null }, new: { ct: slider.val() } };
   });
+
+  /* Sliders for scenes **********************************************************************************************/
+  $('.js-scene-slider-bri').on('change', function() {
+    slider = $(this);
+
+    component_ids = slider.attr('name').match(/scene_(\d+)_light_(\d+)_(.*)/)
+    scene_id = component_ids[1];
+    light_id = component_ids[2];
+    control  = component_ids[3];
+
+    change = {
+      scene: scene_id,
+      light: light_id,
+      bri: slider.val()
+    };
+
+    window.clearTimeout(scene_slider_timer);
+    scene_slider_timer = window.setTimeout(scene_slider_process, 500, change);
+  });
+
+  $('.js-scene-slider-ct').on('change', function() {
+    slider = $(this);
+
+    component_ids = slider.attr('name').match(/scene_(\d+)_light_(\d+)_(.*)/)
+    scene_id = component_ids[1];
+    light_id = component_ids[2];
+    control  = component_ids[3];
+
+    change = {
+      scene: scene_id,
+      light: light_id,
+      ct: slider.val()
+    };
+
+    window.clearTimeout(scene_slider_timer);
+    scene_slider_timer = window.setTimeout(scene_slider_process, 500, change);
+  });
 });
+
+function scene_slider_process(change) {
+  console.log('Change for...');
+  console.log(change);
+
+//  $.ajax('/', {
+//    type: 'post',
+//    data: {
+//      action: 'update-scene',
+//    }
+//  });
+
+  scene_sliders = {};
+}
 
 function slider_process() {
   for(var light in sliders) {
     light_id = light.match(/light_(\d+)_/)[1];
-    state_key = light.match(/light_\d+_(.*)/)[1];
 
     state = {};
     if(sliders[light]['current']['bri'] != sliders[light]['new']['bri']) {

@@ -249,21 +249,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                   <input
                     style="width: 100%;"
                     type="range" min="1" max="255"
+                    data-scene-id="<?=$scene->id?>"
+                    data-light-id="<?=$light->id?>"
                     name="scene_<?=$scene->id?>_light_<?=$light->id?>_bri" value="<?=$light->bri?>"
                     class="js-scene-slider-bri" />
                   <br/>
                   <input
                     style="width: 100%;"
                     type="range" min="153" max="500"
+                    data-scene-id="<?=$scene->id?>"
+                    data-light-id="<?=$light->id?>"
                     name="scene_<?=$scene->id?>_light_<?=$light->id?>_ct" value="<?=$light->ct?>"
                     class="js-scene-slider-ct" />
                 </div>
                 <div class="light-controls-hs" style="<?=($hs_active)?'':' display:none;'?>">
                   <input
                     type="color"
+                    data-scene-id="<?=$scene->id?>"
                     data-light-id="<?=$light->id?>"
-                    data-light="light_<?=$light->id?>_hs"
-                    class="js-light-control-hs"
+                    class="js-scene-control-hs"
                     name="scene_<?=$scene->id?>_light_<?=$light->id?>_hs"
                     value="<?=$light->as_hex()?>">
                 </div>
