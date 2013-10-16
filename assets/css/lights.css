@@ -1,0 +1,47 @@
+pre#response {
+  font-size: 0.7em;
+}
+
+.toggle-response-row {
+  margin: 10px 0;
+}
+
+.response-row {
+  border-top: 1px solid silver;
+  margin-top: 30px;
+}
+
+.loading {
+  background-color: white;
+  -webkit-animation: throb 0.5s linear infinite;
+}
+
+@-webkit-keyframes throb {
+  50% { background-color: #ffe18f; }
+  100% { background-color: #fff; }
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.light-name {
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.light-controls-type {
+  /*text-align: right;*/
+  margin-bottom: 5px;
+}
+
+.light-controls {
+  border: 1px solid silver;
+  padding: 5px;
+  border-radius: 3px;
+}
+
+.light-control-hs {
+  border: none;
+  width: 100%;
+}
