@@ -45,3 +45,12 @@ pre#response {
   border: none;
   width: 100%;
 }
+
+.scene-swatch {
+  width: 32px;
+  height: 32px;
+  font-size: 1px;
+  margin-left: 3px;
+  border-radius: 3px;
+  float: left;
+}

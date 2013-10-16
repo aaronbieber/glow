@@ -75,7 +75,7 @@ $(document).ready(function() {
     $('#controls_' + light_id).slideToggle();
   });
 
-  $('.light-control-hs').on('change', function() {
+  $('.js-light-control-hs').on('change', function() {
     var light_name = $(this).data('light');
     var light_id = $(this).data('light-id');
     var hex_color = $(this).val();

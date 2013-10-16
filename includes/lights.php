@@ -8,8 +8,7 @@
  * @copyright 2013 All Rights Reserved
  * @version   git: $Id$
  */
-class Lights
-{
+class Lights {
   public $lights = [];
 
   public function __construct() {
