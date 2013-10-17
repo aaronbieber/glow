@@ -1,8 +1,10 @@
 var sliders = {};
 var scene_sliders = {};
 var pickers = {};
-var picker_timer = null;
 
+var picker_timer = null;
+var scene_picker_timer = null;
+var slider_timer = null;
 var scene_slider_timer = null;
 
 function rgbToHsl(r, g, b){
@@ -78,34 +80,6 @@ $(document).ready(function() {
     $('#controls_' + light_id).slideToggle();
   });
 
-  $('.js-light-control-hs').on('change', function() {
-    var light_name = $(this).data('light');
-    var light_id = $(this).data('light-id');
-    var hex_color = $(this).val();
-
-    hex_r = hex_color.substring(1,3);
-    hex_g = hex_color.substring(3,5);
-    hex_b = hex_color.substring(5,7);
-    dec_r = parseInt(hex_r, 16);
-    dec_g = parseInt(hex_g, 16);
-    dec_b = parseInt(hex_b, 16);
-
-    hsl = rgbToHsl(dec_r, dec_g, dec_b);
-    console.log('RGB: ' + dec_r + ', ' + dec_g + ', ' + dec_b + ', HSL: ' + hsl.h + ', ' + hsl.s + ', ' + hsl.l);
-
-    pickers[light_name] = {
-      id: light_id,
-      new: {
-        h: hsl.h,
-        s: hsl.s,
-        b: hsl.l
-      }
-    }
-
-    window.clearTimeout(picker_timer);
-    picker_timer = window.setTimeout(picker_process, 250);
-  });
-                            
   $('.js-toggle-colormode').on('click', function() {
     button = $(this);
     // Find the other button by looking around.
@@ -172,16 +146,60 @@ $(document).ready(function() {
 
   /* Sliders for individual lights ***********************************************************************************/
   $('.js-slider-bri').on('change', function() {
-    window.setTimeout(slider_process, 500);
-    slider = $(this);
-    sliders[slider.attr('name')] = { current: { bri: null }, new: { bri: slider.val() } };
+    var slider = $(this);
+    var light_id = slider.data('light-id');
+    //light_id = slider.attr('name').match(/light_(\d+)_/)[1];
+
+    change = {
+      light: light_id,
+      bri: slider.val()
+    }
+
+    window.clearTimeout(slider_timer);
+    slider_timer = window.setTimeout(slider_process, 500, change);
   });
 
   $('.js-slider-ct').on('change', function() {
-    window.setTimeout(slider_process, 500);
-    slider = $(this);
-    sliders[slider.attr('name')] = { current: { ct: null }, new: { ct: slider.val() } };
+    var slider = $(this);
+    var light_id = slider.data('light-id');
+    //light_id = slider.attr('name').match(/light_(\d+)_/)[1];
+
+    change = {
+      light: light_id,
+      ct: slider.val()
+    }
+
+    window.clearTimeout(slider_timer);
+    slider_timer = window.setTimeout(slider_process, 500, change);
   });
+
+  $('.js-light-control-hs').on('change', function() {
+    var picker = $(this);
+    var light_id = picker.data('light-id');
+    var hex_color = picker.val();
+
+    hex_r = hex_color.substring(1,3);
+    hex_g = hex_color.substring(3,5);
+    hex_b = hex_color.substring(5,7);
+    dec_r = parseInt(hex_r, 16);
+    dec_g = parseInt(hex_g, 16);
+    dec_b = parseInt(hex_b, 16);
+
+    hsl = rgbToHsl(dec_r, dec_g, dec_b);
+
+    console.log('RGB: ' + dec_r + ', ' + dec_g + ', ' + dec_b + ', HSL: ' + hsl.h + ', ' + hsl.s + ', ' + hsl.l);
+
+    state = {
+      light: light_id,
+      hue: hsl.h,
+      sat: hsl.s,
+      bri: hsl.l
+    }
+
+    window.clearTimeout(picker_timer);
+    picker_timer = window.setTimeout(picker_process, 500, state);
+  });
+                            
 
   /* Sliders for scenes **********************************************************************************************/
   $('.js-scene-slider-bri').on('change', function() {
@@ -219,90 +237,42 @@ $(document).ready(function() {
     window.clearTimeout(scene_slider_timer);
     scene_slider_timer = window.setTimeout(scene_slider_process, 500, change);
   });
+
+  $('.js-scene-control-hs').on('change', function() {
+    
+  });
 });
 
 function scene_slider_process(change) {
   console.log('Change for...');
   console.log(change);
 
-//  $.ajax('/', {
-//    type: 'post',
-//    data: {
-//      action: 'update-scene',
-//    }
-//  });
+  $.ajax('/', {
+    type: 'post',
+    data: {
+      action: 'update-scene',
+    }
+  });
 
   scene_sliders = {};
 }
 
-function slider_process() {
-  for(var light in sliders) {
-    light_id = light.match(/light_(\d+)_/)[1];
-
-    state = {};
-    if(sliders[light]['current']['bri'] != sliders[light]['new']['bri']) {
-      state['bri'] = sliders[light]['new']['bri'];
-      sliders[light]['current']['bri'] = sliders[light]['new']['bri'];
+function slider_process(state) {
+  $.ajax('/', {
+    type: 'post',
+    data: state,
+    success: function(data) {
+      $('#response').html(data);
     }
-
-    if(sliders[light]['current']['ct'] != sliders[light]['new']['ct']) {
-      state['ct'] = sliders[light]['new']['ct'];
-      sliders[light]['current']['ct'] = sliders[light]['new']['ct'];
-    }
-
-    if(Object.keys(state).length) {
-      state['light'] = light_id;
-
-      $.ajax('/', {
-        type: 'post',
-        data: state,
-        success: function(data) {
-          $('#response').html(data);
-        }
-      });
-
-      window.setTimeout(slider_process, 500);
-    }
-  }
+  });
 }
 
-function picker_process() {
-  for(var picker in pickers) {
-    if(  !pickers[picker].current
-      || JSON.stringify(pickers[picker].current) !== JSON.stringify(pickers[picker].new)
-    ) {
-      // Acknowledge that there was a change that we observed and come back in 250 ms to look again.
-      pickers[picker].current = pickers[picker].new;
-      window.setTimeout(picker_process, 500);
-    } else if(JSON.stringify(pickers[picker].current) === JSON.stringify(pickers[picker].new)) {
-      // If the values are the same, it's been 250ms since the last time we observed a change.
-
-      // Store the values in a new temporary object.
-      color = {
-        hue: pickers[picker].new.h,
-        sat: pickers[picker].new.s,
-        bri: pickers[picker].new.b
-      }
-
-      // Translate the values into the Hue ranges.
-      //color.hue = Math.floor((color.hue * 65535) / 360);
-      //color.sat = Math.floor((color.sat * 255) / 100);
-      //color.bri = Math.floor((color.bri * 255) / 100);
-
-      state = {
-        light: pickers[picker].id,
-        hue: color.hue,
-        sat: color.sat,
-        bri: color.bri
-      }
-
-      $.ajax('/', {
-        type: 'post',
-        data: state,
-        success: function(data) {
-          $('#response').html(data);
-        }
-      });
+function picker_process(state) {
+  $.ajax('/', {
+    type: 'post',
+    data: state,
+    success: function(data) {
+      $('#response').html(data);
     }
-  }
+  });
 }

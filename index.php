@@ -160,12 +160,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
               <input
                 style="width: 100%;"
                 type="range" min="1" max="255"
+                data-light-id="<?=$light->id?>"
                 name="light_<?=$light->id?>_bri" value="<?=$light->bri?>"
                 class="js-slider-bri" />
               <br/>
               <input
                 style="width: 100%;"
                 type="range" min="153" max="500"
+                data-light-id="<?=$light->id?>"
                 name="light_<?=$light->id?>_ct" value="<?=$light->ct?>"
                 class="js-slider-ct" />
             </div>
