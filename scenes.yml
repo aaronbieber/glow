@@ -1,3 +1,29 @@
 ---
-1: !php/object "O:5:\"Scene\":3:{s:4:\"name\";s:6:\"Groovy\";s:6:\"lights\";a:3:{i:0;O:5:\"Light\":8:{s:2:\"id\";i:1;s:4:\"name\";s:0:\"\";s:2:\"on\";b:0;s:9:\"colormode\";s:2:\"hs\";s:2:\"ct\";N;s:3:\"hue\";i:47992;s:3:\"sat\";i:192;s:3:\"bri\";i:109;}i:1;O:5:\"Light\":8:{s:2:\"id\";i:2;s:4:\"name\";s:0:\"\";s:2:\"on\";b:0;s:9:\"colormode\";s:2:\"hs\";s:2:\"ct\";N;s:3:\"hue\";i:55115;s:3:\"sat\";i:167;s:3:\"bri\";i:116;}i:2;O:5:\"Light\":8:{s:2:\"id\";i:3;s:4:\"name\";s:0:\"\";s:2:\"on\";b:0;s:9:\"colormode\";s:2:\"hs\";s:2:\"ct\";N;s:3:\"hue\";i:47992;s:3:\"sat\";i:192;s:3:\"bri\";i:109;}}s:2:\"id\";i:1;}"
+1:
+  name: Groovy
+  lights:
+    1:
+      name: "Bedroom"
+      "on": false
+      colormode: hs
+      ct: ~
+      hue: 47992
+      sat: 192
+      bri: 109
+    2:
+      name: "Dining Room"
+      "on": false
+      colormode: hs
+      ct: ~
+      hue: 55115
+      sat: 167
+      bri: 116
+    3:
+      name: "Living Room"
+      "on": false
+      colormode: hs
+      ct: ~
+      hue: 47992
+      sat: 192
+      bri: 109
 ...
