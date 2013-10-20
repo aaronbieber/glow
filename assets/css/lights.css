@@ -50,6 +50,9 @@ pre#response {
   border-radius: 3px;
   float: left;
   margin-right: 5px;
+  text-align: center;
+  line-height: 32px;
+  font-size: 1.3em;
 }
 
 .swatch-sm {
@@ -119,4 +122,9 @@ div.light-name {
 }
 
 span.save-scene-name-button {
+}
+
+ul.nav {
+  margin-top: 1em;
+  margin-bottom: 2em;
 }

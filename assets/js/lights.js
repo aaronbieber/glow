@@ -33,7 +33,7 @@ function select_page(page) {
   var page_name = page.substring(1, page.length);
 
   // Un-highlight all buttons.
-  $('ul.navbar-nav a').each(function() {
+  $('ul.nav a').each(function() {
     var href = $(this).attr('href');
 
     // Be selective.
@@ -62,7 +62,7 @@ $(document).ready(function() {
     select_page(location.hash);
   }
 
-  $('ul.navbar-nav a').on('click', function() {
+  $('ul.nav a').on('click', function() {
     select_page($(this).attr('href'));
   });
 

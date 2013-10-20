@@ -24,33 +24,33 @@
 
   /* All lights row!
    *
-   * The "All Lights" row should reflect the value of all lights, if they are the same, and defaults otherwise. What we
-   * do is snag all of the attributes of the first light by index, then loop over each of the remaining lights comparing
-   * all of their values to those of the first light. As soon as any value differs, remove it from the final state arra,
-   * then use the final state array to draw the All Lights row.
+   * The "All Lights" row should reflect the value of all lights only if they are the same, and some defaults otherwise.
+   * What we do is snag all of the attributes of the first light by index, then loop over each of the remaining lights
+   * comparing all of their values to those of the first light. As soon as any value differs, remove it from the final
+   * state array, then use the final state array to draw the All Lights row.
    */
-  $first_light = $all_state = get_object_vars($Lights->lights[0]);
+  $all_state = get_object_vars($Lights->lights[0]);
+
   $skip_first = true;
   foreach ($Lights->lights as $light) {
+    // Skip the first light because it is the one we're comparing everything to.
     if ($skip_first) {
       $skip_first = false;
       continue;
     }
 
-    foreach ($first_light as $attr => $value) {
-      // Don't compare name.
-      if ($attr == 'name') {
-        continue;
-      }
-
-      /* Compare all other attributes. If the attribute is different, remove it from the final "state" array.
-       * Ultimately, the "state" array will contain only the attributes that are identical across all lights.
-       */
-      if ($first_light[$attr] != $light->{$attr}) {
+    /* Compare all other attributes. If the attribute is different, remove it from the final "state" array. Ultimately,
+     * the "state" array will contain only the attributes that are identical across all lights.
+     */
+    foreach ($all_state as $attr => $value) {
+      if ($all_state[$attr] != $light->{$attr}) {
         unset($all_state[$attr]);
       }
     }
   }
+
+  // Synthesize the name for this light, which is displayed in the row.
+  $all_state['name'] = 'All Lights';
 
   // Create a new light object using the values shared by all lights.
   $light = new Light($all_state);

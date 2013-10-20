@@ -12,7 +12,24 @@
         class="btn btn-default<?=($light->power)?' btn-success':''?> js-button-light light-button"
       >Toggle</button>
 
-      <span id="light_swatch_<?=$light->id?>" class="color-swatch" style="float: right; background-color: <?=$light->as_hex()?>">&nbsp;</span>
+      <?php
+      $swatch = new StdClass();
+      if ( empty($light->ct)
+        && ( empty($light->hue)
+          || empty($light->sat)
+           )
+      ) {
+        $swatch->color = '#efefef';
+        $swatch->text  = '?';
+      } else {
+        $swatch->color = $light->as_hex();
+        $swatch->text  = '&nbsp;';
+      }
+      ?>
+      <span
+        id="light_swatch_<?=$light->id?>"
+        class="color-swatch"
+        style="float: right; background-color: <?=$swatch->color?>"><?=$swatch->text?></span>
     </div>
   </div>
 

@@ -160,8 +160,14 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST'
   <script src="assets/js/bootstrap.min.js"></script>
 </head>
 <body>
+
+  <div class="container">
+    <?php
+    include 'includes/page_blocks/navbar.php';
+    ?>
+  </div>
+
   <?php
-  include 'includes/page_blocks/navbar.php';
   include 'includes/page_blocks/home.php';
   include 'includes/page_blocks/scenes.php';
   ?>

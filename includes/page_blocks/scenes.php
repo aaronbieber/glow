@@ -35,7 +35,7 @@
               <button
                 class="btn btn-default btn-sm js-button-save-scene-name"
                 data-scene-id="<?=$scene->id?>"
-              ><span class="glyphicon glyphicon-floppy-disk save-scene-name-button clickable"></span></button>
+              ><span class="glyphicon glyphicon-floppy-disk save-scene-name-button clickable"></span> Save Name</button>
             </div>
           </div>
         </div>
