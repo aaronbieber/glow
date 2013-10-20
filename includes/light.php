@@ -4,7 +4,7 @@ class Light
 {
   public $id = 0;
   public $name = '';
-  public $on = false;
+  public $power = true;
   public $colormode = 'ct';
   public $ct = null;
   public $hue = null;
@@ -12,7 +12,7 @@ class Light
   public $bri = null;
 
   public function __construct($state = []) {
-    if (count($state)) {
+    if (!empty($state)) {
       $this->load_state($state);
     }
   }
@@ -26,11 +26,20 @@ class Light
   }
 
   public function as_hex() {
-    return $this->_hsl_to_hex(
-      $this->hue,
-      $this->sat,
-      $this->bri
-    );
+    // Exception if the light is off.
+    if (!$this->power) {
+      return '#000000';
+    }
+
+    if ($this->colormode == 'ct') {
+      return $this->_ct_to_hex($this->ct);
+    } else {
+      return $this->_hsl_to_hex(
+        $this->hue,
+        $this->sat,
+        $this->bri
+      );
+    }
   }
 
   public function as_rgb() {
@@ -43,12 +52,24 @@ class Light
     );
   }
 
+  private function _ct_to_hex($ct) {
+    $percent = (($ct - 153) / 347) * 100;
+
+    $first  = [ 158, 175, 213 ];
+    $last   = [ 213, 183, 160 ];
+    $deltas = [ ($last[0] - $first[0]) / 100, ($last[1] - $first[1]) / 100, ($last[2] - $first[2]) / 100 ];
+    $color  = '#' .
+      sprintf('%02s', dechex(floor($first[0] + $percent * $deltas[0]))) .
+      sprintf('%02s', dechex(floor($first[1] + $percent * $deltas[1]))) .
+      sprintf('%02s', dechex(floor($first[2] + $percent * $deltas[2])));
+
+    return $color;
+  }
+
   private function _hsl_to_hex($h, $s, $l) {
     $h = ($h * 255) / 65535;
 
     $rgb = $this->_hsl_to_rgb($h, $s, $l);
-
-    //var_dump($rgb);
 
     // Convert back to 255 scale.
     $rgb['r'] = floor($rgb['r']);

@@ -3,27 +3,135 @@
   name: Groovy
   lights:
     1:
-      name: "Bedroom"
-      "on": false
+      name: Bedroom
+      power: true
       colormode: hs
       ct: ~
-      hue: 47992
-      sat: 192
-      bri: 109
+      hue: 58518
+      sat: 193
+      bri: 108
     2:
-      name: "Dining Room"
-      "on": false
+      name: Dining Room
+      power: true
       colormode: hs
       ct: ~
       hue: 55115
       sat: 167
       bri: 116
     3:
-      name: "Living Room"
-      "on": false
+      name: Living Room
+      power: true
       colormode: hs
       ct: ~
       hue: 47992
       sat: 192
       bri: 109
+2:
+  name: Relax
+  lights:
+    1:
+      name: Bedroom
+      power: true
+      colormode: ct
+      ct: "400"
+      hue: ~
+      sat: ~
+      bri: 197
+    2:
+      name: Dining Room
+      power: true
+      colormode: ct
+      ct: 400
+      hue: ~
+      sat: ~
+      bri: 198
+    3:
+      name: Living Room
+      power: true
+      colormode: ct
+      ct: 400
+      hue: ~
+      sat: ~
+      bri: 198
+3:
+  name: All Off
+  lights:
+    1:
+      name: Bedroom
+      power: false
+      colormode: ct
+      ct: ~
+      hue: ~
+      sat: ~
+      bri: ~
+    2:
+      name: Dining Room
+      power: false
+      colormode: ct
+      ct: ~
+      hue: ~
+      sat: ~
+      bri: ~
+    3:
+      name: Living Room
+      power: false
+      colormode: ct
+      ct: ~
+      hue: ~
+      sat: ~
+      bri: ~
+4:
+  name: Untitled Scene
+  lights:
+    1:
+      name: Bedroom
+      power: true
+      colormode: hs
+      ct: 340
+      hue: 21564
+      sat: 226
+      bri: 211
+    2:
+      name: Dining Room
+      power: true
+      colormode: hs
+      ct: 340
+      hue: 21701
+      sat: 225
+      bri: 211
+    3:
+      name: Living Room
+      power: true
+      colormode: hs
+      ct: 349
+      hue: 21845
+      sat: 254
+      bri: 216
+5:
+  name: Untitled Scene
+  lights:
+    1:
+      name: Bedroom
+      power: true
+      colormode: hs
+      ct: 340
+      hue: 43690
+      sat: 169
+      bri: 198
+    2:
+      name: Dining Room
+      power: true
+      colormode: hs
+      ct: 340
+      hue: 41623
+      sat: 149
+      bri: 223
+    3:
+      name: Living Room
+      power: true
+      colormode: hs
+      ct: 153
+      hue: 48397
+      sat: 160
+      bri: 209
 ...

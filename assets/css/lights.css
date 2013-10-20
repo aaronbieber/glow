@@ -53,4 +53,36 @@ pre#response {
   margin-left: 3px;
   border-radius: 3px;
   float: left;
+  margin: 3px 5px 3px 5px;
+}
+
+.scene-name {
+  font-weight: bold;
+}
+
+.scene-controls {
+  display: block;
+  margin-top: 4px;
+}
+
+input[type=color] {
+  width: 100%;
+}
+
+#loading {
+  position: fixed;
+  padding: 3px;
+  z-index: 2000;
+  top: 0px;
+  left: 50%;
+  width: 140px;
+  height: 30px;
+  margin-left: -70px;
+  text-align: center;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  background-color: #FFF3A1;
+  border-left: 1px solid #D1C784;
+  border-bottom: 1px solid #D1C784;
+  border-right: 1px solid #D1C784;
 }

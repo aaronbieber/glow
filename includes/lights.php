@@ -27,12 +27,17 @@ class Lights {
   }
 
   private function _set_light_state($light_id, Array $state) {
+    // Translate values.
+    if (isset($state['power'])) {
+      $state['on'] = (bool) $state['power'];
+      unset($state['power']);
+    }
+
     $service_url = 'http://192.168.10.81/api/abcdef101010/lights/' . $light_id . '/state';
     $ch = curl_init($service_url);
 
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
-
     curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($state));
 
     $response = curl_exec($ch);
@@ -45,7 +50,7 @@ class Lights {
     curl_close($ch);
   }
 
-  public function get_light_state($light_id) {
+  private function _get_light_state($light_id) {
     $service_url = 'http://192.168.10.81/api/abcdef101010/lights/' . $light_id . '/';
     $ch = curl_init($service_url);
 
@@ -61,7 +66,14 @@ class Lights {
     curl_close($ch);
 
     $light_state = json_decode($response, true);
+
     if (!empty($light_state['state'])) {
+      // Translate values.
+      if (isset($light_state['state']['on'])) {
+        $light_state['state']['power'] = $light_state['state']['on'];
+        unset($light_state['state']['on']);
+      }
+
       return $light_state['state'];
     }
   }
@@ -87,7 +99,7 @@ class Lights {
       $light = new Light();
       $light->id = $light_id;
       $light->name = $light_data['name'];
-      $light->load_state($this->get_light_state($light_id));
+      $light->load_state($this->_get_light_state($light_id));
       $lights[] = $light;
     }
 

@@ -1,7 +1,3 @@
-var sliders = {};
-var scene_sliders = {};
-var pickers = {};
-
 var picker_timer = null;
 var scene_picker_timer = null;
 var slider_timer = null;
@@ -80,6 +76,12 @@ $(document).ready(function() {
     $('#controls_' + light_id).slideToggle();
   });
 
+  $('.js-toggle-scene-controls').on('click', function() {
+    button = $(this);
+    scene_id = button.closest('div').data('scene-id');
+    $('#scene_controls_' + scene_id).slideToggle();
+  });
+
   $('.js-toggle-colormode').on('click', function() {
     button = $(this);
     // Find the other button by looking around.
@@ -104,11 +106,15 @@ $(document).ready(function() {
   });
 
   $('.js-button-scene').on('click', function() {
+    $('#loading').fadeIn();
     var scene_id = $(this).data('scene-id');
     $.ajax('/', {
       type: 'post',
-      data: { scene: scene_id },
-      success: function() {}
+      data: { action: 'select-scene', scene: scene_id },
+      success: function(data) {
+        $('#loading').fadeOut();
+        $('#response').html(data);
+      }
     });
   });
 
@@ -116,9 +122,10 @@ $(document).ready(function() {
     button = $(this);
     light_id = button.data('light-id');
 
-    button.closest('tr').addClass('loading');
+    $('#loading').fadeIn();
 
     data = {
+      action: 'power',
       light: light_id,
       power: button.data('power') ? 'off' : 'on'
     }
@@ -138,8 +145,21 @@ $(document).ready(function() {
       type: 'post',
       data: data,
       success: function(data) {
+        $('#loading').fadeOut();
         $('#response').html(data);
-        button.closest('tr').removeClass('loading');
+      }
+    });
+  });
+
+  $('.js-button-save-scene').on('click', function() {
+    $('#loading').fadeIn();
+    $.ajax('/', {
+      type: 'post',
+      data: {
+        action: 'create-scene'
+      },
+      success: function(data) {
+        $('#loading').fadeOut();
       }
     });
   });
@@ -148,7 +168,10 @@ $(document).ready(function() {
   $('.js-slider-bri').on('change', function() {
     var slider = $(this);
     var light_id = slider.data('light-id');
-    //light_id = slider.attr('name').match(/light_(\d+)_/)[1];
+
+    if (!$('#loading').is(':visible')) {
+      $('#loading').fadeIn();
+    }
 
     change = {
       light: light_id,
@@ -162,7 +185,10 @@ $(document).ready(function() {
   $('.js-slider-ct').on('change', function() {
     var slider = $(this);
     var light_id = slider.data('light-id');
-    //light_id = slider.attr('name').match(/light_(\d+)_/)[1];
+
+    if (!$('#loading').is(':visible')) {
+      $('#loading').fadeIn();
+    }
 
     change = {
       light: light_id,
@@ -174,9 +200,13 @@ $(document).ready(function() {
   });
 
   $('.js-light-control-hs').on('change', function() {
-    var picker = $(this);
-    var light_id = picker.data('light-id');
+    var picker    = $(this);
+    var light_id  = picker.data('light-id');
     var hex_color = picker.val();
+
+    if (!$('#loading').is(':visible')) {
+      $('#loading').fadeIn();
+    }
 
     hex_r = hex_color.substring(1,3);
     hex_g = hex_color.substring(3,5);
@@ -196,14 +226,20 @@ $(document).ready(function() {
       bri: hsl.l
     }
 
+    // Update the swatch in real time.
+    $('#light_swatch_' + light_id).css({ backgroundColor: hex_color });
+
     window.clearTimeout(picker_timer);
     picker_timer = window.setTimeout(picker_process, 500, state);
   });
-                            
 
   /* Sliders for scenes **********************************************************************************************/
   $('.js-scene-slider-bri').on('change', function() {
     slider = $(this);
+    
+    if (!$('#loading').is(':visible')) {
+      $('#loading').fadeIn();
+    }
 
     component_ids = slider.attr('name').match(/scene_(\d+)_light_(\d+)_(.*)/)
     scene_id = component_ids[1];
@@ -211,9 +247,10 @@ $(document).ready(function() {
     control  = component_ids[3];
 
     change = {
-      scene: scene_id,
-      light: light_id,
-      bri: slider.val()
+      action: 'update-scene',
+      scene:  scene_id,
+      light:  light_id,
+      bri:    slider.val()
     };
 
     window.clearTimeout(scene_slider_timer);
@@ -223,15 +260,20 @@ $(document).ready(function() {
   $('.js-scene-slider-ct').on('change', function() {
     slider = $(this);
 
+    if (!$('#loading').is(':visible')) {
+      $('#loading').fadeIn();
+    }
+
     component_ids = slider.attr('name').match(/scene_(\d+)_light_(\d+)_(.*)/)
     scene_id = component_ids[1];
     light_id = component_ids[2];
     control  = component_ids[3];
 
     change = {
-      scene: scene_id,
-      light: light_id,
-      ct: slider.val()
+      action: 'update-scene',
+      scene:  scene_id,
+      light:  light_id,
+      ct:     slider.val()
     };
 
     window.clearTimeout(scene_slider_timer);
@@ -239,39 +281,89 @@ $(document).ready(function() {
   });
 
   $('.js-scene-control-hs').on('change', function() {
-    
+    var picker    = $(this);
+    var scene_id  = picker.data('scene-id');
+    var light_id  = picker.data('light-id');
+    var hex_color = picker.val();
+
+    if (!$('#loading').is(':visible')) {
+      $('#loading').fadeIn();
+    }
+
+    hex_r = hex_color.substring(1,3);
+    hex_g = hex_color.substring(3,5);
+    hex_b = hex_color.substring(5,7);
+    dec_r = parseInt(hex_r, 16);
+    dec_g = parseInt(hex_g, 16);
+    dec_b = parseInt(hex_b, 16);
+
+    hsl = rgbToHsl(dec_r, dec_g, dec_b);
+
+    console.log('RGB: ' + dec_r + ', ' + dec_g + ', ' + dec_b + ', HSL: ' + hsl.h + ', ' + hsl.s + ', ' + hsl.l);
+
+    change = {
+      action: 'update-scene',
+      scene: scene_id,
+      light: light_id,
+      hue: hsl.h,
+      sat: hsl.s,
+      bri: hsl.l
+    }
+
+    window.clearTimeout(scene_picker_timer);
+    scene_picker_timer = window.setTimeout(function(change) {
+      $.ajax('/', {
+        type: 'post',
+        data: change,
+        success: function() {
+          $('#loading').fadeOut();
+        }
+      });
+    }, 500, change);
   });
 });
 
 function scene_slider_process(change) {
-  console.log('Change for...');
-  console.log(change);
-
   $.ajax('/', {
     type: 'post',
-    data: {
-      action: 'update-scene',
+    data: change,
+    success: function() {
+      $('#loading').fadeOut();
     }
   });
-
-  scene_sliders = {};
 }
 
 function slider_process(state) {
+  if (state.bri) {
+    $.extend(state, {
+      action: 'update-bri'
+    });
+  } else if (state.ct) {
+    $.extend(state, {
+      action: 'update-ct'
+    });
+  }
+
   $.ajax('/', {
     type: 'post',
     data: state,
     success: function(data) {
+      $('#loading').fadeOut();
       $('#response').html(data);
     }
   });
 }
 
 function picker_process(state) {
+  $.extend(state, {
+    action: 'update-hsl'
+  });
+
   $.ajax('/', {
     type: 'post',
     data: state,
     success: function(data) {
+      $('#loading').fadeOut();
       $('#response').html(data);
     }
   });

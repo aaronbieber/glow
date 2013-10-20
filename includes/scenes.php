@@ -23,14 +23,12 @@ class Scenes implements Iterator {
     return key($this->scenes) !== null;
   }
 
-  public function load_scenes() {
-    //$scenes_yaml = file_get_contents('scenes.yml.serialized');
+  public function load() {
     $scenes_yaml = file_get_contents('scenes.yml');
-    //$this->scenes = yaml_parse($scenes_yaml);
     $this->from_array(yaml_parse($scenes_yaml));
   }
 
-  public function save_scenes() {
+  public function save() {
     $scenes_yaml = yaml_emit($this->as_array());
     $fp = fopen('scenes.yml', 'w');
     fwrite($fp, $scenes_yaml);
@@ -40,13 +38,14 @@ class Scenes implements Iterator {
   public function from_array($self_array) {
     foreach ($self_array as $scene_id => $scene) {
       $this->scenes[$scene_id] = new Scene();
+      $this->scenes[$scene_id]->id = $scene_id;
       $this->scenes[$scene_id]->name = $scene['name'];
 
       foreach ($scene['lights'] as $light_id => $light) {
         $this->scenes[$scene_id]->lights[$light_id] = new Light([
           'id'        => $light_id,
           'name'      => $light['name'],
-          'on'        => $light['on'],
+          'power'     => (bool) $light['power'],
           'colormode' => $light['colormode'],
           'ct'        => $light['ct'],
           'hue'       => $light['hue'],
@@ -65,7 +64,7 @@ class Scenes implements Iterator {
       foreach ($scene->lights as $light) {
         $scene_lights[$light->id] = [
           'name'      => $light->name,
-          'on'        => $light->on,
+          'power'     => $light->power,
           'colormode' => $light->colormode,
           'ct'        => $light->ct,
           'hue'       => $light->hue,
