@@ -25,17 +25,14 @@ pre#response {
   cursor: pointer;
 }
 
-.light-name {
-  font-weight: bold;
-  margin-top: 10px;
-}
-
 .light-controls-type {
   /*text-align: right;*/
   margin-bottom: 5px;
 }
 
 .light-controls {
+  float: right;
+  width: 200px;
   border: 1px solid silver;
   padding: 5px;
   border-radius: 3px;
@@ -46,23 +43,39 @@ pre#response {
   width: 100%;
 }
 
-.scene-swatch {
+.color-swatch {
   width: 32px;
   height: 32px;
   font-size: 1px;
-  margin-left: 3px;
   border-radius: 3px;
   float: left;
-  margin: 3px 5px 3px 5px;
+  margin-right: 5px;
+}
+
+.swatch-sm {
+  width: 16px;
+  height: 16px;
+  margin-top: 8px;
+  margin-bottom: 8px;
 }
 
 .scene-name {
+  height: 32px;
+  line-height: 32px;
   font-weight: bold;
 }
 
 .scene-controls {
   display: block;
   margin-top: 4px;
+}
+
+.scene-controls .row {
+  margin-bottom: 5px;
+}
+
+.scene-controls .row:last-child {
+  margin-bottom: 0px;
 }
 
 input[type=color] {
@@ -85,4 +98,21 @@ input[type=color] {
   border-left: 1px solid #D1C784;
   border-bottom: 1px solid #D1C784;
   border-right: 1px solid #D1C784;
+}
+
+div.light-row,
+div.scene-row {
+  padding-bottom: 5px;
+  border-bottom: 1px solid silver;
+  margin-bottom: 5px;
+}
+
+button.light-button {
+  height: 32px;
+}
+
+div.light-name {
+  font-weight: bold;
+  height: 32px;
+  line-height: 32px;
 }

@@ -72,13 +72,13 @@ $(document).ready(function() {
 
   $('.js-toggle-controls').on('click', function() {
     button = $(this);
-    light_id = button.data('id');
+    light_id = button.data('light-id');
     $('#controls_' + light_id).slideToggle();
   });
 
   $('.js-toggle-scene-controls').on('click', function() {
     button = $(this);
-    scene_id = button.closest('div').data('scene-id');
+    scene_id = button.data('scene-id');
     $('#scene_controls_' + scene_id).slideToggle();
   });
 
@@ -90,9 +90,9 @@ $(document).ready(function() {
     if (!button.data('active')) {
       // Toggle to the other button.
       button.data('active', true);
-      button.addClass('btn-primary');
+      button.removeClass('btn-default').addClass('btn-primary');
       other_button.data('active', false);
-      other_button.removeClass('btn-primary');
+      other_button.removeClass('btn-primary').addClass('btn-default');
 
       row = button.closest('.row');
       if(button.data('mode') == 'ct') {

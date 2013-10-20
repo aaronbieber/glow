@@ -81,7 +81,7 @@
       sat: ~
       bri: ~
 4:
-  name: Untitled Scene
+  name: Swamp Gas
   lights:
     1:
       name: Bedroom
@@ -108,7 +108,7 @@
       sat: 254
       bri: 216
 5:
-  name: Untitled Scene
+  name: Lavender
   lights:
     1:
       name: Bedroom
@@ -134,4 +134,58 @@
       hue: 48397
       sat: 160
       bri: 209
+6:
+  name: Wildflowers
+  lights:
+    1:
+      name: Bedroom
+      power: true
+      colormode: hs
+      ct: 417
+      hue: 59293
+      sat: 220
+      bri: 210
+    2:
+      name: Dining Room
+      power: true
+      colormode: hs
+      ct: 153
+      hue: 38867
+      sat: 220
+      bri: 210
+    3:
+      name: Living Room
+      power: true
+      colormode: hs
+      ct: 209
+      hue: 49151
+      sat: 159
+      bri: 239
+7:
+  name: Energetic
+  lights:
+    1:
+      name: Bedroom
+      power: true
+      colormode: ct
+      ct: 243
+      hue: 59293
+      sat: 220
+      bri: 255
+    2:
+      name: Dining Room
+      power: true
+      colormode: ct
+      ct: 245
+      hue: 38867
+      sat: 220
+      bri: 255
+    3:
+      name: Living Room
+      power: true
+      colormode: ct
+      ct: 245
+      hue: 16201
+      sat: 58
+      bri: 254
 ...
