@@ -30,6 +30,17 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST'
       }
       break;
 
+    case 'rename-scene':
+      $Scenes->scenes[$_POST['scene']]->name = trim($_POST['name']);
+      $Scenes->save();
+
+      echo json_encode([
+        'success' => true,
+        'scene'   => (int) $_POST['scene'],
+        'name'    => $_POST['name']
+      ]);
+      break;
+
     case 'select-scene':
       $scene = $Scenes->scenes[$_POST['scene']];
       foreach ($scene->lights as $light) {
@@ -132,7 +143,6 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST'
       break;
   }
 
-
   die();
 }
 ?>
@@ -149,237 +159,13 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST'
 
   <script src="//code.jquery.com/jquery.js"></script>
   <script src="assets/js/bootstrap.min.js"></script>
-  <script src="assets/js/colorpicker.js"></script>
-
-  <script src="assets/js/lights.js"></script>
 </head>
 <body>
-  <div class="navbar navbar-default navbar-static-top">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">Lights</a>
-      </div>
-      <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav">
-          <li><a href="#home" class="js-page-home">Home</a></li>
-          <li><a href="#scenes" class="js-page-scenes">Scenes</a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <div class="container" id="page-home">
-    <?php
-    foreach($Lights->lights as $light):
-      $ct_class = $hs_class = ' btn-default';
-      $ct_active = $hs_active = false;
-      $ct_active_data = $hs_active_data = 'false';
-      if ($light->colormode == 'ct') {
-        $ct_active = true;
-        $ct_active_data = 'true';
-        $ct_class = ' btn-primary';
-      } elseif($light->colormode == 'hs') {
-        $hs_active = true;
-        $hs_active_data = 'true';
-        $hs_class = ' btn-primary';
-
-        $hue = floor(($light->hue * 255) / 65535);
-        $sat = floor(($light->sat * 100) / 255);
-        $bri = floor(($light->bri * 100) / 255);
-      }
-      ?>
-
-      <?php // Main light row: name, swatch, toggle. ?>
-      <div class="light-row">
-        <div class="row">
-          <div class="col-xs-6 light-name">
-            <span class="glyphicon glyphicon-cog js-toggle-controls clickable" data-light-id="<?=$light->id?>"></span>
-            <?=$light->name?>
-          </div>
-          <div class="col-xs-6" style="text-align: right;">
-            <button
-              style="float: right;"
-              data-light-id="<?=$light->id?>"
-              data-power="<?=($light->power)?'true':'false'?>"
-              class="btn btn-default<?=($light->power)?' btn-success':''?> js-button-light light-button"
-            >Toggle</button>
-
-            <span id="light_swatch_<?=$light->id?>" class="color-swatch" style="float: right; background-color: <?=$light->as_hex()?>">&nbsp;</span>
-          </div>
-        </div>
-
-        <?php // Light controls row: ct/hsl switch, sliders and pickers. ?>
-        <div class="row" id="controls_<?=$light->id?>" style="display: none; margin-top: 4px;">
-          <div class="col-xs-12">
-            <div class="light-controls">
-              <div class="light-controls-ct" style="<?=($ct_active)?'':' display:none;'?>">
-                <input
-                  style="width: 100%;"
-                  type="range" min="1" max="255"
-                  data-light-id="<?=$light->id?>"
-                  name="light_<?=$light->id?>_bri" value="<?=$light->bri?>"
-                  class="js-slider-bri" />
-                <br/>
-                <input
-                  style="width: 100%;"
-                  type="range" min="153" max="500"
-                  data-light-id="<?=$light->id?>"
-                  name="light_<?=$light->id?>_ct" value="<?=$light->ct?>"
-                  class="js-slider-ct" />
-              </div>
-              <div class="light-controls-hs" style="<?=($hs_active)?'':' display:none;'?>">
-                <input
-                  type="color"
-                  style="width: 100%;"
-                  data-light-id="<?=$light->id?>"
-                  data-light="light_<?=$light->id?>_hs"
-                  class="js-light-control-hs"
-                  name="light_<?=$light->id?>_hs"
-                  value="<?=$light->as_hex()?>">
-              </div>
-            </div>
-
-            <div class="btn-group btn-group-xs" style="float: right; margin-right: 3px;">
-              <button
-                type="button"
-                data-mode="ct"
-                data-active="<?=$ct_active_data?>"
-                class="btn js-toggle-colormode<?=$ct_class?>"
-              >Temp</button>
-              <button
-                type="button"
-                data-mode="hs"
-                data-active="<?=$hs_active_data?>"
-                class="btn js-toggle-colormode<?=$hs_class?>"
-              >Hue/Sat</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    <?php
-    endforeach; ?>
-
-    <div class="row">
-      <div class="col-sm-3" style="margin-bottom: 3px; margin-top: 3px;">
-        <button
-          style="width: 100%;"
-          class="btn btn-info js-button-save-scene"
-        >Save Current Settings as Scene</button>
-      </div>
-    </div>
-  </div>
-
-  <div id="page-scenes" class="container" style="display: none;">
-    <?php
-    foreach($Scenes as $scene):
-      ?>
-      <div class="scene-row">
-        <div class="row">
-          <div class="col-xs-6 scene-name">
-            <span class="glyphicon glyphicon-cog js-toggle-scene-controls clickable" data-scene-id="<?=$scene->id?>"></span>
-            <?=$scene->name?>
-          </div>
-          <div class="col-xs-6" style="text-align: right;">
-            <button
-              style="float: right;"
-              data-scene-id="<?=$scene->id?>"
-              class="btn btn-primary js-button-scene"
-            >Choose</button>
-
-            <?php
-            foreach($scene->lights as $light):
-              ?>
-              <span class="color-swatch swatch-sm" style="float: right; background-color: <?=$light->as_hex()?>">&nbsp;</span>
-              <?php
-            endforeach;
-            ?>
-          </div>
-        </div>
-
-        <?php // Scene controls: ct/hsl switches, sliders, pickers. ?>
-        <div id="scene_controls_<?=$scene->id?>" class="scene-controls" style="display: none;">
-        <?php
-        foreach ($scene->lights as $light):
-          $ct_class = $hs_class = ' btn-default';
-          $ct_active = $hs_active = false;
-          $ct_active_data = $hs_active_data = 'false';
-          if ($light->colormode == 'ct') {
-            $ct_active = true;
-            $ct_active_data = 'true';
-            $ct_class = ' btn-primary';
-          } elseif($light->colormode == 'hs') {
-            $hs_active = true;
-            $hs_active_data = 'true';
-            $hs_class = ' btn-primary';
-
-            $hue = floor(($light->hue * 255) / 65535);
-            $sat = floor(($light->sat * 100) / 255);
-            $bri = floor(($light->bri * 100) / 255);
-          }
-          ?>
-          <div class="row">
-            <div class="col-xs-12 light-controls-type">
-
-              <div class="light-controls">
-                <div class="light-controls-ct" style="<?=($ct_active)?'':' display: none;'?>">
-                  <input
-                    style="width: 100%;"
-                    type="range" min="1" max="255"
-                    data-scene-id="<?=$scene->id?>"
-                    data-light-id="<?=$light->id?>"
-                    name="scene_<?=$scene->id?>_light_<?=$light->id?>_bri" value="<?=$light->bri?>"
-                    class="js-scene-slider-bri" />
-                  <br/>
-                  <input
-                    style="width: 100%;"
-                    type="range" min="153" max="500"
-                    data-scene-id="<?=$scene->id?>"
-                    data-light-id="<?=$light->id?>"
-                    name="scene_<?=$scene->id?>_light_<?=$light->id?>_ct" value="<?=$light->ct?>"
-                    class="js-scene-slider-ct" />
-                </div>
-                <div class="light-controls-hs" style="<?=($hs_active)?'':' display: none;'?>">
-                  <input
-                    style="width: 100%;"
-                    type="color"
-                    data-scene-id="<?=$scene->id?>"
-                    data-light-id="<?=$light->id?>"
-                    class="js-scene-control-hs"
-                    name="scene_<?=$scene->id?>_light_<?=$light->id?>_hs"
-                    value="<?=$light->as_hex()?>">
-                </div>
-              </div>
-
-              <div class="btn-group btn-group-xs" style="float: right; margin-right: 3px;">
-                <button
-                  data-mode="ct"
-                  data-active="<?=$ct_active_data?>"
-                  class="btn btn-default js-toggle-colormode<?=$ct_class?>"
-                >Temp</button>
-                <button
-                  data-mode="hs"
-                  data-active="<?=$hs_active_data?>"
-                  class="btn btn-default js-toggle-colormode<?=$hs_class?>"
-                >Hue/Sat</button>
-              </div>
-            </div>
-
-
-          </div>
-          <?php
-        endforeach;
-        ?>
-        </div>
-      </div>
-      <?php
-    endforeach;
-    ?>
-  </div>
+  <?php
+  include 'includes/page_blocks/navbar.php';
+  include 'includes/page_blocks/home.php';
+  include 'includes/page_blocks/scenes.php';
+  ?>
 
   <div class="container">
     <div class="row">
@@ -394,5 +180,8 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST'
     <img src="assets/images/ajax-loader.gif" />
     Working...
   </div>
+
+  <script src="assets/js/colorpicker.js"></script>
+  <script src="assets/js/lights.js"></script>
 </body>
 </html>

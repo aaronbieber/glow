@@ -73,13 +73,25 @@ $(document).ready(function() {
   $('.js-toggle-controls').on('click', function() {
     button = $(this);
     light_id = button.data('light-id');
-    $('#controls_' + light_id).slideToggle();
+    if ($('#controls_' + light_id).is(':visible')) {
+      button.removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-right');
+      $('#controls_' + light_id).slideUp();
+    } else {
+      button.removeClass('glyphicon-chevron-right').addClass('glyphicon-chevron-down');
+      $('#controls_' + light_id).slideDown();
+    }
   });
 
   $('.js-toggle-scene-controls').on('click', function() {
     button = $(this);
     scene_id = button.data('scene-id');
-    $('#scene_controls_' + scene_id).slideToggle();
+    if ($('#scene_controls_' + scene_id).is(':visible')) {
+      button.removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-right');
+      $('#scene_controls_' + scene_id).slideUp();
+    } else {
+      button.removeClass('glyphicon-chevron-right').addClass('glyphicon-chevron-down');
+      $('#scene_controls_' + scene_id).slideDown();
+    }
   });
 
   $('.js-toggle-colormode').on('click', function() {
@@ -163,6 +175,26 @@ $(document).ready(function() {
       }
     });
   });
+
+  $('.js-button-save-scene-name').on('click', function() {
+    var button = $(this);
+    var scene_id = button.data('scene-id');
+
+    $('#loading').fadeIn();
+    $.ajax('/', {
+      type: 'post',
+      data: {
+        action: 'rename-scene',
+        scene: scene_id,
+        name: $('#scene_name_input_' + scene_id).val()
+      },
+      success: function(data) {
+        response = JSON.parse(data);
+        $('#scene_name_label_' + response.scene).html(response.name);
+        $('#loading').fadeOut();
+      }
+    });
+  })
 
   /* Sliders for individual lights ***********************************************************************************/
   $('.js-slider-bri').on('change', function() {

@@ -107,7 +107,8 @@ div.scene-row {
   margin-bottom: 5px;
 }
 
-button.light-button {
+button.light-button,
+button.scene-button {
   height: 32px;
 }
 
@@ -115,4 +116,7 @@ div.light-name {
   font-weight: bold;
   height: 32px;
   line-height: 32px;
+}
+
+span.save-scene-name-button {
 }
