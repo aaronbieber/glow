@@ -1,6 +1,6 @@
 <div class="container" id="page-home">
   <?php
-  foreach($Lights->lights as $light):
+  foreach($Lights->lights as $light) {
     $ct_class = $hs_class = ' btn-default';
     $ct_active = $hs_active = false;
     $ct_active_data = $hs_active_data = 'false';
@@ -19,75 +19,45 @@
     }
 
     // Main light row: name, swatch, toggle.
-    ?>
-    <div class="light-row">
-      <div class="row">
-        <div class="col-xs-6 light-name">
-          <span class="glyphicon glyphicon-chevron-right js-toggle-controls clickable" data-light-id="<?=$light->id?>"></span>
-          <?=$light->name?>
-        </div>
-        <div class="col-xs-6" style="text-align: right;">
-          <button
-            style="float: right;"
-            data-light-id="<?=$light->id?>"
-            data-power="<?=($light->power)?'true':'false'?>"
-            class="btn btn-default<?=($light->power)?' btn-success':''?> js-button-light light-button"
-          >Toggle</button>
+    include 'includes/page_blocks/home_light_row.php';
+  }
 
-          <span id="light_swatch_<?=$light->id?>" class="color-swatch" style="float: right; background-color: <?=$light->as_hex()?>">&nbsp;</span>
-        </div>
-      </div>
+  /* All lights row!
+   *
+   * The "All Lights" row should reflect the value of all lights, if they are the same, and defaults otherwise. What we
+   * do is snag all of the attributes of the first light by index, then loop over each of the remaining lights comparing
+   * all of their values to those of the first light. As soon as any value differs, remove it from the final state arra,
+   * then use the final state array to draw the All Lights row.
+   */
+  $first_light = $all_state = get_object_vars($Lights->lights[0]);
+  $skip_first = true;
+  foreach ($Lights->lights as $light) {
+    if ($skip_first) {
+      $skip_first = false;
+      continue;
+    }
 
-      <?php // Light controls row: ct/hsl switch, sliders and pickers. ?>
-      <div class="row" id="controls_<?=$light->id?>" style="display: none; margin-top: 4px;">
-        <div class="col-xs-12">
-          <div class="light-controls">
-            <div class="light-controls-ct" style="<?=($ct_active)?'':' display:none;'?>">
-              <input
-                style="width: 100%;"
-                type="range" min="1" max="255"
-                data-light-id="<?=$light->id?>"
-                name="light_<?=$light->id?>_bri" value="<?=$light->bri?>"
-                class="js-slider-bri" />
-              <br/>
-              <input
-                style="width: 100%;"
-                type="range" min="153" max="500"
-                data-light-id="<?=$light->id?>"
-                name="light_<?=$light->id?>_ct" value="<?=$light->ct?>"
-                class="js-slider-ct" />
-            </div>
-            <div class="light-controls-hs" style="<?=($hs_active)?'':' display:none;'?>">
-              <input
-                type="color"
-                style="width: 100%;"
-                data-light-id="<?=$light->id?>"
-                data-light="light_<?=$light->id?>_hs"
-                class="js-light-control-hs"
-                name="light_<?=$light->id?>_hs"
-                value="<?=$light->as_hex()?>">
-            </div>
-          </div>
+    foreach ($first_light as $attr => $value) {
+      // Don't compare name.
+      if ($attr == 'name') {
+        continue;
+      }
 
-          <div class="btn-group btn-group-xs" style="float: right; margin-right: 3px;">
-            <button
-              type="button"
-              data-mode="ct"
-              data-active="<?=$ct_active_data?>"
-              class="btn js-toggle-colormode<?=$ct_class?>"
-            >Temp</button>
-            <button
-              type="button"
-              data-mode="hs"
-              data-active="<?=$hs_active_data?>"
-              class="btn js-toggle-colormode<?=$hs_class?>"
-            >Hue/Sat</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  <?php
-  endforeach; ?>
+      /* Compare all other attributes. If the attribute is different, remove it from the final "state" array.
+       * Ultimately, the "state" array will contain only the attributes that are identical across all lights.
+       */
+      if ($first_light[$attr] != $light->{$attr}) {
+        unset($all_state[$attr]);
+      }
+    }
+  }
+
+  // Create a new light object using the values shared by all lights.
+  $light = new Light($all_state);
+
+  // Paint the row.
+  include 'includes/page_blocks/home_light_row.php';
+  ?>
 
   <div class="row">
     <div class="col-sm-3" style="margin-bottom: 3px; margin-top: 3px;">

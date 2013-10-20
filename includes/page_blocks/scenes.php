@@ -16,7 +16,8 @@
           >Choose</button>
 
           <?php
-          foreach($scene->lights as $light):
+          // Reverse the array because the floated elements will appear backwards.
+          foreach(array_reverse($scene->lights) as $light):
             ?>
             <span class="color-swatch swatch-sm" style="float: right; background-color: <?=$light->as_hex()?>">&nbsp;</span>
             <?php

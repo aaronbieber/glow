@@ -18,11 +18,10 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST'
   switch($_POST['action']) {
     case 'power':
       // Validate input.
-      if (empty($_POST['power']) || empty($_POST['light'])) {
+      if (!isset($_POST['power']) || !isset($_POST['light'])) {
         break;
       }
 
-      // Set the light's power.
       if ($_POST['power'] == 'on') {
         $Lights->set_state([ 'on' => true ], $_POST['light']);
       } else {

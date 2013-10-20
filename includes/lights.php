@@ -18,7 +18,7 @@ class Lights {
   public function set_state(Array $state, $light_id = 0) {
     if ($light_id == 0) {
       foreach ($this->lights as $light) {
-        $this->_set_light_state($light['id'], $state);
+        $this->_set_light_state($light->id, $state);
         usleep(100000);
       }
     } else {
