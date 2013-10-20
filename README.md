@@ -22,3 +22,9 @@ to keep things simple).
 
 The ability to actually edit the scene names, re-arrange scenes and lights, 
 delete scenes, and so on.
+
+Better error handling would be nice; sometimes selecting a scene appears to 
+work but some lights don't change. It seems like success responses are being 
+returned for those lights so I'm not sure if there is much the application can 
+do, but perhaps it could do a read of the full light status to see if it 
+matches what we expect.
