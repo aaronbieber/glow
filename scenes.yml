@@ -33,7 +33,7 @@
       name: Bedroom
       power: true
       colormode: ct
-      ct: "400"
+      ct: 400
       hue: ~
       sat: ~
       bri: 197
