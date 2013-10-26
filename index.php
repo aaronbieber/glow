@@ -1,15 +1,18 @@
 <?php
-require_once 'includes/lights.php';
-require_once 'includes/light.php';
-require_once 'includes/scenes.php';
-require_once 'includes/scene.php';
+define('LIBRARY_PATH', 'includes');
+
+require_once 'includes/autoloader.php';
+//require_once 'includes/lights.php';
+//require_once 'includes/light.php';
+//require_once 'includes/scenes.php';
+//require_once 'includes/scene.php';
 
 // Get our scenes.
-$Scenes = new Scenes();
+$Scenes = new \AB\Chroma\Scenes();
 $Scenes->load();
 
 // Get our lights.
-$Lights = new Lights();
+$Lights = new \AB\Chroma\Lights();
 
 // Process any posted data (commands).
 if ( $_SERVER['REQUEST_METHOD'] == 'POST'

@@ -1,7 +1,7 @@
 <?php
+namespace AB\Chroma;
 
-class Scene
-{
+class Scene {
   public $name = '';
   public $lights = [];
 

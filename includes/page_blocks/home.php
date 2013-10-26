@@ -53,7 +53,7 @@
   $all_state['name'] = 'All Lights';
 
   // Create a new light object using the values shared by all lights.
-  $light = new Light($all_state);
+  $light = new \AB\Chroma\Light($all_state);
 
   // Paint the row.
   include 'includes/page_blocks/home_light_row.php';

@@ -8,6 +8,8 @@
  * @copyright 2013 All Rights Reserved
  * @version   git: $Id$
  */
+namespace AB\Chroma;
+
 class Lights {
   public $lights = [];
 

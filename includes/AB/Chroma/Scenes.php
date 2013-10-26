@@ -1,6 +1,7 @@
 <?php
+namespace AB\Chroma;
 
-class Scenes implements Iterator {
+class Scenes implements \Iterator {
   public $scenes = [];
 
   public function rewind() {

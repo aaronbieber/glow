@@ -1,7 +1,7 @@
 <?php
+namespace AB\Chroma;
 
-class Light
-{
+class Light {
   public $id = 0;
   public $name = '';
   public $power = true;
