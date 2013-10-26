@@ -3,6 +3,53 @@ var scene_picker_timer = null;
 var slider_timer = null;
 var scene_slider_timer = null;
 
+function update_home_view() {
+  $.ajax('/', {
+    type: 'get',
+    data: { status: 1 },
+    success: function(data) {
+      for (var index in data) {
+        var light = data[index];
+        update_light_display(light);
+      }
+
+      update_all_light_display(data);
+    }
+  });
+}
+
+function update_all_light_display(lights) {
+  // Figure out power setting.
+  function on(l) { return l.power == true };
+  function off(l) { return l.power == false };
+
+  if (_.all(lights, on)) {
+    $('button[data-light-id=0]').removeClass('btn-default').addClass('btn-success');
+  } else if (_.all(lights, off)) {
+    $('button[data-light-id=0]').addClass('btn-default').removeClass('btn-success');
+  } else {
+    $('button[data-light-id=0]').removeClass('btn-default').removeClass('btn-success');
+  }
+
+  // Figure out color setting.
+  function same_color(l) { return l.hex == lights[0].hex }
+
+  if (_.all(lights, same_color)) {
+    $('#light_swatch_0').css({ backgroundColor: lights[0].hex }).html('&nbsp;');
+  } else {
+    $('#light_swatch_0').css({ backgroundColor: '#efefef' }).html('?');
+  }
+}
+
+function update_light_display(state) {
+  $('#light_swatch_' + state.id).css({ backgroundColor: state.hex });
+  if (state.power) {
+    $('button[data-light-id=' + state.id + ']').addClass('btn-success');
+  } else {
+    $('button[data-light-id=' + state.id + ']').removeClass('btn-success');
+  }
+}
+
 function rgbToHsl(r, g, b){
   r /= 255, g /= 255, b /= 255;
   var max = Math.max(r, g, b), min = Math.min(r, g, b);
@@ -126,6 +173,7 @@ $(document).ready(function() {
       success: function(data) {
         $('#loading').fadeOut();
         $('#response').html(data);
+        update_home_view();
       }
     });
   });
@@ -159,6 +207,7 @@ $(document).ready(function() {
       success: function(data) {
         $('#loading').fadeOut();
         $('#response').html(data);
+        update_home_view();
       }
     });
   });
@@ -189,7 +238,7 @@ $(document).ready(function() {
         name: $('#scene_name_input_' + scene_id).val()
       },
       success: function(data) {
-        response = JSON.parse(data);
+        var response = data; //JSON.parse(data);
         $('#scene_name_label_' + response.scene).html(response.name);
         $('#loading').fadeOut();
       }
@@ -349,6 +398,7 @@ $(document).ready(function() {
         data: change,
         success: function() {
           $('#loading').fadeOut();
+          update_home_view();
         }
       });
     }, 500, change);
@@ -361,6 +411,7 @@ function scene_slider_process(change) {
     data: change,
     success: function() {
       $('#loading').fadeOut();
+      update_home_view();
     }
   });
 }
@@ -382,6 +433,7 @@ function slider_process(state) {
     success: function(data) {
       $('#loading').fadeOut();
       $('#response').html(data);
+      update_home_view();
     }
   });
 }
@@ -397,6 +449,7 @@ function picker_process(state) {
     success: function(data) {
       $('#loading').fadeOut();
       $('#response').html(data);
+      update_home_view();
     }
   });
 }

@@ -25,6 +25,16 @@ class Light
     }
   }
 
+  public function as_array() {
+    // Get all public properties as an associative array.
+    $light_array = get_object_vars($this);
+
+    // Inject the hex value for this light as well.
+    $light_array['hex'] = $this->as_hex();
+
+    return $light_array;
+  }
+
   public function as_hex() {
     // Exception if the light is off.
     if (!$this->power) {
@@ -96,6 +106,7 @@ class Light
     if ($t < 1/6) return $p + ($q - $p) * 6 * $t;
     if ($t < 1/2) return $q;
     if ($t < 2/3) return $p + ($q - $p) * (2/3 - $t) * 6;
+
     return $p;
   }
 

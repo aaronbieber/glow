@@ -124,7 +124,12 @@ div.light-name {
 span.save-scene-name-button {
 }
 
+div.navigation {
+  background-color: #efefef;
+  border-bottom: 2px solid #dedede;
+  margin-bottom: 10px;
+}
+
 ul.nav {
-  margin-top: 1em;
-  margin-bottom: 2em;
+  margin: 10px 0;
 }

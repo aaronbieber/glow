@@ -26,6 +26,17 @@ class Lights {
     }
   }
 
+  public function as_array() {
+    $lights_array = [];
+
+    // Create an array of each of the lights converted to an array. Simple.
+    foreach ($this->lights as $light) {
+      $lights_array[] = $light->as_array();
+    }
+
+    return $lights_array;
+  }
+
   private function _set_light_state($light_id, Array $state) {
     // Translate values.
     if (isset($state['power'])) {
