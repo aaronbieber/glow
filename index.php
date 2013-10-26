@@ -33,6 +33,7 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST'
       $Scenes->scenes[$_POST['scene']]->name = trim($_POST['name']);
       $Scenes->save();
 
+      header('Content-Type: application/json');
       echo json_encode([
         'success' => true,
         'scene'   => (int) $_POST['scene'],
@@ -143,6 +144,12 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST'
   }
 
   die();
+} elseif ( $_SERVER['REQUEST_METHOD'] == 'GET'
+        && !empty($_GET['status'])
+) {
+  header('Content-Type: application/json');
+  echo json_encode($Lights->as_array());
+  die();
 }
 ?>
 <!DOCTYPE html>
@@ -158,14 +165,13 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST'
 
   <script src="//code.jquery.com/jquery.js"></script>
   <script src="assets/js/bootstrap.min.js"></script>
+  <script src="assets/js/underscore-min.js"></script>
 </head>
 <body>
 
-  <div class="container">
-    <?php
-    include 'includes/page_blocks/navbar.php';
-    ?>
-  </div>
+  <?php
+  include 'includes/page_blocks/navbar.php';
+  ?>
 
   <?php
   include 'includes/page_blocks/home.php';
