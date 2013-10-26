@@ -36,7 +36,7 @@
       ct: 400
       hue: ~
       sat: ~
-      bri: 197
+      bri: 255
     2:
       name: Dining Room
       power: true
@@ -44,7 +44,7 @@
       ct: 400
       hue: ~
       sat: ~
-      bri: 198
+      bri: 255
     3:
       name: Living Room
       power: true
@@ -52,7 +52,7 @@
       ct: 400
       hue: ~
       sat: ~
-      bri: 198
+      bri: 255
 3:
   name: All Off
   lights:
@@ -188,4 +188,31 @@
       hue: 16201
       sat: 58
       bri: 254
+8:
+  name: Hellish
+  lights:
+    1:
+      name: Bedroom
+      power: true
+      colormode: hs
+      ct: 447
+      hue: 2462
+      sat: 255
+      bri: 204
+    2:
+      name: Dining Room
+      power: true
+      colormode: hs
+      ct: 399
+      hue: 3058
+      sat: 223
+      bri: 198
+    3:
+      name: Living Room
+      power: true
+      colormode: hs
+      ct: 500
+      hue: 2660
+      sat: 226
+      bri: 211
 ...
