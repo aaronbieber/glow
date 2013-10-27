@@ -26,7 +26,7 @@ class Scenes implements \Iterator {
 
   public function load() {
     $scenes_yaml = file_get_contents('scenes.yml');
-    $this->from_array(yaml_parse($scenes_yaml));
+    $this->from_array(\yaml_parse($scenes_yaml));
   }
 
   public function save() {

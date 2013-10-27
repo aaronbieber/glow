@@ -77,7 +77,7 @@ class Lights implements \Iterator {
 
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
-    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($state));
+    curl_setopt($ch, CURLOPT_POSTFIELDS, \json_encode($state));
 
     $response = curl_exec($ch);
     if ($response === false) {
@@ -108,7 +108,7 @@ class Lights implements \Iterator {
     }
     curl_close($ch);
 
-    $light_state = json_decode($response, true);
+    $light_state = \json_decode($response, true);
 
     if (!empty($light_state['state'])) {
       // Translate values.
@@ -139,7 +139,7 @@ class Lights implements \Iterator {
     }
     curl_close($ch);
 
-    $response = json_decode($response, true);
+    $response = \json_decode($response, true);
     $lights = [];
     foreach($response as $light_id => $light_data) {
       $light = new Light();
