@@ -1,12 +1,4 @@
 <?php
-define('LIBRARY_PATH', 'includes');
-
-require_once 'includes/autoloader.php';
-//require_once 'includes/lights.php';
-//require_once 'includes/light.php';
-//require_once 'includes/scenes.php';
-//require_once 'includes/scene.php';
-
 // Get our scenes.
 $Scenes = new \AB\Chroma\Scenes();
 $Scenes->load();

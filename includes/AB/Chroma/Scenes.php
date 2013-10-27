@@ -63,17 +63,19 @@ class Scenes implements \Iterator {
     foreach ($this->scenes as $scene_id => $scene) {
       $scene_lights = [];
       foreach ($scene->lights as $light) {
-        $scene_lights[$light->id] = [
-          'name'      => $light->name,
-          'power'     => $light->power,
-          'colormode' => $light->colormode,
-          'ct'        => $light->ct,
-          'hue'       => $light->hue,
-          'sat'       => $light->sat,
-          'bri'       => $light->bri
-        ];
+        $scene_lights[$light->id] = $light->as_array();
+        //[
+        //  'name'      => $light->name,
+        //  'power'     => $light->power,
+        //  'colormode' => $light->colormode,
+        //  'ct'        => $light->ct,
+        //  'hue'       => $light->hue,
+        //  'sat'       => $light->sat,
+        //  'bri'       => $light->bri
+        //];
       }
       $self_array[$scene_id] = [
+        'id'     => $scene_id,
         'name'   => $scene->name,
         'lights' => $scene_lights
       ];

@@ -1,0 +1,90 @@
+<div class="scene-row">
+  <div class="row">
+    <div class="col-xs-6 scene-name">
+      <span class="glyphicon glyphicon-chevron-right js-toggle-scene-controls clickable" data-scene-id="{{ scene.id }}"></span>
+      <span id="scene_name_label_{{ scene.id }}">{{ scene.name }}</span>
+    </div>
+    <div class="col-xs-6" style="text-align: right;">
+      <button
+        style="float: right;"
+        data-scene-id="{{ scene.id }}"
+        class="btn btn-primary js-button-scene scene-button"
+      >Choose</button>
+
+      {% for light in scene.lights %}
+        <span class="color-swatch swatch-sm" style="float: right; background-color: {{ light.hex }};">&nbsp;</span>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div id="scene_controls_{{ scene.id }}" class="scene-controls" style="display: none;">
+    <div class="row">
+      <div class="col-xs-12">
+        <div style="float: right;">
+          <input type="text" id="scene_name_input_{{ scene.id }}" value="{{ scene.name }}" />
+          <button
+            class="btn btn-default btn-sm js-button-save-scene-name"
+            data-scene-id="{{ scene.id }}"
+          ><span class="glyphicon glyphicon-floppy-disk save-scene-name-button clickable"></span> Save Name</button>
+        </div>
+      </div>
+    </div>
+
+    {% for light in scene.lights %}
+      <div class="row">
+        <div class="col-xs-12 light-controls-type">
+          <div class="light-controls">
+            <div class="light-controls-ct" style="{% if light.colormode != 'ct' %}display: none;{% endif %}">
+              <input
+                style="width: 100%;"
+                type="range" min="1" max="255"
+                data-scene-id="{{ scene.id }}"
+                data-light-id="{{ light.id }}"
+                name="scene_{{ scene.id }}_light_{{ light.id }}_bri" value="{{ light.bri }}"
+                class="js-scene-slider-bri" />
+              <br/>
+              <input
+                style="width: 100%;"
+                type="range" min="153" max="500"
+                data-scene-id="{{ scene.id }}"
+                data-light-id="{{ light.id }}"
+                name="scene_{{ scene.id }}_light_{{ light.id }}_ct" value="{{ light.ct }}"
+                class="js-scene-slider-ct" />
+            </div>
+            <div class="light-controls-hs" style="{% if light.colormode != 'hs' %}display: none;{% endif %}">
+              <input
+                style="width: 100%;"
+                type="color"
+                data-scene-id="{{ scene.id }}"
+                data-light-id="{{ light.id }}"
+                class="js-scene-control-hs"
+                name="scene_{{ scene.id }}_light_{{ light.id }}_hs"
+                value="{{ light.hex }}">
+            </div>
+          </div>
+
+          <div class="btn-group btn-group-xs" style="float: right; margin-right: 3px;">
+            <button
+              data-mode="ct"
+              data-active="{% if light.colormode == 'ct' %}true{% else %}false{% endif %}"
+              class="btn btn-default js-toggle-colormode{% if light.colormode == 'ct' %} btn-primary{% endif %}"
+            >Temp</button>
+            <button
+              data-mode="hs"
+              data-active="{% if light.colormode == 'hs' %}true{% else %}false{% endif %}"
+              class="btn btn-default js-toggle-colormode{% if light.colormode == 'hs' %} btn-primary{% endif %}"
+            >Hue/Sat</button>
+          </div>
+
+          <button 
+            style="float: right; margin-right: 3px;" 
+            class="btn{% if light.power %} btn-success{% else %} btn-default{% endif %} btn-xs js-scene-light-power"
+            data-power="{% if light.power %}true{% else %}false{% endif %}"
+            data-scene-id="{{ scene.id }}"
+            data-light-id="{{ light.id }}"
+          >On</button>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>

@@ -10,7 +10,7 @@ function autoload($class) {
   }
   $fileName .= str_replace('_', DIRECTORY_SEPARATOR, $class) . '.php';
 
-  require '.' . DIRECTORY_SEPARATOR . LIBRARY_PATH . DIRECTORY_SEPARATOR . $fileName;
+  require LIBRARY_PATH . DIRECTORY_SEPARATOR . $fileName;
 }
 
 spl_autoload_register('autoload');

@@ -10,21 +10,47 @@
  */
 namespace AB\Chroma;
 
-class Lights {
+class Lights implements \Iterator {
   public $lights = [];
 
   public function __construct() {
     $this->lights = $this->_get_lights();
   }
 
+  public function rewind() {
+    return reset($this->lights);
+  }
+
+  public function current() {
+    return current($this->lights);
+  }
+
+  public function key() {
+    return key($this->lights);
+  }
+
+  public function next() {
+    return next($this->lights);
+  }
+
+  public function valid() {
+    return key($this->lights) !== null;
+  }
+
   public function set_state(Array $state, $light_id = 0) {
     if ($light_id == 0) {
+      $success = true;
       foreach ($this->lights as $light) {
-        $this->_set_light_state($light->id, $state);
+        $ret = $this->_set_light_state($light->id, $state);
+        if (!$ret) {
+          $success = false;
+          break;
+        }
         usleep(100000);
       }
+      return $success;
     } else {
-      $this->_set_light_state($light_id, $state);
+      return $this->_set_light_state($light_id, $state);
     }
   }
 
@@ -54,13 +80,16 @@ class Lights {
     curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($state));
 
     $response = curl_exec($ch);
-    echo $response;
     if ($response === false) {
-        $info = curl_getinfo($ch);
-        curl_close($ch);
-        die('error occured during curl exec. Additioanl info: ' . var_export($info));
+      $info = curl_getinfo($ch);
+      curl_close($ch);
+      return false;
+      // die('error occured during curl exec. Additioanl info: ' . var_export($info));
     }
+
+    // Success!
     curl_close($ch);
+    return true;
   }
 
   private function _get_light_state($light_id) {
@@ -72,9 +101,10 @@ class Lights {
 
     $response = curl_exec($ch);
     if ($response === false) {
-        $info = curl_getinfo($ch);
-        curl_close($ch);
-        die('Fatal error while retrieving lights state: ' . var_export($info));
+      $info = curl_getinfo($ch);
+      curl_close($ch);
+      return false;
+      //die('Fatal error while retrieving lights state: ' . var_export($info));
     }
     curl_close($ch);
 
@@ -89,6 +119,8 @@ class Lights {
 
       return $light_state['state'];
     }
+
+    return false;
   }
 
   private function _get_lights() {
@@ -102,7 +134,8 @@ class Lights {
     if ($response === false) {
         $info = curl_getinfo($ch);
         curl_close($ch);
-        die('Fatal error while retrieving lights state: ' . var_export($info));
+        return false;
+        //die('Fatal error while retrieving lights state: ' . var_export($info));
     }
     curl_close($ch);
 

@@ -1,35 +1,44 @@
 ---
 1:
-  name: Groovy
+  id: 1
+  name: Movie
   lights:
     1:
+      id: 1
       name: Bedroom
-      power: true
-      colormode: hs
-      ct: ~
-      hue: 58518
-      sat: 193
-      bri: 108
+      power: false
+      colormode: ct
+      ct: 399
+      hue: 14393
+      sat: 169
+      bri: 254
+      hex: '#000000'
     2:
+      id: 2
       name: Dining Room
-      power: true
+      power: false
       colormode: hs
-      ct: ~
-      hue: 55115
-      sat: 167
-      bri: 116
+      ct: 399
+      hue: 22197
+      sat: 83
+      bri: 95
+      hex: '#000000'
     3:
+      id: 3
       name: Living Room
       power: true
-      colormode: hs
-      ct: ~
-      hue: 47992
-      sat: 192
-      bri: 109
+      colormode: ct
+      ct: 497
+      hue: 12521
+      sat: 225
+      bri: 61
+      hex: '#d4b6a0'
 2:
+  id: 2
   name: Relax
   lights:
     1:
+      id: 1
       name: Bedroom
       power: true
       colormode: ct
@@ -37,7 +46,9 @@
       hue: ~
       sat: ~
       bri: 255
+      hex: '#c5b4af'
     2:
+      id: 2
       name: Dining Room
       power: true
       colormode: ct
@@ -45,7 +56,9 @@
       hue: ~
       sat: ~
       bri: 255
+      hex: '#c5b4af'
     3:
+      id: 3
       name: Living Room
       power: true
       colormode: ct
@@ -53,10 +66,13 @@
       hue: ~
       sat: ~
       bri: 255
+      hex: '#c5b4af'
 3:
+  id: 3
   name: All Off
   lights:
     1:
+      id: 1
       name: Bedroom
       power: false
       colormode: ct
@@ -64,7 +80,9 @@
       hue: ~
       sat: ~
       bri: ~
+      hex: '#000000'
     2:
+      id: 2
       name: Dining Room
       power: false
       colormode: ct
@@ -72,7 +90,9 @@
       hue: ~
       sat: ~
       bri: ~
+      hex: '#000000'
     3:
+      id: 3
       name: Living Room
       power: false
       colormode: ct
@@ -80,10 +100,13 @@
       hue: ~
       sat: ~
       bri: ~
+      hex: '#000000'
 4:
+  id: 4
   name: Swamp Gas
   lights:
     1:
+      id: 1
       name: Bedroom
       power: true
       colormode: hs
@@ -91,7 +114,9 @@
       hue: 21564
       sat: 226
       bri: 211
+      hex: '#aef9ac'
     2:
+      id: 2
       name: Dining Room
       power: true
       colormode: hs
@@ -99,7 +124,9 @@
       hue: 21701
       sat: 225
       bri: 211
+      hex: '#adf9ac'
     3:
+      id: 3
       name: Living Room
       power: true
       colormode: hs
@@ -107,10 +134,13 @@
       hue: 21845
       sat: 254
       bri: 216
+      hex: '#b1feb1'
 5:
+  id: 5
   name: Lavender
   lights:
     1:
+      id: 1
       name: Bedroom
       power: true
       colormode: hs
@@ -118,7 +148,9 @@
       hue: 43690
       sat: 169
       bri: 198
+      hex: '#a0a0eb'
     2:
+      id: 2
       name: Dining Room
       power: true
       colormode: hs
@@ -126,7 +158,9 @@
       hue: 41623
       sat: 149
       bri: 223
+      hex: '#ccd3f1'
     3:
+      id: 3
       name: Living Room
       power: true
       colormode: hs
@@ -134,10 +168,13 @@
       hue: 48397
       sat: 160
       bri: 209
+      hex: '#cdb4ed'
 6:
+  id: 6
   name: Wildflowers
   lights:
     1:
+      id: 1
       name: Bedroom
       power: true
       colormode: hs
@@ -145,7 +182,9 @@
       hue: 59293
       sat: 220
       bri: 210
+      hex: '#f8abd7'
     2:
+      id: 2
       name: Dining Room
       power: true
       colormode: hs
@@ -153,7 +192,9 @@
       hue: 38867
       sat: 220
       bri: 210
+      hex: '#abcdf8'
     3:
+      id: 3
       name: Living Room
       power: true
       colormode: hs
@@ -161,10 +202,13 @@
       hue: 49151
       sat: 159
       bri: 239
+      hex: '#eee5f8'
 7:
+  id: 7
   name: Energetic
   lights:
     1:
+      id: 1
       name: Bedroom
       power: true
       colormode: ct
@@ -172,7 +216,9 @@
       hue: 59293
       sat: 220
       bri: 255
+      hex: '#acb1c7'
     2:
+      id: 2
       name: Dining Room
       power: true
       colormode: ct
@@ -180,7 +226,9 @@
       hue: 38867
       sat: 220
       bri: 255
+      hex: '#acb1c6'
     3:
+      id: 3
       name: Living Room
       power: true
       colormode: ct
@@ -188,10 +236,13 @@
       hue: 16201
       sat: 58
       bri: 254
+      hex: '#acb1c6'
 8:
+  id: 8
   name: Hellish
   lights:
     1:
+      id: 1
       name: Bedroom
       power: true
       colormode: hs
@@ -199,7 +250,9 @@
       hue: 2462
       sat: 255
       bri: 204
+      hex: '#ffaf99'
     2:
+      id: 2
       name: Dining Room
       power: true
       colormode: hs
@@ -207,7 +260,9 @@
       hue: 3058
       sat: 223
       bri: 198
+      hex: '#f7b094'
     3:
+      id: 3
       name: Living Room
       power: true
       colormode: hs
@@ -215,4 +270,5 @@
       hue: 2660
       sat: 226
       bri: 211
+      hex: '#f9beac'
 ...

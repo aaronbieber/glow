@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Lights</title>
+
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/lights.css">
+  <link rel="stylesheet" href="assets/css/colorpicker.css">
+
+  <script src="//code.jquery.com/jquery.js"></script>
+  <script src="assets/js/bootstrap.min.js"></script>
+  <script src="assets/js/underscore-min.js"></script>
+</head>
+<body>
+
+  <div class="navigation">
+    <div class="container">
+      <ul class="nav nav-pills">
+        <li><a href="#home" class="js-page-home">Home</a></li>
+        <li><a href="#scenes" class="js-page-scenes">Scenes</a></li>
+      </ul>
+    </div>
+  </div>
+
+  {% block content %}
+  {% endblock %}
+
+  <div id="loading" style="display: none;">
+    <img src="assets/images/ajax-loader.gif" />
+    Working...
+  </div>
+
+  <script src="assets/js/colorpicker.js"></script>
+  <script src="assets/js/lights.js"></script>
+</body>
+</html>

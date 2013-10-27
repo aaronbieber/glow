@@ -10,10 +10,12 @@ class Light {
   public $hue = null;
   public $sat = null;
   public $bri = null;
+  public $hex = null;
 
   public function __construct($state = []) {
     if (!empty($state)) {
       $this->load_state($state);
+      $this->hex = $this->as_hex();
     }
   }
 

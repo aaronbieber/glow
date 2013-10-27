@@ -4,9 +4,9 @@ var slider_timer = null;
 var scene_slider_timer = null;
 
 function update_home_view() {
-  $.ajax('/', {
+  $.ajax('/light/status', {
     type: 'get',
-    data: { status: 1 },
+    data: {},
     success: function(data) {
       for (var index in data) {
         var light = data[index];
@@ -167,7 +167,7 @@ $(document).ready(function() {
   $('.js-button-scene').on('click', function() {
     $('#loading').fadeIn();
     var scene_id = $(this).data('scene-id');
-    $.ajax('/', {
+    $.ajax('/scene/choose/' + scene_id, {
       type: 'post',
       data: { action: 'select-scene', scene: scene_id },
       success: function(data) {
@@ -190,6 +190,10 @@ $(document).ready(function() {
       power: button.data('power') ? 'off' : 'on'
     }
 
+    var url = '/light/power/' +
+      light_id + '/' +
+      (button.data('power') ? 'off' : 'on');
+
     if(!button.data('static')) {
       if(button.data('power')) {
         button.removeClass('btn-success');
@@ -201,9 +205,9 @@ $(document).ready(function() {
       button.data('power', !button.data('power'));
     }
 
-    $.ajax('/', {
+    $.ajax(url, {
       type: 'post',
-      data: data,
+      data: {},
       success: function(data) {
         $('#loading').fadeOut();
         $('#response').html(data);
@@ -214,11 +218,9 @@ $(document).ready(function() {
 
   $('.js-button-save-scene').on('click', function() {
     $('#loading').fadeIn();
-    $.ajax('/', {
+    $.ajax('/scene/create', {
       type: 'post',
-      data: {
-        action: 'create-scene'
-      },
+      data: {},
       success: function(data) {
         $('#loading').fadeOut();
       }
@@ -230,11 +232,9 @@ $(document).ready(function() {
     var scene_id = button.data('scene-id');
 
     $('#loading').fadeIn();
-    $.ajax('/', {
+    $.ajax('/scene/update/' + scene_id, {
       type: 'post',
       data: {
-        action: 'rename-scene',
-        scene: scene_id,
         name: $('#scene_name_input_' + scene_id).val()
       },
       success: function(data) {
@@ -317,7 +317,7 @@ $(document).ready(function() {
   /* Sliders for scenes **********************************************************************************************/
   $('.js-scene-slider-bri').on('change', function() {
     slider = $(this);
-    
+
     if (!$('#loading').is(':visible')) {
       $('#loading').fadeIn();
     }
@@ -351,14 +351,24 @@ $(document).ready(function() {
     control  = component_ids[3];
 
     change = {
-      action: 'update-scene',
-      scene:  scene_id,
-      light:  light_id,
-      ct:     slider.val()
+      action:    'update-scene',
+      scene:     scene_id,
+      light:     light_id,
+      colormode: 'ct',
+      ct:        slider.val()
     };
 
     window.clearTimeout(scene_slider_timer);
-    scene_slider_timer = window.setTimeout(scene_slider_process, 500, change);
+    scene_slider_timer = window.setTimeout(function(change) {
+      $.ajax('/scene/update/' + scene_id, {
+        type: 'post',
+        data: change,
+        success: function() {
+          $('#loading').fadeOut();
+          update_home_view();
+        }
+      });
+    }, 500, change);
   });
 
   $('.js-scene-control-hs').on('change', function() {
@@ -383,17 +393,18 @@ $(document).ready(function() {
     console.log('RGB: ' + dec_r + ', ' + dec_g + ', ' + dec_b + ', HSL: ' + hsl.h + ', ' + hsl.s + ', ' + hsl.l);
 
     change = {
-      action: 'update-scene',
-      scene: scene_id,
-      light: light_id,
-      hue: hsl.h,
-      sat: hsl.s,
-      bri: hsl.l
+      action:    'update-scene',
+      scene:     scene_id,
+      light:     light_id,
+      colormode: 'hs',
+      hue:       hsl.h,
+      sat:       hsl.s,
+      bri:       hsl.l
     }
 
     window.clearTimeout(scene_picker_timer);
     scene_picker_timer = window.setTimeout(function(change) {
-      $.ajax('/', {
+      $.ajax('/scene/update/' + scene_id, {
         type: 'post',
         data: change,
         success: function() {
@@ -403,10 +414,36 @@ $(document).ready(function() {
       });
     }, 500, change);
   });
+
+  $('.js-scene-light-power').on('click', function() {
+    var button = $(this);
+    var scene_id = button.data('scene-id'),
+        light_id = button.data('light-id'),
+        power    = !button.data('power');
+
+    $('#loading').fadeIn();
+
+    if (power) {
+      button.addClass('btn-success').removeClass('btn-default');
+    } else {
+      button.addClass('btn-default').removeClass('btn-success');
+    }
+
+    $.ajax('/scene/update/' + scene_id, {
+      type: 'post',
+      data: {
+        light: light_id,
+        power: power
+      },
+      success: function() {
+        $('#loading').fadeOut();
+      }
+    });
+  });
 });
 
 function scene_slider_process(change) {
-  $.ajax('/', {
+  $.ajax('/scene/update/' + change.scene, {
     type: 'post',
     data: change,
     success: function() {
@@ -427,7 +464,7 @@ function slider_process(state) {
     });
   }
 
-  $.ajax('/', {
+  $.ajax('/light/set/' + state.light, {
     type: 'post',
     data: state,
     success: function(data) {
@@ -443,7 +480,7 @@ function picker_process(state) {
     action: 'update-hsl'
   });
 
-  $.ajax('/', {
+  $.ajax('/light/set/' + state.light, {
     type: 'post',
     data: state,
     success: function(data) {
