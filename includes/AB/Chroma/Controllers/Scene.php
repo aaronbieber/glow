@@ -54,7 +54,7 @@ class Scene extends Base {
     $this->auto_render = false;
 
     // What is our new scene ID?
-    $scene_id = max(array_keys($Scenes->scenes));
+    $scene_id = max(array_keys($this->_scenes->scenes));
     $scene_id++;
 
     $this->_scenes->scenes[$scene_id] = new \AB\Chroma\Scene();
@@ -106,7 +106,6 @@ class Scene extends Base {
           }
         }
 
-        var_dump($this->_scenes);
         $this->_scenes->save();
 
         return array_merge(['success' => true], $updates);
