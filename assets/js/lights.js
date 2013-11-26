@@ -107,6 +107,9 @@ $(document).ready(function() {
      && jQuery.inArray(location.hash, ['#home', '#scenes']) > -1
   ) {
     select_page(location.hash);
+  } else {
+    location.hash = '#home';
+    select_page('#home');
   }
 
   $('ul.nav a').on('click', function() {
