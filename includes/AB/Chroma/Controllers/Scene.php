@@ -13,41 +13,39 @@ class Scene extends Base {
   public function choose() {
     $this->auto_render = false;
 
-    if ($this->method == 'post') {
-      $scene_id = (int) array_shift($this->args);
+    $scene_id = (int) array_shift($this->args);
 
-      if (is_numeric($scene_id)) {
-        $scene = $this->_scenes->scenes[$scene_id];
+    if (is_numeric($scene_id)) {
+      $scene = $this->_scenes->scenes[$scene_id];
 
-        foreach ($scene->lights as $light) {
-          if ($light->power == false) {
-            $state = [
-              'power' => false
-            ];
-          } elseif ($light->colormode == 'ct') {
-            $state = [
-              'power'  => true,
-              'bri' => $light->bri,
-              'ct'  => $light->ct
-            ];
-          } elseif ($light->colormode == 'hs') {
-            $state = [
-              'power'  => true,
-              'hue' => $light->hue,
-              'sat' => $light->sat,
-              'bri' => $light->bri
-            ];
-          }
+      foreach ($scene->lights as $light) {
+        if ($light->power == false) {
+          $state = [
+            'power' => false
+          ];
+        } elseif ($light->colormode == 'ct') {
+          $state = [
+            'power'  => true,
+            'bri' => $light->bri,
+            'ct'  => $light->ct
+          ];
+        } elseif ($light->colormode == 'hs') {
+          $state = [
+            'power'  => true,
+            'hue' => $light->hue,
+            'sat' => $light->sat,
+            'bri' => $light->bri
+          ];
+        }
 
-          $Lights = new \AB\Chroma\Lights();
-          $ret = $Lights->set_state($state, $light->id);
-          if (!$ret) {
-            return ['success' => false];
-          }
-        } // foreach
-      } // if is_numeric($scene_id)
-      return true;
-    } // if post
+        $Lights = new \AB\Chroma\Lights();
+        $ret = $Lights->set_state($state, $light->id);
+        if (!$ret) {
+          return ['success' => false];
+        }
+      } // foreach
+    } // if is_numeric($scene_id)
+    return true;
   } // choose()
 
   public function create() {
