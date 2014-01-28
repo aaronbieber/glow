@@ -12,61 +12,57 @@ class Light extends Base {
   }
 
   public function post($light_id) {
-    $this->auto_render = false;
+    $state = array_filter([
+      'power'     => $this->param('power') === null ? true : (bool) $this->param('power'),
+      'ct'        => (int) $this->param('ct'),
+      'hue'       => (int) $this->param('hue'),
+      'sat'       => (int) $this->param('sat'),
+      'bri'       => (int) $this->param('bri')
+    ], function ($v) {
+      return $v !== null;
+    });
 
-    //$light_id = (int) array_shift($this->args);
-    if (is_numeric($light_id) && isset($this->params['action'])) {
-      $state = array_filter([
-        'power'     => $this->param('power'),
-        'colormode' => $this->param('colormode'),
-        'ct'        => $this->param('ct'),
-        'hue'       => $this->param('hue'),
-        'sat'       => $this->param('sat'),
-        'bri'       => $this->param('bri')
-      ], function ($v) {
-        return $v !== null;
-      });
+    $this->_lights->set_state($state, $light_id);
 
-      switch ($this->params['action']) {
-        case 'update-hsl':
-          if ( empty($this->params['hue'])
-            || empty($this->params['sat'])
-            || empty($this->params['bri'])
-          ) {
-            break;
-          }
+    //switch ($this->params['action']) {
+    //  case 'update-hsl':
+    //    if ( empty($this->params['hue'])
+    //      || empty($this->params['sat'])
+    //      || empty($this->params['bri'])
+    //    ) {
+    //      break;
+    //    }
 
-          // Set the light's HSL values.
-          $state = [
-            'hue' => (int) $_POST['hue'],
-            'sat' => (int) $_POST['sat'],
-            'bri' => (int) $_POST['bri']
-          ];
+    //    // Set the light's HSL values.
+    //    $state = [
+    //      'hue' => (int) $_POST['hue'],
+    //      'sat' => (int) $_POST['sat'],
+    //      'bri' => (int) $_POST['bri']
+    //    ];
 
-          $this->_lights->set_state($state, $this->params['light']);
-          break;
+    //    $this->_lights->set_state($state, $this->params['light']);
+    //    break;
 
-        case 'update-bri':
-          if (empty($this->params['bri'])) {
-            break;
-          }
+    //  case 'update-bri':
+    //    if (empty($this->params['bri'])) {
+    //      break;
+    //    }
 
-          // Set the light's brightness.
-          $state = [ 'on' => true, 'bri' => (int) $this->params['bri'] ];
-          $this->_lights->set_state($state, $this->params['light']);
-          break;
+    //    // Set the light's brightness.
+    //    $state = [ 'on' => true, 'bri' => (int) $this->params['bri'] ];
+    //    $this->_lights->set_state($state, $this->params['light']);
+    //    break;
 
-        case 'update-ct':
-          if (empty($this->params['ct'])) {
-            break;
-          }
+    //  case 'update-ct':
+    //    if (empty($this->params['ct'])) {
+    //      break;
+    //    }
 
-          // Set the light's color temperature.
-          $state = [ 'on' => true, 'ct' => (int) $this->params['ct'] ];
-          $this->_lights->set_state($state, $this->params['light']);
-          break;
-      }
-    }
+    //    // Set the light's color temperature.
+    //    $state = [ 'on' => true, 'ct' => (int) $this->params['ct'] ];
+    //    $this->_lights->set_state($state, $this->params['light']);
+    //    break;
+    //}
 
     $this->render(['success' => true], Base::FORMAT_JSON);
   }

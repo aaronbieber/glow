@@ -33,7 +33,7 @@ class Base {
   }
 
   protected function param($param) {
-    return !empty($this->params[$param]) ? $this->params[$param] : null;
+    return isset($this->params[$param]) ? $this->params[$param] : null;
   }
 
   protected function render($params, $format = self::FORMAT_HTML) {

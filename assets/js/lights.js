@@ -4,7 +4,7 @@ var slider_timer = null;
 var scene_slider_timer = null;
 
 function update_home_view() {
-  $.ajax('/light/status', {
+  $.ajax('/lights', {
     type: 'get',
     data: {},
     success: function(data) {
@@ -188,14 +188,8 @@ $(document).ready(function() {
     $('#loading').fadeIn();
 
     data = {
-      action: 'power',
-      light: light_id,
-      power: button.data('power') ? 'off' : 'on'
+      power: button.data('power') ? 0 : 1
     }
-
-    var url = '/light/power/' +
-      light_id + '/' +
-      (button.data('power') ? 'off' : 'on');
 
     if(!button.data('static')) {
       if(button.data('power')) {
@@ -208,9 +202,9 @@ $(document).ready(function() {
       button.data('power', !button.data('power'));
     }
 
-    $.ajax(url, {
+    $.ajax('/light/' + light_id, {
       type: 'post',
-      data: {},
+      data: data,
       success: function(data) {
         $('#loading').fadeOut();
         $('#response').html(data);

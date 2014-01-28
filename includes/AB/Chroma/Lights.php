@@ -80,6 +80,9 @@ class Lights implements \Iterator {
     curl_setopt($ch, CURLOPT_POSTFIELDS, \json_encode($state));
 
     $response = curl_exec($ch);
+
+    var_dump($response);
+
     if ($response === false) {
       $info = curl_getinfo($ch);
       curl_close($ch);
