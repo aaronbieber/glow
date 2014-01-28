@@ -28,6 +28,12 @@ class Base {
   public function __construct() {
     $twig_loader = new \Twig_Loader_Filesystem(LIBRARY_PATH . '/AB/Chroma/Views');
     $this->renderer = new \Twig_Environment($twig_loader, [ 'auto_reload' => true, 'cache' => 'cache/templates' ]);
+
+    $this->params = array_merge($_GET, $_POST);
+  }
+
+  protected function param($param) {
+    return !empty($this->params[$param]) ? $this->params[$param] : null;
   }
 
   protected function render($params, $format = self::FORMAT_HTML) {

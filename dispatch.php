@@ -20,6 +20,7 @@ ToroHook::add('404', function() { echo "Not found."; });
 
 Toro::serve(array(
   '/'              => '\\AB\\Chroma\\Controllers\\Home',
+  '/lights'        => '\\AB\\Chroma\\Controllers\\Lights',
   '/light/:number' => '\\AB\\Chroma\\Controllers\\Light',
   '/scene/:number' => '\\AB\\Chroma\\Controllers\\Scene'
 ));
