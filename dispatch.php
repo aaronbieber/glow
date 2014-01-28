@@ -10,18 +10,16 @@
  */
 
 // Define the base library path for the application.
-define('LIBRARY_PATH', './includes');
+define('LIBRARY_PATH', '/var/www/lights/htdocs/includes');
 
 // Pull in our autoloader, which is the only thing we need to include.
 require_once 'includes/autoloader.php';
 require_once 'vendor/autoload.php';
 
-$twig_loader = new Twig_Loader_Filesystem('includes/AB/Chroma/Views');
-$twig = new Twig_Environment($twig_loader, [ 'auto_reload' => true, 'cache' => 'cache/templates' ]);
+ToroHook::add('404', function() { echo "Not found."; });
 
-$request = new \AB\Chroma\RequestContext($_SERVER);
-
-// Easy, right?
-$dispatcher = new \AB\Chroma\Dispatcher($request);
-$dispatcher->renderer = $twig;
-$dispatcher->dispatch();
+Toro::serve(array(
+  '/'              => '\\AB\\Chroma\\Controllers\\Home',
+  '/light/:number' => '\\AB\\Chroma\\Controllers\\Light',
+  '/scene/:number' => '\\AB\\Chroma\\Controllers\\Scene'
+));

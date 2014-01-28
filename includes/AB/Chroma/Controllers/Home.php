@@ -18,7 +18,8 @@ class Home extends Base {
   private $_scenes;
   private $_lights;
 
-  public function pre_action() {
+  public function __construct() {
+    parent::__construct();
     // Get our scenes.
     $this->_scenes = new \AB\Chroma\Scenes();
     $this->_scenes->load();
@@ -30,7 +31,7 @@ class Home extends Base {
   /**
    * Function index
    */
-  public function index() {
+  public function get() {
     // Create a flat array of light data, which we will then manipulate and append to.
     $lights = [];
 
@@ -107,9 +108,9 @@ class Home extends Base {
     // Append it to the lights array.
     $lights[] = $all_state;
 
-    return [
+    $this->render([
       'lights' => $lights,
       'scenes' => $this->_scenes->as_array()
-    ];
+    ]);
   }
 }

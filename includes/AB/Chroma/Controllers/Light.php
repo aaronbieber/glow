@@ -4,12 +4,14 @@ namespace AB\Chroma\Controllers;
 class Light extends Base {
   private $_lights;
 
-  public function pre_action() {
+  public function __construct() {
+    parent::__construct();
+
     // Get our lights.
     $this->_lights = new \AB\Chroma\Lights();
   }
 
-  public function set() {
+  public function post($id) {
     $this->auto_render = false;
 
     if ($this->method == 'post') {
@@ -56,13 +58,13 @@ class Light extends Base {
         }
       }
 
-      return ['success' => true];
+      $this->render(['success' => true], Base::FORMAT_JSON);
     }
   }
 
-  public function status() {
-    $this->auto_render = false;
-    return $this->_lights->as_array();
+  public function get($id) {
+    //$this->auto_render = false;
+    $this->render($this->_lights->as_array(), Base::FORMAT_JSON);
   }
 
   public function power() {

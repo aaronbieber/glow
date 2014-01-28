@@ -15,18 +15,28 @@ namespace AB\Chroma\Controllers;
  * @author Aaron Bieber <aaron@aaronbieber.com>
  */
 class Base {
+  const FORMAT_JSON = 'json';
+  const FORMAT_HTML = 'html';
+
   protected $args = [];
   protected $params = [];
   protected $method = '';
+  protected $renderer = null;
+
   public $auto_render = true;
 
-  public function __construct(\AB\Chroma\Dispatcher $dispatcher) {
-    $this->args = $dispatcher->request->args;
-    $this->params = $dispatcher->request->params;
-    $this->method = $dispatcher->request->method;
+  public function __construct() {
+    $twig_loader = new \Twig_Loader_Filesystem(LIBRARY_PATH . '/AB/Chroma/Views');
+    $this->renderer = new \Twig_Environment($twig_loader, [ 'auto_reload' => true, 'cache' => 'cache/templates' ]);
   }
 
-  public function pre_action() {
-    // No-op.
+  protected function render($params, $format = self::FORMAT_HTML) {
+    if ($format == self::FORMAT_HTML) {
+      $view_name = str_replace('AB\\Chroma\\Controllers\\', '', get_class($this)) .
+        DIRECTORY_SEPARATOR . strtolower($_SERVER['REQUEST_METHOD']) . '.html';
+      echo $this->renderer->render($view_name, $params);
+    } elseif ($format == self::FORMAT_JSON) {
+      echo json_encode($params);
+    }
   }
 }
