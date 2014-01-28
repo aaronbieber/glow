@@ -25,7 +25,27 @@
       hex: '#000000'
     3:
       id: 3
-      name: Living Room
+      name: Living Room South
+      power: true
+      colormode: ct
+      ct: 497
+      hue: 12521
+      sat: 225
+      bri: 61
+      hex: '#d4b6a0'
+    4:
+      id: 4
+      name: Dining Room South
+      power: false
+      colormode: hs
+      ct: 399
+      hue: 22197
+      sat: 83
+      bri: 95
+      hex: '#000000'
+    5:
+      id: 5
+      name: Living Room West
       power: true
       colormode: ct
       ct: 497
@@ -59,7 +79,27 @@
       hex: '#c5b4af'
     3:
       id: 3
-      name: Living Room
+      name: Living Room South
+      power: true
+      colormode: ct
+      ct: 400
+      hue: ~
+      sat: ~
+      bri: 255
+      hex: '#c5b4af'
+    4:
+      id: 4
+      name: Living Room West
+      power: true
+      colormode: ct
+      ct: 400
+      hue: ~
+      sat: ~
+      bri: 255
+      hex: '#c5b4af'
+    5:
+      id: 5
+      name: Dining Room South
       power: true
       colormode: ct
       ct: 400
@@ -101,8 +141,82 @@
       sat: ~
       bri: ~
       hex: '#000000'
+    4:
+      id: 4
+      name: Living Room West
+      power: false
+      colormode: ct
+      ct: 400
+      hue: ~
+      sat: ~
+      bri: 255
+      hex: '#c5b4af'
+    5:
+      id: 5
+      name: Dining Room South
+      power: false
+      colormode: ct
+      ct: 400
+      hue: ~
+      sat: ~
+      bri: 255
+      hex: '#c5b4af'
 4:
   id: 4
+  name: Moody
+  lights:
+    1:
+      id: 1
+      name: Bedroom
+      power: true
+      colormode: ct
+      ct: 400
+      hue: ~
+      sat: ~
+      bri: 128
+      hex: '#c5b4af'
+    2:
+      id: 2
+      name: Dining Room
+      power: true
+      colormode: ct
+      ct: 400
+      hue: ~
+      sat: ~
+      bri: 128
+      hex: '#c5b4af'
+    3:
+      id: 3
+      name: Living Room South
+      power: true
+      colormode: ct
+      ct: 400
+      hue: ~
+      sat: ~
+      bri: 128
+      hex: '#c5b4af'
+    4:
+      id: 4
+      name: Living Room West
+      power: true
+      colormode: ct
+      ct: 400
+      hue: ~
+      sat: ~
+      bri: 128
+      hex: '#c5b4af'
+    5:
+      id: 5
+      name: Dining Room South
+      power: true
+      colormode: ct
+      ct: 400
+      hue: ~
+      sat: ~
+      bri: 128
+      hex: '#c5b4af'
+5:
+  id: 5
   name: Swamp Gas
   lights:
     1:
@@ -135,8 +249,8 @@
       sat: 254
       bri: 216
       hex: '#b1feb1'
-5:
-  id: 5
+6:
+  id: 6
   name: Lavender
   lights:
     1:
@@ -169,8 +283,8 @@
       sat: 160
       bri: 209
       hex: '#cdb4ed'
-6:
-  id: 6
+7:
+  id: 7
   name: Wildflowers
   lights:
     1:
@@ -203,8 +317,8 @@
       sat: 159
       bri: 239
       hex: '#eee5f8'
-7:
-  id: 7
+8:
+  id: 8
   name: Energetic
   lights:
     1:
@@ -237,8 +351,8 @@
       sat: 58
       bri: 254
       hex: '#acb1c6'
-8:
-  id: 8
+9:
+  id: 9
   name: Hellish
   lights:
     1:
@@ -271,8 +385,8 @@
       sat: 226
       bri: 211
       hex: '#f9beac'
-9:
-  id: 9
+10:
+  id: 10
   name: Groovy
   lights:
     1:
@@ -305,8 +419,8 @@
       sat: 240
       bri: 121
       hex: '#7107ea'
-10:
-  id: 10
+11:
+  id: 11
   name: Dark Red
   lights:
     1:
