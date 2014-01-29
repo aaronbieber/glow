@@ -7,4 +7,39 @@ class Scene {
 
   public function __construct() {
   }
+
+  /**
+   * Function as_array
+   *
+   * @return array Array of light data.
+   */
+  public function as_array() {
+    $lights = [];
+    foreach ($this->lights as $light) {
+      $lights[] = $light->as_array();
+    }
+
+    return $lights;
+  }
+
+  /**
+   * Function as_settings_array
+   *
+   * @return array An array suitable for setting light state.
+   */
+  public function as_settings_array() {
+    $lights_arrays   = $this->as_array();
+    $lights_settings = [];
+    // Remove unnecessary elements.
+    foreach ($lights_arrays as $light) {
+      $lights_settings[$light['id']] = [];
+      foreach ($light as $setting => $value) {
+        if (in_array($setting, ['power', 'ct', 'hue', 'sat', 'bri'])) {
+          $lights_settings[$light['id']][$setting] = $value;
+        }
+      }
+    }
+
+    return $lights_settings;
+  }
 }

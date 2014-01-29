@@ -22,7 +22,7 @@ Toro::serve(array(
   '/'                      => '\\AB\\Chroma\\Controllers\\Home',
   '/lights'                => '\\AB\\Chroma\\Controllers\\Lights',
   '/light/:number'         => '\\AB\\Chroma\\Controllers\\Light',
-  '/scenes/by_name/:alpha' => '\\AB\\Chroma\\Controllers\\Scenes',
+  '/scenes/by_name/([a-zA-Z0-9+]+)' => '\\AB\\Chroma\\Controllers\\Scenes',
   '/scenes'                => '\\AB\\Chroma\\Controllers\\Scenes',
   '/scene/:number'         => '\\AB\\Chroma\\Controllers\\Scene',
   '/scene/:number/choose'  => '\\AB\\Chroma\\Controllers\\SceneActionHandler'

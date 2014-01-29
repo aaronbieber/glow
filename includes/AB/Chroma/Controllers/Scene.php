@@ -12,6 +12,11 @@ class Scene extends Base {
     $this->_scenes->load();
   }
 
+  /**
+   * Create a new scene.
+   *
+   * @return void
+   */
   public function post() {
     // What is our new scene ID?
     $scene_id = max(array_keys($this->_scenes->scenes));
@@ -31,6 +36,11 @@ class Scene extends Base {
     $this->render(['success' => true], Base::FORMAT_JSON);
   }
 
+  /**
+   * Edit a scene (patch).
+   *
+   * @return void
+   */
   public function put($scene_id) {
     $scene_id = (int) array_shift($this->args);
     $scene = $this->_scenes->scenes[$scene_id];
