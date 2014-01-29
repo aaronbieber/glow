@@ -170,9 +170,9 @@ $(document).ready(function() {
   $('.js-button-scene').on('click', function() {
     $('#loading').fadeIn();
     var scene_id = $(this).data('scene-id');
-    $.ajax('/scene/choose/' + scene_id, {
+    $.ajax('/scene/' + scene_id + '/choose', {
       type: 'post',
-      data: { action: 'select-scene', scene: scene_id },
+      data: {},
       success: function(data) {
         $('#loading').fadeOut();
         $('#response').html(data);
@@ -461,7 +461,7 @@ function slider_process(state) {
     });
   }
 
-  $.ajax('/light/set/' + state.light, {
+  $.ajax('/light/' + state.light, {
     type: 'post',
     data: state,
     success: function(data) {

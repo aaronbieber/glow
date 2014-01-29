@@ -42,6 +42,7 @@ class Base {
         DIRECTORY_SEPARATOR . strtolower($_SERVER['REQUEST_METHOD']) . '.html';
       echo $this->renderer->render($view_name, $params);
     } elseif ($format == self::FORMAT_JSON) {
+      header('Content-Type: application/json');
       echo json_encode($params);
     }
   }
