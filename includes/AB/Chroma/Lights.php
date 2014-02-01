@@ -71,15 +71,17 @@ class Lights implements \Iterator {
       $state['on'] = (bool) $state['power'];
       unset($state['power']);
     }
+    $state_json = \json_encode($state);
 
     $service_url = 'http://192.168.10.81/api/abcdef101010/lights/' . $light_id . '/state';
     $ch = curl_init($service_url);
 
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
-    curl_setopt($ch, CURLOPT_POSTFIELDS, \json_encode($state));
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $state_json);
 
     $response = curl_exec($ch);
+
     if ($response === false) {
       $info = curl_getinfo($ch);
       curl_close($ch);

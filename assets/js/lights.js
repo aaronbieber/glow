@@ -4,7 +4,7 @@ var slider_timer = null;
 var scene_slider_timer = null;
 
 function update_home_view() {
-  $.ajax('/light/status', {
+  $.ajax('/lights', {
     type: 'get',
     data: {},
     success: function(data) {
@@ -170,9 +170,9 @@ $(document).ready(function() {
   $('.js-button-scene').on('click', function() {
     $('#loading').fadeIn();
     var scene_id = $(this).data('scene-id');
-    $.ajax('/scene/choose/' + scene_id, {
+    $.ajax('/scene/' + scene_id + '/choose', {
       type: 'post',
-      data: { action: 'select-scene', scene: scene_id },
+      data: {},
       success: function(data) {
         $('#loading').fadeOut();
         $('#response').html(data);
@@ -188,14 +188,8 @@ $(document).ready(function() {
     $('#loading').fadeIn();
 
     data = {
-      action: 'power',
-      light: light_id,
-      power: button.data('power') ? 'off' : 'on'
+      power: button.data('power') ? 0 : 1
     }
-
-    var url = '/light/power/' +
-      light_id + '/' +
-      (button.data('power') ? 'off' : 'on');
 
     if(!button.data('static')) {
       if(button.data('power')) {
@@ -208,9 +202,9 @@ $(document).ready(function() {
       button.data('power', !button.data('power'));
     }
 
-    $.ajax(url, {
+    $.ajax('/light/' + light_id, {
       type: 'post',
-      data: {},
+      data: data,
       success: function(data) {
         $('#loading').fadeOut();
         $('#response').html(data);
@@ -221,7 +215,7 @@ $(document).ready(function() {
 
   $('.js-button-save-scene').on('click', function() {
     $('#loading').fadeIn();
-    $.ajax('/scene/create', {
+    $.ajax('/scene', {
       type: 'post',
       data: {},
       success: function(data) {
@@ -235,8 +229,8 @@ $(document).ready(function() {
     var scene_id = button.data('scene-id');
 
     $('#loading').fadeIn();
-    $.ajax('/scene/update/' + scene_id, {
-      type: 'post',
+    $.ajax('/scene/' + scene_id, {
+      type: 'patch',
       data: {
         name: $('#scene_name_input_' + scene_id).val()
       },
@@ -467,7 +461,7 @@ function slider_process(state) {
     });
   }
 
-  $.ajax('/light/set/' + state.light, {
+  $.ajax('/light/' + state.light, {
     type: 'post',
     data: state,
     success: function(data) {

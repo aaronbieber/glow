@@ -150,7 +150,7 @@
       hue: ~
       sat: ~
       bri: 255
-      hex: '#c5b4af'
+      hex: '#000000'
     5:
       id: 5
       name: Dining Room South
@@ -160,7 +160,7 @@
       hue: ~
       sat: ~
       bri: 255
-      hex: '#c5b4af'
+      hex: '#000000'
 4:
   id: 4
   name: Moody
@@ -453,4 +453,58 @@
       sat: 219
       bri: 50
       hex: '#5c2207'
+12:
+  id: 12
+  name: Reading
+  lights:
+    1:
+      id: 1
+      name: Bedroom
+      power: true
+      colormode: ct
+      ct: 413
+      hue: 14101
+      sat: 180
+      bri: 210
+      hex: '#c7b4ad'
+    2:
+      id: 2
+      name: Dining Room
+      power: false
+      colormode: ct
+      ct: 153
+      hue: 34534
+      sat: 240
+      bri: 210
+      hex: '#000000'
+    3:
+      id: 3
+      name: Living Room South
+      power: false
+      colormode: ct
+      ct: 206
+      hue: 34039
+      sat: 113
+      bri: 239
+      hex: '#000000'
+    4:
+      id: 4
+      name: Dining Room South
+      power: false
+      colormode: ct
+      ct: 399
+      hue: 14393
+      sat: 169
+      bri: 254
+      hex: '#000000'
+    5:
+      id: 5
+      name: Living Room West
+      power: false
+      colormode: ct
+      ct: 399
+      hue: 14393
+      sat: 169
+      bri: 254
+      hex: '#000000'
 ...

@@ -4,68 +4,39 @@ namespace AB\Chroma\Controllers;
 class Light extends Base {
   private $_lights;
 
-  public function pre_action() {
+  public function __construct() {
+    parent::__construct();
+
     // Get our lights.
     $this->_lights = new \AB\Chroma\Lights();
   }
 
-  public function set() {
-    $this->auto_render = false;
+  public function post($light_id) {
+    // If power is off, do nothing else (altering other values while power is off is not permitted).
+    if ($this->param('power') !== null && $this->param('power') == false) {
+      $state = [ 'power' => false ];
+    } else {
+      // Otherwise, generate a clean state by removing null values (those not provided in the request).
+      $state = array_filter([
+        'ct'        => $this->param('ct'),
+        'hue'       => $this->param('hue'),
+        'sat'       => $this->param('sat'),
+        'bri'       => $this->param('bri')
+      ], function ($v) {
+        return $v !== null;
+      });
 
-    if ($this->method == 'post') {
-      $light_id = (int) array_shift($this->args);
-      if (is_numeric($light_id) && isset($this->params['action'])) {
-        switch ($this->params['action']) {
-          case 'update-hsl':
-            if ( empty($this->params['hue'])
-              || empty($this->params['sat'])
-              || empty($this->params['bri'])
-            ) {
-              break;
-            }
-
-            // Set the light's HSL values.
-            $state = [
-              'hue' => (int) $_POST['hue'],
-              'sat' => (int) $_POST['sat'],
-              'bri' => (int) $_POST['bri']
-            ];
-
-            $this->_lights->set_state($state, $this->params['light']);
-            break;
-
-          case 'update-bri':
-            if (empty($this->params['bri'])) {
-              break;
-            }
-
-            // Set the light's brightness.
-            $state = [ 'on' => true, 'bri' => (int) $this->params['bri'] ];
-            $this->_lights->set_state($state, $this->params['light']);
-            break;
-
-          case 'update-ct':
-            if (empty($this->params['ct'])) {
-              break;
-            }
-
-            // Set the light's color temperature.
-            $state = [ 'on' => true, 'ct' => (int) $this->params['ct'] ];
-            $this->_lights->set_state($state, $this->params['light']);
-            break;
-        }
-      }
-
-      return ['success' => true];
+      // Cast all non-Boolean values as integers.
+      $state = array_map(function ($v) { return (int) $v; }, $state);
+      $state['power'] = true;
     }
+
+    $this->_lights->set_state($state, $light_id);
+
+    $this->render(['success' => true], Base::FORMAT_JSON);
   }
 
-  public function status() {
-    $this->auto_render = false;
-    return $this->_lights->as_array();
-  }
-
-  public function power() {
+  public function power($id) {
     // Nothing to render.
     $this->auto_render = false;
 
