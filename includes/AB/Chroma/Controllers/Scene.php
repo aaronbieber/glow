@@ -32,7 +32,6 @@ class Scene extends Base {
     }
 
     $this->_scenes->save();
-
     $this->render(['success' => true], Base::FORMAT_JSON);
   }
 
@@ -41,8 +40,7 @@ class Scene extends Base {
    *
    * @return void
    */
-  public function put($scene_id) {
-    $scene_id = (int) array_shift($this->args);
+  public function patch($scene_id) {
     $scene = $this->_scenes->scenes[$scene_id];
     $updates = ['scene' => $scene_id];
 

@@ -29,7 +29,16 @@ class Base {
     $twig_loader = new \Twig_Loader_Filesystem(LIBRARY_PATH . '/AB/Chroma/Views');
     $this->renderer = new \Twig_Environment($twig_loader, [ 'auto_reload' => true, 'cache' => 'cache/templates' ]);
 
+    // Merge GET and POST for "normal" request types (we can safely do this all the time).
     $this->params = array_merge($_GET, $_POST);
+
+    // If the request type is one of PUT, PATCH, DELETE, get the raw request body data and parse it.
+    if (   $_SERVER['REQUEST_METHOD'] == 'PUT'
+        || $_SERVER['REQUEST_METHOD'] == 'PATCH'
+    ) {
+      parse_str(file_get_contents('php://input'), $raw_params);
+      $this->params = array_merge($this->params, $raw_params);
+    }
   }
 
   protected function param($param) {

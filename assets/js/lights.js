@@ -215,7 +215,7 @@ $(document).ready(function() {
 
   $('.js-button-save-scene').on('click', function() {
     $('#loading').fadeIn();
-    $.ajax('/scene/create', {
+    $.ajax('/scene', {
       type: 'post',
       data: {},
       success: function(data) {
@@ -229,8 +229,8 @@ $(document).ready(function() {
     var scene_id = button.data('scene-id');
 
     $('#loading').fadeIn();
-    $.ajax('/scene/update/' + scene_id, {
-      type: 'post',
+    $.ajax('/scene/' + scene_id, {
+      type: 'patch',
       data: {
         name: $('#scene_name_input_' + scene_id).val()
       },
