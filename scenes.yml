@@ -217,142 +217,6 @@
       hex: '#c5b4af'
 5:
   id: 5
-  name: Swamp Gas
-  lights:
-    1:
-      id: 1
-      name: Bedroom
-      power: true
-      colormode: hs
-      ct: 340
-      hue: 21564
-      sat: 226
-      bri: 211
-      hex: '#aef9ac'
-    2:
-      id: 2
-      name: Dining Room
-      power: true
-      colormode: hs
-      ct: 340
-      hue: 21701
-      sat: 225
-      bri: 211
-      hex: '#adf9ac'
-    3:
-      id: 3
-      name: Living Room
-      power: true
-      colormode: hs
-      ct: 349
-      hue: 21845
-      sat: 254
-      bri: 216
-      hex: '#b1feb1'
-6:
-  id: 6
-  name: Lavender
-  lights:
-    1:
-      id: 1
-      name: Bedroom
-      power: true
-      colormode: hs
-      ct: 340
-      hue: 43690
-      sat: 169
-      bri: 198
-      hex: '#a0a0eb'
-    2:
-      id: 2
-      name: Dining Room
-      power: true
-      colormode: hs
-      ct: 340
-      hue: 41623
-      sat: 149
-      bri: 223
-      hex: '#ccd3f1'
-    3:
-      id: 3
-      name: Living Room
-      power: true
-      colormode: hs
-      ct: 153
-      hue: 48397
-      sat: 160
-      bri: 209
-      hex: '#cdb4ed'
-7:
-  id: 7
-  name: Wildflowers
-  lights:
-    1:
-      id: 1
-      name: Bedroom
-      power: true
-      colormode: hs
-      ct: 417
-      hue: 59293
-      sat: 220
-      bri: 210
-      hex: '#f8abd7'
-    2:
-      id: 2
-      name: Dining Room
-      power: true
-      colormode: hs
-      ct: 153
-      hue: 38867
-      sat: 220
-      bri: 210
-      hex: '#abcdf8'
-    3:
-      id: 3
-      name: Living Room
-      power: true
-      colormode: hs
-      ct: 209
-      hue: 49151
-      sat: 159
-      bri: 239
-      hex: '#eee5f8'
-8:
-  id: 8
-  name: Energetic
-  lights:
-    1:
-      id: 1
-      name: Bedroom
-      power: true
-      colormode: ct
-      ct: 243
-      hue: 59293
-      sat: 220
-      bri: 255
-      hex: '#acb1c7'
-    2:
-      id: 2
-      name: Dining Room
-      power: true
-      colormode: ct
-      ct: 245
-      hue: 38867
-      sat: 220
-      bri: 255
-      hex: '#acb1c6'
-    3:
-      id: 3
-      name: Living Room
-      power: true
-      colormode: ct
-      ct: 245
-      hue: 16201
-      sat: 58
-      bri: 254
-      hex: '#acb1c6'
-9:
-  id: 9
   name: Hellish
   lights:
     1:
@@ -360,21 +224,21 @@
       name: Bedroom
       power: true
       colormode: hs
-      ct: 447
-      hue: 2462
-      sat: 255
-      bri: 204
-      hex: '#ffaf99'
+      ct: 500
+      hue: 2660
+      sat: 226
+      bri: 211
+      hex: '#f9beac'
     2:
       id: 2
       name: Dining Room
       power: true
       colormode: hs
-      ct: 399
-      hue: 3058
-      sat: 223
-      bri: 198
-      hex: '#f7b094'
+      ct: 500
+      hue: 2660
+      sat: 226
+      bri: 211
+      hex: '#f9beac'
     3:
       id: 3
       name: Living Room
@@ -385,8 +249,28 @@
       sat: 226
       bri: 211
       hex: '#f9beac'
-10:
-  id: 10
+    4:
+      id: 4
+      name: Dining Room South
+      power: true
+      colormode: hs
+      ct: 500
+      hue: 2660
+      sat: 226
+      bri: 211
+      hex: '#f9beac'
+    5:
+      id: 5
+      name: Living Room West
+      power: true
+      colormode: hs
+      ct: 500
+      hue: 2660
+      sat: 226
+      bri: 211
+      hex: '#f9beac'
+6:
+  id: 6
   name: Groovy
   lights:
     1:
@@ -419,42 +303,28 @@
       sat: 240
       bri: 121
       hex: '#7107ea'
-11:
-  id: 11
-  name: Dark Red
-  lights:
-    1:
-      id: 1
-      name: Bedroom
-      power: true
-      colormode: hs
-      ct: 209
-      hue: 3429
-      sat: 219
-      bri: 50
-      hex: '#5c2207'
-    2:
-      id: 2
-      name: Dining Room
+    4:
+      id: 4
+      name: Dining Room South
       power: true
       colormode: hs
       ct: 500
-      hue: 3429
-      sat: 219
-      bri: 50
-      hex: '#5c2207'
-    3:
-      id: 3
-      name: Living Room
+      hue: 48815
+      sat: 240
+      bri: 121
+      hex: '#7107ea'
+    5:
+      id: 5
+      name: Living Room West
       power: true
       colormode: hs
-      ct: 492
-      hue: 3429
-      sat: 219
-      bri: 50
-      hex: '#5c2207'
-12:
-  id: 12
+      ct: 500
+      hue: 48815
+      sat: 240
+      bri: 121
+      hex: '#7107ea'
+7:
+  id: 7
   name: Reading
   lights:
     1:

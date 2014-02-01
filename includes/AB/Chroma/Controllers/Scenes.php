@@ -23,11 +23,17 @@ class Scenes extends Base {
     }
   }
 
+  /**
+   * Select a scene by name (/scenes/by_name/:name)
+   *
+   * @return void
+   */
   public function post($name = null) {
     if (!empty($name)) {
       if ($scene = $this->find($name)) {
         $Lights = new \AB\Chroma\Lights();
         $light_settings = $scene->as_settings_array();
+
         foreach ($light_settings as $id => $state) {
           $ret = $Lights->set_state($state, $id);
           if (!$ret) {

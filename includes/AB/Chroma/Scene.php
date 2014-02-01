@@ -34,7 +34,14 @@ class Scene {
     foreach ($lights_arrays as $light) {
       $lights_settings[$light['id']] = [];
       foreach ($light as $setting => $value) {
-        if (in_array($setting, ['power', 'ct', 'hue', 'sat', 'bri'])) {
+
+        $acceptable_settings =
+          array_merge(
+            ['power'],
+            $light['colormode'] == 'ct' ? ['ct', 'bri'] : ['hue', 'sat', 'bri']
+          );
+
+        if (in_array($setting, $acceptable_settings)) {
           $lights_settings[$light['id']][$setting] = $value;
         }
       }
