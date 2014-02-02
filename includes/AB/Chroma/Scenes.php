@@ -26,7 +26,8 @@ class Scenes implements \Iterator {
 
   public function load() {
     $scenes_yaml = file_get_contents('scenes.yml');
-    $this->from_array(\yaml_parse($scenes_yaml));
+    $this->_from_array(\yaml_parse($scenes_yaml));
+    usort($this->scenes, array($this, '_compare_scene_names'));
   }
 
   public function save() {
@@ -36,7 +37,11 @@ class Scenes implements \Iterator {
     fclose($fp);
   }
 
-  public function from_array($self_array) {
+  private function _compare_scene_names($a, $b) {
+    return strcmp($a->name, $b->name);
+  }
+
+  private function _from_array($self_array) {
     foreach ($self_array as $scene_id => $scene) {
       $this->scenes[$scene_id] = new Scene();
       $this->scenes[$scene_id]->id = $scene_id;

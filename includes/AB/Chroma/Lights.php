@@ -15,7 +15,13 @@ class Lights implements \Iterator {
 
   public function __construct() {
     $this->lights = $this->_get_lights();
+    usort($this->lights, array($this, '_light_name_compare'));
   }
+
+  private function _light_name_compare($a, $b) {
+    return strcmp($a->name, $b->name);
+  }
+
 
   public function rewind() {
     return reset($this->lights);
@@ -137,7 +143,6 @@ class Lights implements \Iterator {
         $info = curl_getinfo($ch);
         curl_close($ch);
         return false;
-        //die('Fatal error while retrieving lights state: ' . var_export($info));
     }
     curl_close($ch);
 
