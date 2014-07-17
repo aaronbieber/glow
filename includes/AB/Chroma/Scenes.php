@@ -42,15 +42,16 @@ class Scenes implements \Iterator {
   }
 
   private function _from_array($self_array) {
-    foreach ($self_array as $scene_id => $scene) {
+    foreach ($self_array as $scene) {
+      $scene_id = $scene['id'];
       $this->scenes[$scene_id] = new Scene();
       $this->scenes[$scene_id]->id = $scene_id;
       $this->scenes[$scene_id]->name = $scene['name'];
 
-      foreach ($scene['lights'] as $light_id => $light) {
+      foreach ($scene['lights'] as $light) {
+        $light_id = $light['id'];
         $this->scenes[$scene_id]->lights[$light_id] = new Light([
           'id'        => $light_id,
-          'name'      => $light['name'],
           'power'     => (bool) $light['power'],
           'colormode' => $light['colormode'],
           'ct'        => $light['ct'],
