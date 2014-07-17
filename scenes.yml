@@ -5,7 +5,6 @@
   lights:
     1:
       id: 1
-      name: Bedroom
       power: false
       colormode: ct
       ct: 399
@@ -15,7 +14,6 @@
       hex: '#000000'
     2:
       id: 2
-      name: Dining Room
       power: false
       colormode: hs
       ct: 399
@@ -25,7 +23,6 @@
       hex: '#000000'
     3:
       id: 3
-      name: Living Room South
       power: true
       colormode: ct
       ct: 497
@@ -35,7 +32,6 @@
       hex: '#d4b6a0'
     4:
       id: 4
-      name: Dining Room South
       power: false
       colormode: hs
       ct: 399
@@ -45,7 +41,6 @@
       hex: '#000000'
     5:
       id: 5
-      name: Living Room West
       power: true
       colormode: ct
       ct: 497
@@ -59,7 +54,6 @@
   lights:
     1:
       id: 1
-      name: Bedroom
       power: true
       colormode: ct
       ct: 400
@@ -69,7 +63,6 @@
       hex: '#c5b4af'
     2:
       id: 2
-      name: Dining Room
       power: true
       colormode: ct
       ct: 400
@@ -79,7 +72,6 @@
       hex: '#c5b4af'
     3:
       id: 3
-      name: Living Room South
       power: true
       colormode: ct
       ct: 400
@@ -89,7 +81,6 @@
       hex: '#c5b4af'
     4:
       id: 4
-      name: Living Room West
       power: true
       colormode: ct
       ct: 400
@@ -99,7 +90,6 @@
       hex: '#c5b4af'
     5:
       id: 5
-      name: Dining Room South
       power: true
       colormode: ct
       ct: 400
@@ -113,7 +103,6 @@
   lights:
     1:
       id: 1
-      name: Bedroom
       power: false
       colormode: ct
       ct: ~
@@ -123,7 +112,6 @@
       hex: '#000000'
     2:
       id: 2
-      name: Dining Room
       power: false
       colormode: ct
       ct: ~
@@ -133,7 +121,6 @@
       hex: '#000000'
     3:
       id: 3
-      name: Living Room
       power: false
       colormode: ct
       ct: ~
@@ -143,7 +130,6 @@
       hex: '#000000'
     4:
       id: 4
-      name: Living Room West
       power: false
       colormode: ct
       ct: 400
@@ -153,7 +139,6 @@
       hex: '#000000'
     5:
       id: 5
-      name: Dining Room South
       power: false
       colormode: ct
       ct: 400
@@ -167,7 +152,6 @@
   lights:
     1:
       id: 1
-      name: Bedroom
       power: true
       colormode: ct
       ct: 400
@@ -177,7 +161,6 @@
       hex: '#c5b4af'
     2:
       id: 2
-      name: Dining Room
       power: true
       colormode: ct
       ct: 400
@@ -187,7 +170,6 @@
       hex: '#c5b4af'
     3:
       id: 3
-      name: Living Room South
       power: true
       colormode: ct
       ct: 400
@@ -197,7 +179,6 @@
       hex: '#c5b4af'
     4:
       id: 4
-      name: Living Room West
       power: true
       colormode: ct
       ct: 400
@@ -207,7 +188,6 @@
       hex: '#c5b4af'
     5:
       id: 5
-      name: Dining Room South
       power: true
       colormode: ct
       ct: 400
@@ -221,7 +201,6 @@
   lights:
     1:
       id: 1
-      name: Bedroom
       power: true
       colormode: hs
       ct: 500
@@ -231,7 +210,6 @@
       hex: '#f9beac'
     2:
       id: 2
-      name: Dining Room
       power: true
       colormode: hs
       ct: 500
@@ -241,7 +219,6 @@
       hex: '#f9beac'
     3:
       id: 3
-      name: Living Room
       power: true
       colormode: hs
       ct: 500
@@ -251,7 +228,6 @@
       hex: '#f9beac'
     4:
       id: 4
-      name: Dining Room South
       power: true
       colormode: hs
       ct: 500
@@ -261,7 +237,6 @@
       hex: '#f9beac'
     5:
       id: 5
-      name: Living Room West
       power: true
       colormode: hs
       ct: 500
@@ -275,7 +250,6 @@
   lights:
     1:
       id: 1
-      name: Bedroom
       power: true
       colormode: hs
       ct: 500
@@ -285,7 +259,6 @@
       hex: '#7107ea'
     2:
       id: 2
-      name: Dining Room
       power: true
       colormode: hs
       ct: 500
@@ -295,7 +268,6 @@
       hex: '#7107ea'
     3:
       id: 3
-      name: Living Room
       power: true
       colormode: hs
       ct: 500
@@ -305,7 +277,6 @@
       hex: '#7107ea'
     4:
       id: 4
-      name: Dining Room South
       power: true
       colormode: hs
       ct: 500
@@ -315,7 +286,6 @@
       hex: '#7107ea'
     5:
       id: 5
-      name: Living Room West
       power: true
       colormode: hs
       ct: 500
@@ -329,7 +299,6 @@
   lights:
     1:
       id: 1
-      name: Bedroom
       power: true
       colormode: ct
       ct: 413
@@ -339,7 +308,6 @@
       hex: '#c7b4ad'
     2:
       id: 2
-      name: Dining Room
       power: false
       colormode: ct
       ct: 153
@@ -349,7 +317,6 @@
       hex: '#000000'
     3:
       id: 3
-      name: Living Room South
       power: false
       colormode: ct
       ct: 206
@@ -359,7 +326,6 @@
       hex: '#000000'
     4:
       id: 4
-      name: Dining Room South
       power: false
       colormode: ct
       ct: 399
@@ -369,7 +335,6 @@
       hex: '#000000'
     5:
       id: 5
-      name: Living Room West
       power: false
       colormode: ct
       ct: 399
@@ -377,4 +342,53 @@
       sat: 169
       bri: 254
       hex: '#000000'
+8:
+  id: 8
+  name: Relax TV
+  lights:
+    1:
+      id: 1
+      power: true
+      colormode: ct
+      ct: 400
+      hue: ~
+      sat: ~
+      bri: 255
+      hex: '#c5b4af'
+    2:
+      id: 2
+      power: true
+      colormode: ct
+      ct: 400
+      hue: ~
+      sat: ~
+      bri: 255
+      hex: '#c5b4af'
+    3:
+      id: 3
+      power: true
+      colormode: ct
+      ct: 400
+      hue: ~
+      sat: ~
+      bri: 255
+      hex: '#c5b4af'
+    4:
+      id: 4
+      power: true
+      colormode: ct
+      ct: 400
+      hue: ~
+      sat: ~
+      bri: 32
+      hex: '#c5b4af'
+    5:
+      id: 5
+      power: true
+      colormode: ct
+      ct: 400
+      hue: ~
+      sat: ~
+      bri: 255
+      hex: '#c5b4af'
 ...
