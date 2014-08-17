@@ -79,7 +79,7 @@ class Lights implements \Iterator {
     }
     $state_json = \json_encode($state);
 
-    $service_url = 'http://192.168.10.81/api/abcdef101010/lights/' . $light_id . '/state';
+    $service_url = 'http://192.168.10.82/api/abcdef101010/lights/' . $light_id . '/state';
     $ch = curl_init($service_url);
 
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -101,7 +101,7 @@ class Lights implements \Iterator {
   }
 
   private function _get_light_state($light_id) {
-    $service_url = 'http://192.168.10.81/api/abcdef101010/lights/' . $light_id . '/';
+    $service_url = 'http://192.168.10.82/api/abcdef101010/lights/' . $light_id . '/';
     $ch = curl_init($service_url);
 
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -132,7 +132,7 @@ class Lights implements \Iterator {
   }
 
   private function _get_lights() {
-    $service_url = 'http://192.168.10.81/api/abcdef101010/lights/';
+    $service_url = 'http://192.168.10.82/api/abcdef101010/lights/';
     $ch = curl_init($service_url);
 
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

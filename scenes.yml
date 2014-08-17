@@ -1,10 +1,8 @@
 ---
-1:
-  id: 1
+- id: 1
   name: Movie
   lights:
-    1:
-      id: 1
+    - id: 1
       power: false
       colormode: ct
       ct: 399
@@ -12,8 +10,7 @@
       sat: 169
       bri: 254
       hex: '#000000'
-    2:
-      id: 2
+    - id: 2
       power: false
       colormode: hs
       ct: 399
@@ -21,8 +18,7 @@
       sat: 83
       bri: 95
       hex: '#000000'
-    3:
-      id: 3
+    - id: 3
       power: true
       colormode: ct
       ct: 497
@@ -30,8 +26,7 @@
       sat: 225
       bri: 61
       hex: '#d4b6a0'
-    4:
-      id: 4
+    - id: 4
       power: false
       colormode: hs
       ct: 399
@@ -39,8 +34,7 @@
       sat: 83
       bri: 95
       hex: '#000000'
-    5:
-      id: 5
+    - id: 5
       power: true
       colormode: ct
       ct: 497
@@ -48,12 +42,10 @@
       sat: 225
       bri: 61
       hex: '#d4b6a0'
-2:
-  id: 2
+- id: 2
   name: Relax
   lights:
-    1:
-      id: 1
+    - id: 1
       power: true
       colormode: ct
       ct: 400
@@ -61,8 +53,7 @@
       sat: ~
       bri: 255
       hex: '#c5b4af'
-    2:
-      id: 2
+    - id: 2
       power: true
       colormode: ct
       ct: 400
@@ -70,8 +61,7 @@
       sat: ~
       bri: 255
       hex: '#c5b4af'
-    3:
-      id: 3
+    - id: 3
       power: true
       colormode: ct
       ct: 400
@@ -79,8 +69,7 @@
       sat: ~
       bri: 255
       hex: '#c5b4af'
-    4:
-      id: 4
+    - id: 4
       power: true
       colormode: ct
       ct: 400
@@ -88,8 +77,7 @@
       sat: ~
       bri: 255
       hex: '#c5b4af'
-    5:
-      id: 5
+    - id: 5
       power: true
       colormode: ct
       ct: 400
@@ -97,12 +85,10 @@
       sat: ~
       bri: 255
       hex: '#c5b4af'
-3:
-  id: 3
+- id: 3
   name: All Off
   lights:
-    1:
-      id: 1
+    - id: 1
       power: false
       colormode: ct
       ct: ~
@@ -110,8 +96,7 @@
       sat: ~
       bri: ~
       hex: '#000000'
-    2:
-      id: 2
+    - id: 2
       power: false
       colormode: ct
       ct: ~
@@ -119,8 +104,7 @@
       sat: ~
       bri: ~
       hex: '#000000'
-    3:
-      id: 3
+    - id: 3
       power: false
       colormode: ct
       ct: ~
@@ -128,8 +112,7 @@
       sat: ~
       bri: ~
       hex: '#000000'
-    4:
-      id: 4
+    - id: 4
       power: false
       colormode: ct
       ct: 400
@@ -137,8 +120,7 @@
       sat: ~
       bri: 255
       hex: '#000000'
-    5:
-      id: 5
+    - id: 5
       power: false
       colormode: ct
       ct: 400
@@ -146,12 +128,10 @@
       sat: ~
       bri: 255
       hex: '#000000'
-4:
-  id: 4
+- id: 4
   name: Moody
   lights:
-    1:
-      id: 1
+    - id: 1
       power: true
       colormode: ct
       ct: 400
@@ -159,8 +139,7 @@
       sat: ~
       bri: 128
       hex: '#c5b4af'
-    2:
-      id: 2
+    - id: 2
       power: true
       colormode: ct
       ct: 400
@@ -168,8 +147,7 @@
       sat: ~
       bri: 128
       hex: '#c5b4af'
-    3:
-      id: 3
+    - id: 3
       power: true
       colormode: ct
       ct: 400
@@ -177,8 +155,7 @@
       sat: ~
       bri: 128
       hex: '#c5b4af'
-    4:
-      id: 4
+    - id: 4
       power: true
       colormode: ct
       ct: 400
@@ -186,8 +163,7 @@
       sat: ~
       bri: 128
       hex: '#c5b4af'
-    5:
-      id: 5
+    - id: 5
       power: true
       colormode: ct
       ct: 400
@@ -195,12 +171,10 @@
       sat: ~
       bri: 128
       hex: '#c5b4af'
-5:
-  id: 5
+- id: 5
   name: Hellish
   lights:
-    1:
-      id: 1
+    - id: 1
       power: true
       colormode: hs
       ct: 500
@@ -208,8 +182,7 @@
       sat: 226
       bri: 211
       hex: '#f9beac'
-    2:
-      id: 2
+    - id: 2
       power: true
       colormode: hs
       ct: 500
@@ -217,8 +190,7 @@
       sat: 226
       bri: 211
       hex: '#f9beac'
-    3:
-      id: 3
+    - id: 3
       power: true
       colormode: hs
       ct: 500
@@ -226,8 +198,7 @@
       sat: 226
       bri: 211
       hex: '#f9beac'
-    4:
-      id: 4
+    - id: 4
       power: true
       colormode: hs
       ct: 500
@@ -235,8 +206,7 @@
       sat: 226
       bri: 211
       hex: '#f9beac'
-    5:
-      id: 5
+    - id: 5
       power: true
       colormode: hs
       ct: 500
@@ -244,12 +214,10 @@
       sat: 226
       bri: 211
       hex: '#f9beac'
-6:
-  id: 6
+- id: 6
   name: Groovy
   lights:
-    1:
-      id: 1
+    - id: 1
       power: true
       colormode: hs
       ct: 500
@@ -257,8 +225,7 @@
       sat: 240
       bri: 121
       hex: '#7107ea'
-    2:
-      id: 2
+    - id: 2
       power: true
       colormode: hs
       ct: 500
@@ -266,8 +233,7 @@
       sat: 240
       bri: 121
       hex: '#7107ea'
-    3:
-      id: 3
+    - id: 3
       power: true
       colormode: hs
       ct: 500
@@ -275,8 +241,7 @@
       sat: 240
       bri: 121
       hex: '#7107ea'
-    4:
-      id: 4
+    - id: 4
       power: true
       colormode: hs
       ct: 500
@@ -284,8 +249,7 @@
       sat: 240
       bri: 121
       hex: '#7107ea'
-    5:
-      id: 5
+    - id: 5
       power: true
       colormode: hs
       ct: 500
@@ -293,12 +257,10 @@
       sat: 240
       bri: 121
       hex: '#7107ea'
-7:
-  id: 7
+- id: 7
   name: Reading
   lights:
-    1:
-      id: 1
+    - id: 1
       power: true
       colormode: ct
       ct: 413
@@ -306,8 +268,7 @@
       sat: 180
       bri: 210
       hex: '#c7b4ad'
-    2:
-      id: 2
+    - id: 2
       power: false
       colormode: ct
       ct: 153
@@ -315,8 +276,7 @@
       sat: 240
       bri: 210
       hex: '#000000'
-    3:
-      id: 3
+    - id: 3
       power: false
       colormode: ct
       ct: 206
@@ -324,8 +284,7 @@
       sat: 113
       bri: 239
       hex: '#000000'
-    4:
-      id: 4
+    - id: 4
       power: false
       colormode: ct
       ct: 399
@@ -333,8 +292,7 @@
       sat: 169
       bri: 254
       hex: '#000000'
-    5:
-      id: 5
+    - id: 5
       power: false
       colormode: ct
       ct: 399
@@ -342,12 +300,10 @@
       sat: 169
       bri: 254
       hex: '#000000'
-8:
-  id: 8
+- id: 8
   name: Relax TV
   lights:
-    1:
-      id: 1
+    - id: 1
       power: true
       colormode: ct
       ct: 400
@@ -355,8 +311,7 @@
       sat: ~
       bri: 255
       hex: '#c5b4af'
-    2:
-      id: 2
+    - id: 2
       power: true
       colormode: ct
       ct: 400
@@ -364,8 +319,7 @@
       sat: ~
       bri: 255
       hex: '#c5b4af'
-    3:
-      id: 3
+    - id: 3
       power: true
       colormode: ct
       ct: 400
@@ -373,8 +327,7 @@
       sat: ~
       bri: 255
       hex: '#c5b4af'
-    4:
-      id: 4
+    - id: 4
       power: true
       colormode: ct
       ct: 400
@@ -382,8 +335,50 @@
       sat: ~
       bri: 32
       hex: '#c5b4af'
-    5:
-      id: 5
+    - id: 5
+      power: true
+      colormode: ct
+      ct: 400
+      hue: ~
+      sat: ~
+      bri: 255
+      hex: '#c5b4af'
+- id: 9
+  name: Dark Bedroom
+  lights:
+    - id: 1
+      power: true
+      colormode: ct
+      ct: 400
+      hue: ~
+      sat: ~
+      bri: 255
+      hex: '#c5b4af'
+    - id: 2
+      power: true
+      colormode: ct
+      ct: 400
+      hue: ~
+      sat: ~
+      bri: 255
+      hex: '#c5b4af'
+    - id: 3
+      power: false
+      colormode: ct
+      ct: 400
+      hue: ~
+      sat: ~
+      bri: 255
+      hex: '#c5b4af'
+    - id: 4
+      power: true
+      colormode: ct
+      ct: 400
+      hue: ~
+      sat: ~
+      bri: 32
+      hex: '#c5b4af'
+    - id: 5
       power: true
       colormode: ct
       ct: 400
