@@ -4,16 +4,23 @@
       <span class="glyphicon glyphicon-chevron-right js-toggle-scene-controls clickable" data-scene-id="{{ scene.id }}"></span>
       <span id="scene_name_label_{{ scene.id }}">{{ scene.name }}</span>
     </div>
-    <div class="col-xs-6" style="text-align: right;">
+
+    <div class="col-xs-6">
       <button
         style="float: right;"
         data-scene-id="{{ scene.id }}"
         class="btn btn-primary js-button-scene scene-button"
       >Choose</button>
+    </div>
+  </div>
 
-      {% for light in scene.lights %}
-        <span class="color-swatch swatch-sm" style="float: right; background-color: {{ light.hex }};">&nbsp;</span>
-      {% endfor %}
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="light-bar">
+        {% for light in scene.lights %}
+          <div style="background-color: {{ light.hex }};">&nbsp;</div>
+        {% endfor %}
+      </div>
     </div>
   </div>
 

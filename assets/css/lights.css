@@ -133,3 +133,22 @@ div.navigation {
 ul.nav {
   margin: 10px 0;
 }
+
+div.light-bar {
+  margin-top: 8px;
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+  line-height: 10px;
+}
+
+div.light-bar > div {
+  display: table-cell;
+  border-right-color: white;
+  border-right-width: 2px;
+  border-right-style: solid;
+}
+
+div.light-bar > div:last-child {
+  border-right-width: 0;
+}

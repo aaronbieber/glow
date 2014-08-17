@@ -11,20 +11,20 @@
       bri: 254
       hex: '#000000'
     - id: 2
-      power: false
-      colormode: hs
+      power: true
+      colormode: ct
       ct: 399
       hue: 22197
       sat: 83
-      bri: 95
+      bri: 75
       hex: '#000000'
     - id: 3
-      power: true
+      power: false
       colormode: ct
       ct: 497
-      hue: 12521
-      sat: 225
-      bri: 61
+      hue: 22197
+      sat: 83
+      bri: 75
       hex: '#d4b6a0'
     - id: 4
       power: false
@@ -37,10 +37,10 @@
     - id: 5
       power: true
       colormode: ct
+      hue: 22197
+      sat: 83
       ct: 497
-      hue: 12521
-      sat: 225
-      bri: 61
+      bri: 75
       hex: '#d4b6a0'
 - id: 2
   name: Relax
@@ -376,7 +376,7 @@
       ct: 400
       hue: ~
       sat: ~
-      bri: 32
+      bri: 255
       hex: '#c5b4af'
     - id: 5
       power: true
