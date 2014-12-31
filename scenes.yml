@@ -386,4 +386,47 @@
       sat: ~
       bri: 255
       hex: '#c5b4af'
+- id: 10
+  name: Wake Up
+  lights:
+    - id: 1
+      power: true
+      colormode: ct
+      ct: 400
+      hue: ~
+      sat: ~
+      bri: 255
+      hex: '#c5b4af'
+    - id: 2
+      power: true
+      colormode: ct
+      ct: 400
+      hue: ~
+      sat: ~
+      bri: 255
+      hex: '#c5b4af'
+    - id: 3
+      power: true
+      colormode: ct
+      ct: 400
+      hue: ~
+      sat: ~
+      bri: 60
+      hex: '#c5b4af'
+    - id: 4
+      power: true
+      colormode: ct
+      ct: 400
+      hue: ~
+      sat: ~
+      bri: 255
+      hex: '#c5b4af'
+    - id: 5
+      power: true
+      colormode: ct
+      ct: 400
+      hue: ~
+      sat: ~
+      bri: 255
+      hex: '#c5b4af'
 ...

@@ -12,6 +12,7 @@ namespace AB\Chroma;
 
 class Lights implements \Iterator {
   public $lights = [];
+  private $bridge_ip = '192.168.10.30';
 
   public function __construct() {
     $this->lights = $this->_get_lights();
@@ -79,7 +80,7 @@ class Lights implements \Iterator {
     }
     $state_json = \json_encode($state);
 
-    $service_url = 'http://192.168.10.82/api/abcdef101010/lights/' . $light_id . '/state';
+    $service_url = 'http://' . $this->bridge_ip . '/api/abcdef101010/lights/' . $light_id . '/state';
     $ch = curl_init($service_url);
 
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -101,7 +102,7 @@ class Lights implements \Iterator {
   }
 
   private function _get_light_state($light_id) {
-    $service_url = 'http://192.168.10.82/api/abcdef101010/lights/' . $light_id . '/';
+    $service_url = 'http://' . $this->bridge_ip . '/api/abcdef101010/lights/' . $light_id . '/';
     $ch = curl_init($service_url);
 
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -132,7 +133,7 @@ class Lights implements \Iterator {
   }
 
   private function _get_lights() {
-    $service_url = 'http://192.168.10.82/api/abcdef101010/lights/';
+    $service_url = 'http://' . $this->bridge_ip . '/api/abcdef101010/lights/';
     $ch = curl_init($service_url);
 
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
