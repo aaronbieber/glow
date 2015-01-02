@@ -44,7 +44,6 @@ class Lights extends Collection {
 
     // Create an array of each of the lights converted to an array. Simple.
     foreach ($this->models as $light) {
-      var_dump($light);
       $lights_array[] = $light->as_array();
     }
 
