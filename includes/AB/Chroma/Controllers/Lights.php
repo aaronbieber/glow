@@ -2,16 +2,16 @@
 namespace AB\Chroma\Controllers;
 
 class Lights extends Base {
-  private $_lights;
+  private $lights;
 
   public function __construct() {
     parent::__construct();
 
     // Get our lights.
-    $this->_lights = new \AB\Chroma\Lights();
+    $this->lights = new \AB\Chroma\Lights();
   }
 
   public function get() {
-    $this->render($this->_lights->as_array(), Base::FORMAT_JSON);
+    $this->render($this->lights->as_array(), Base::FORMAT_JSON);
   }
 }

@@ -1,76 +1,16 @@
 <?php
 namespace AB\Chroma;
 
-class Scenes implements \Iterator, \ArrayAccess {
-  /**
-   * @var array Scene objects.
-   */
-  public $scenes = [];
-
-  /**
-   * Rewind to the start.
-   *
-   * @return First Scene object in the collection.
-   */
-  public function rewind() {
-    return reset($this->scenes);
-  }
-
-  /**
-   * Get the current Scene object.
-   *
-   * @return \AB\Chroma\Scene Current Scene object in the collection.
-   */
-  public function current() {
-    return current($this->scenes);
-  }
-
-  /**
-   * Return the key of the current Scene item in the collection.
-   *
-   * @return string The current key.
-   */
-  public function key() {
-    return key($this->scenes);
-  }
-
-  public function next() {
-    return next($this->scenes);
-  }
-
-  public function valid() {
-    return key($this->scenes) !== null;
-  }
-
-  public function offsetSet($offset, $value) {
-    if (is_null($offset)) {
-      $this->scenes[] = $value;
-    } else {
-      $this->scenes[$offset] = $value;
-    }
-  }
-
-  public function offsetExists($offset) {
-    return isset($this->scenes[$offset]);
-  }
-
-  public function offsetUnset($offset) {
-    unset($this->scenes[$offset]);
-  }
-
-  public function offsetGet($offset) {
-    return isset($this->scenes[$offset]) ? $this->scenes[$offset] : null;
-  }
-
+class Scenes extends Collection {
   public function get_key_by_id($id) {
-    reset($this->scenes);
+    reset($this->models);
 
     do {
-      $scene = current($this->scenes);
+      $scene = current($this->models);
       if ($scene->id == $id) {
-        return key($this->scenes);
+        return key($this->models);
       }
-    } while (next($this->scenes) !== false);
+    } while (next($this->models) !== false);
 
     // The scene was not found.
     return false;
@@ -85,7 +25,7 @@ class Scenes implements \Iterator, \ArrayAccess {
    */
   public function get_by_id($id) {
     if ($index = $this->get_key_by_id($id)) {
-      return $this->scenes[$index];
+      return $this->models[$index];
     } else {
       return false;
     }
@@ -93,7 +33,7 @@ class Scenes implements \Iterator, \ArrayAccess {
 
   public function set_by_id($id, $value) {
     if ($index = $this->get_key_by_id($id)) {
-      $this->scenes[$index] = $value;
+      $this->models[$index] = $value;
       return true;
     } else {
       return false;
@@ -102,8 +42,8 @@ class Scenes implements \Iterator, \ArrayAccess {
 
   public function load() {
     $scenes_yaml = file_get_contents('data/scenes.yml');
-    $this->scenes = $this->from_array(\yaml_parse($scenes_yaml));
-    usort($this->scenes, array($this, '_compare_scene_names'));
+    $this->models = $this->from_array(\yaml_parse($scenes_yaml));
+    usort($this->models, array($this, '_compare_scene_names'));
   }
 
   public function save() {
@@ -146,7 +86,7 @@ class Scenes implements \Iterator, \ArrayAccess {
   public function as_array() {
     $self_array = [];
 
-    foreach ($this->scenes as $scene_id => $scene) {
+    foreach ($this->models as $scene_id => $scene) {
       $scene_lights = [];
       foreach ($scene->lights as $light) {
         $scene_lights[$light->id] = $light->as_array();

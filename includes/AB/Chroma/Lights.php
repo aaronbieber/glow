@@ -10,44 +10,22 @@
  */
 namespace AB\Chroma;
 
-class Lights implements \Iterator {
-  public $lights = [];
+class Lights extends Collection {
   private $bridge_ip = '192.168.10.30';
 
   public function __construct() {
-    $this->lights = $this->_get_lights();
-    usort($this->lights, array($this, '_light_name_compare'));
+    $this->models = $this->get_lights();
+    usort($this->models, [ $this, 'light_name_compare' ]);
   }
 
-  private function _light_name_compare($a, $b) {
+  private function light_name_compare($a, $b) {
     return strcmp($a->name, $b->name);
-  }
-
-
-  public function rewind() {
-    return reset($this->lights);
-  }
-
-  public function current() {
-    return current($this->lights);
-  }
-
-  public function key() {
-    return key($this->lights);
-  }
-
-  public function next() {
-    return next($this->lights);
-  }
-
-  public function valid() {
-    return key($this->lights) !== null;
   }
 
   public function set_state(Array $state, $light_id = 0) {
     if ($light_id == 0) {
       $success = true;
-      foreach ($this->lights as $light) {
+      foreach ($this as $light) {
         $ret = $this->_set_light_state($light->id, $state);
         if (!$ret) {
           $success = false;
@@ -65,7 +43,8 @@ class Lights implements \Iterator {
     $lights_array = [];
 
     // Create an array of each of the lights converted to an array. Simple.
-    foreach ($this->lights as $light) {
+    foreach ($this->models as $light) {
+      var_dump($light);
       $lights_array[] = $light->as_array();
     }
 
@@ -132,7 +111,7 @@ class Lights implements \Iterator {
     return false;
   }
 
-  private function _get_lights() {
+  private function get_lights() {
     $service_url = 'http://' . $this->bridge_ip . '/api/abcdef101010/lights/';
     $ch = curl_init($service_url);
 

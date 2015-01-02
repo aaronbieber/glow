@@ -74,11 +74,5 @@ class Scene extends Base {
     }
 
     $this->_scenes->save();
-
-    // PATCH shouldn't return any data (only a response code)
-    //$this->render(
-    //  array_merge(['success' => true], $updates),
-    //  Base::FORMAT_JSON
-    //);
   }
 }
