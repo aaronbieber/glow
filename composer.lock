@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/mikecao/flight.git",
-                "reference": "bd0c9474553bccb8a40c09ada703c6345e71b4ac"
+                "reference": "7c50eb7cfb13e288dec2b1cd0db434e402752564"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mikecao/flight/zipball/bd0c9474553bccb8a40c09ada703c6345e71b4ac",
-                "reference": "bd0c9474553bccb8a40c09ada703c6345e71b4ac",
+                "url": "https://api.github.com/repos/mikecao/flight/zipball/7c50eb7cfb13e288dec2b1cd0db434e402752564",
+                "reference": "7c50eb7cfb13e288dec2b1cd0db434e402752564",
                 "shasum": ""
             },
             "require": {
@@ -44,20 +44,20 @@
             ],
             "description": "Flight is a fast, simple, extensible framework for PHP. Flight enables you to quickly and easily build RESTful web applications.",
             "homepage": "http://flightphp.com",
-            "time": "2014-05-23 07:22:53"
+            "time": "2014-11-06 05:03:52"
         },
         {
             "name": "twig/twig",
-            "version": "v1.15.1",
+            "version": "v1.16.3",
             "source": {
                 "type": "git",
-                "url": "https://github.com/fabpot/Twig.git",
-                "reference": "1fb5784662f438d7d96a541e305e28b812e2eeed"
+                "url": "https://github.com/twigphp/Twig.git",
+                "reference": "6dc11a1e8ecfc30e2c68aaeb218148409d8e68af"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fabpot/Twig/zipball/1fb5784662f438d7d96a541e305e28b812e2eeed",
-                "reference": "1fb5784662f438d7d96a541e305e28b812e2eeed",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/6dc11a1e8ecfc30e2c68aaeb218148409d8e68af",
+                "reference": "6dc11a1e8ecfc30e2c68aaeb218148409d8e68af",
                 "shasum": ""
             },
             "require": {
@@ -66,7 +66,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.15-dev"
+                    "dev-master": "1.16-dev"
                 }
             },
             "autoload": {
@@ -92,7 +92,7 @@
                 },
                 {
                     "name": "Twig Team",
-                    "homepage": "https://github.com/fabpot/Twig/graphs/contributors",
+                    "homepage": "http://twig.sensiolabs.org/contributors",
                     "role": "Contributors"
                 }
             ],
@@ -101,23 +101,17 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2014-02-13 10:19:29"
+            "time": "2014-12-25 19:58:19"
         }
     ],
-    "packages-dev": [
-
-    ],
-    "aliases": [
-
-    ],
+    "packages-dev": [],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "mikecao/flight": 20
     },
-    "platform": [
-
-    ],
-    "platform-dev": [
-
-    ]
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
 }

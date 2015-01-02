@@ -44,8 +44,6 @@ class Scene extends Base {
     $scene = $this->_scenes->get_by_id($scene_id);
     $updates = ['scene' => $scene_id];
 
-    var_dump($this->params);
-
     /* Indiscriminately set all scene values that exist in the post. Right now, the only value that can be set at
      * the scene level is "name." */
     foreach ($this->params as $key => $value) {
@@ -75,13 +73,12 @@ class Scene extends Base {
       }
     }
 
-    var_dump($scene);
-
     $this->_scenes->save();
 
-    $this->render(
-      array_merge(['success' => true], $updates),
-      Base::FORMAT_JSON
-    );
+    // PATCH shouldn't return any data (only a response code)
+    //$this->render(
+    //  array_merge(['success' => true], $updates),
+    //  Base::FORMAT_JSON
+    //);
   }
 }
