@@ -357,8 +357,8 @@ $(document).ready(function() {
 
     window.clearTimeout(scene_slider_timer);
     scene_slider_timer = window.setTimeout(function(change) {
-      $.ajax('/scene/update/' + scene_id, {
-        type: 'post',
+      $.ajax('/scene/' + scene_id, {
+        type: 'patch',
         data: change,
         success: function() {
           $('#loading').fadeOut();
@@ -401,8 +401,8 @@ $(document).ready(function() {
 
     window.clearTimeout(scene_picker_timer);
     scene_picker_timer = window.setTimeout(function(change) {
-      $.ajax('/scene/update/' + scene_id, {
-        type: 'post',
+      $.ajax('/scene/' + scene_id, {
+        type: 'patch',
         data: change,
         success: function() {
           $('#loading').fadeOut();
@@ -426,8 +426,8 @@ $(document).ready(function() {
       button.addClass('btn-default').removeClass('btn-success');
     }
 
-    $.ajax('/scene/update/' + scene_id, {
-      type: 'post',
+    $.ajax('/scene/' + scene_id, {
+      type: 'patch',
       data: {
         light: light_id,
         power: power
@@ -440,8 +440,8 @@ $(document).ready(function() {
 });
 
 function scene_slider_process(change) {
-  $.ajax('/scene/update/' + change.scene, {
-    type: 'post',
+  $.ajax('/scene/' + change.scene, {
+    type: 'patch',
     data: change,
     success: function() {
       $('#loading').fadeOut();
@@ -477,7 +477,7 @@ function picker_process(state) {
     action: 'update-hsl'
   });
 
-  $.ajax('/light/set/' + state.light, {
+  $.ajax('/light/' + state.light, {
     type: 'post',
     data: state,
     success: function(data) {

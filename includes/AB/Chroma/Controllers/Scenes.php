@@ -10,7 +10,10 @@ class Scenes extends Base {
     $this->_scenes->load();
   }
 
-  public function get($name = null) {
+  public function get() {
+    $this->render($this->_scenes->as_array(), Base::FORMAT_JSON);
+    return;
+
     if (!empty($name)) {
       if ($scene = $this->find($name)) {
         $this->render($scene, Base::FORMAT_JSON);

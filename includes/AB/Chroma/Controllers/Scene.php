@@ -41,8 +41,10 @@ class Scene extends Base {
    * @return void
    */
   public function patch($scene_id) {
-    $scene = $this->_scenes->scenes[$scene_id];
+    $scene = $this->_scenes->get_by_id($scene_id);
     $updates = ['scene' => $scene_id];
+
+    var_dump($this->params);
 
     /* Indiscriminately set all scene values that exist in the post. Right now, the only value that can be set at
      * the scene level is "name." */
@@ -56,8 +58,10 @@ class Scene extends Base {
 
     if (!empty($this->params['light'])) {
       $light_id = $this->params['light'];
+      echo "Updating light $light_id.\n";
       foreach ($this->params as $key => $value) {
         if (isset($scene->lights[$light_id]->{$key})) {
+          echo "Updating light ${light_id}'s $key.\n";
           if (is_numeric($value)) {
             $value = (int) $value;
           } elseif ($value == 'true') {
@@ -70,6 +74,8 @@ class Scene extends Base {
         }
       }
     }
+
+    var_dump($scene);
 
     $this->_scenes->save();
 
