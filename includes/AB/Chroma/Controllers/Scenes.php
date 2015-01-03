@@ -6,25 +6,12 @@ class Scenes extends Base {
     parent::__construct();
 
     // Get our scenes.
-    $this->_scenes = new \AB\Chroma\Scenes();
-    $this->_scenes->load();
+    $this->scenes = new \AB\Chroma\Scenes();
+    $this->scenes->load();
   }
 
   public function get() {
-    $this->render($this->_scenes->as_array(), Base::FORMAT_JSON);
-    return;
-
-    // @todo Do this somewhere else, maybe in Scene?
-    if (!empty($name)) {
-      if ($scene = $this->find($name)) {
-        $this->render($scene, Base::FORMAT_JSON);
-      } else {
-        $this->render(['error' => 'Scene not found.'], Base::FORMAT_JSON);
-      }
-      return;
-    } else {
-      $this->render($this->_scenes->as_array(), Base::FORMAT_JSON);
-    }
+    $this->render($this->scenes->as_array(), Base::FORMAT_JSON);
   }
 
   /**
@@ -33,32 +20,12 @@ class Scenes extends Base {
    * @return void
    */
   public function post($name = null) {
-    if (!empty($name)) {
-      if ($scene = $this->find($name)) {
-        $Lights = new \AB\Chroma\Lights();
-        $light_settings = $scene->as_settings_array();
-
-        foreach ($light_settings as $id => $state) {
-          $ret = $Lights->set_state($state, $id);
-          if (!$ret) {
-            $this->render([ 'success' => false ], Base::FORMAT_JSON);
-          }
-        }
-      }
+    $name = str_replace('+', ' ', $name);
+    $scene = $this->scenes->find_by_name($name, \AB\Chroma\Scenes::FLAG_ICASE);
+    if ($scene) {
+      $scene->set();
     }
 
     $this->render([ 'success' => true ], Base::FORMAT_JSON);
-  }
-
-  protected function find($name) {
-    if (!empty($name)) {
-      $name = str_replace('+', ' ', $name);
-      foreach ($this->_scenes as $scene) {
-        if (strtolower($scene->name) == strtolower($name)) {
-          return $scene;
-        }
-      }
-    }
-    return false;
   }
 }

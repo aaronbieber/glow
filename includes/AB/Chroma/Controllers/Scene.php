@@ -41,7 +41,7 @@ class Scene extends Base {
    * @return void
    */
   public function patch($scene_id) {
-    $scene = $this->_scenes->get_by_id($scene_id);
+    $scene = $this->_scenes->find_by_id($scene_id);
     $updates = ['scene' => $scene_id];
 
     /* Indiscriminately set all scene values that exist in the post. Right now, the only value that can be set at

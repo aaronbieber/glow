@@ -11,12 +11,14 @@ class Light {
   public $sat = null;
   public $bri = null;
   public $hex = null;
+  private $hue_interface;
 
   public function __construct($state = []) {
     if (!empty($state)) {
       $this->load_state($state);
       $this->hex = $this->as_hex();
     }
+    $this->hue_interface = Hue::get_instance();
   }
 
   public function load_state(Array $state) {
@@ -25,6 +27,35 @@ class Light {
         $this->{$setting} = $value;
       }
     }
+  }
+
+  public function save() {
+    if ($this->power === false) {
+      // If power is off, we can't send any other values.
+      $state = [ 'power' => false ];
+    } else {
+      if ($this->colormode == 'ct') {
+        $state = [
+            'ct' => $this->ct,
+            'bri' => $this->bri
+        ];
+      } else {
+        $state = [
+            'hue' => $this->hue,
+            'sat' => $this->sat,
+            'bri' => $this->bri
+        ];
+      }
+
+      // Cast all values to integers and remove nulls.
+      $state = array_filter($state, function ($v) { return $v !== null; });
+      $state = array_map(function ($v) { return (int) $v; }, $state);
+
+      // Set power to an actual Boolean.
+      $state['power'] = true;
+    }
+
+    $this->hue_interface->set_light_state($this->id, $state);
   }
 
   public function as_array() {

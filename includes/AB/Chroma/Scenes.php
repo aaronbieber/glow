@@ -2,19 +2,7 @@
 namespace AB\Chroma;
 
 class Scenes extends Collection {
-  public function get_key_by_id($id) {
-    reset($this->models);
-
-    do {
-      $scene = current($this->models);
-      if ($scene->id == $id) {
-        return key($this->models);
-      }
-    } while (next($this->models) !== false);
-
-    // The scene was not found.
-    return false;
-  }
+  const FLAG_ICASE = 1;
 
   /**
    * Get the Scene with the given ID, and leave the internal pointer pointed at that scene object.
@@ -23,21 +11,24 @@ class Scenes extends Collection {
    *
    * @return bool|\AB\Chroma\Scene The Scene with the ID given, or FALSE if not found.
    */
-  public function get_by_id($id) {
-    if ($index = $this->get_key_by_id($id)) {
-      return $this->models[$index];
-    } else {
-      return false;
+  public function find_by_id($id) {
+    foreach($this as $scene) {
+      if ($scene->id == $id) {
+        return $scene;
+      }
     }
+    return false;
   }
 
-  public function set_by_id($id, $value) {
-    if ($index = $this->get_key_by_id($id)) {
-      $this->models[$index] = $value;
-      return true;
-    } else {
-      return false;
+  public function find_by_name($name, $flags = null) {
+    $name = ($flags & self::FLAG_ICASE) ? strtolower($name) : $name;
+    foreach($this as $scene) {
+      $scene_name = ($flags & self::FLAG_ICASE) ? strtolower($scene->name) : $scene->name;
+      if ($scene_name == $name) {
+        return $scene;
+      }
     }
+    return false;
   }
 
   public function load() {

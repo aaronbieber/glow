@@ -2,25 +2,15 @@
 namespace AB\Chroma\Controllers;
 
 class SceneActionHandler extends Base {
-  public function __construct() {
-    parent::__construct();
-
-    // Get our scenes.
-    $this->_scenes = new \AB\Chroma\Scenes();
-    $this->_scenes->load();
-  }
-
   public function post($scene_id) {
-    $scene = $this->_scenes->scenes[$scene_id];
-    $Lights = new \AB\Chroma\Lights();
-    $light_settings = $scene->as_settings_array();
+    // Load all scenes (from YAML file on disk).
+    $scenes = new \AB\Chroma\Scenes();
+    $scenes->load();
 
-    foreach ($light_settings as $id => $state) {
-      $ret = $Lights->set_state($state, $id);
-      if (!$ret) {
-        $this->render(['success' => false], Base::FORMAT_JSON);
-      }
-    }
+    // Grab the scene we want to use.
+    $scene = $scenes[$scene_id];
+    // Save each light in the scene, effectively setting it.
+    $scene->set();
 
     $this->render(['success' => true], Base::FORMAT_JSON);
   }

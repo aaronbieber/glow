@@ -49,4 +49,11 @@ class Scene {
 
     return $lights_settings;
   }
+
+  public function set() {
+    foreach($this->lights as $light) {
+      $light->save();
+      usleep(100000);
+    }
+  }
 }
