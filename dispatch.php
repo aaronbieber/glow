@@ -16,9 +16,6 @@ define('LIBRARY_PATH', '/var/www/lights/htdocs/includes');
 require_once 'vendor/autoload.php';
 require_once 'includes/autoloader.php';
 
-$c = \AB\Chroma\Config::get_instance();
-var_dump($c);
-
 Flight::route('/', function() {
   $c = new \AB\Chroma\Controllers\Home();
   $c->get();
