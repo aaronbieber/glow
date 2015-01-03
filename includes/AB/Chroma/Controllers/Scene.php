@@ -56,10 +56,8 @@ class Scene extends Base {
 
     if (!empty($this->params['light'])) {
       $light_id = $this->params['light'];
-      echo "Updating light $light_id.\n";
       foreach ($this->params as $key => $value) {
         if (isset($scene->lights[$light_id]->{$key})) {
-          echo "Updating light ${light_id}'s $key.\n";
           if (is_numeric($value)) {
             $value = (int) $value;
           } elseif ($value == 'true') {

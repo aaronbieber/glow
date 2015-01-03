@@ -181,13 +181,13 @@
     6:
       id: 6
       name: ""
-      power: true
+      power: false
       colormode: hs
       ct: 497
       hue: 48768
       sat: 240
       bri: 121
-      hex: '#7107ea'
+      hex: '#000000'
 - id: 3
   name: Hellish
   lights:

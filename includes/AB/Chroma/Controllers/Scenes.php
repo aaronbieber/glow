@@ -14,6 +14,7 @@ class Scenes extends Base {
     $this->render($this->_scenes->as_array(), Base::FORMAT_JSON);
     return;
 
+    // @todo Do this somewhere else, maybe in Scene?
     if (!empty($name)) {
       if ($scene = $this->find($name)) {
         $this->render($scene, Base::FORMAT_JSON);

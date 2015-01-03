@@ -51,4 +51,9 @@ Flight::route('GET /scenes', function() {
   $c->get();
 });
 
+Flight::route('GET /config', function() {
+  $c = new \AB\Chroma\Controllers\Config();
+  $c->get();
+});
+
 Flight::start();

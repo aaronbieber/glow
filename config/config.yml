@@ -1,4 +1,4 @@
 ---
-- name: First
-  id: Thing
+bridge_ip: 192.168.10.30
+api_key: abcdef101010
 ...

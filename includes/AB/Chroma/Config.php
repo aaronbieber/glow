@@ -14,17 +14,28 @@ class Config {
     $this->load();
   }
 
-  public function get_instance() {
+  public static function get_instance() {
     if (static::$instance === null) {
       static::$instance = new static();
     }
 
-    return $this->instance;
+    return static::$instance;
   }
 
   private function load() {
     $config_yaml = file_get_contents('config/config.yml');
     $this->options = \yaml_parse($config_yaml);
-    var_dump($this->options);
+  }
+
+  public function get($key) {
+    if (isset($this->options[$key])) {
+      return $this->options[$key];
+    } else {
+      return false;
+    }
+  }
+
+  public function get_all() {
+    return $this->options;
   }
 }
