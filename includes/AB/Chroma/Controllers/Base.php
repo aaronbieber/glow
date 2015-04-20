@@ -1,6 +1,6 @@
 <?php
 /**
- *
+ * The basis of all controllers, but you must extend it to use it.
  *
  * PHP Version 5
  *
@@ -14,7 +14,7 @@ namespace AB\Chroma\Controllers;
  *
  * @author Aaron Bieber <aaron@aaronbieber.com>
  */
-class Base {
+abstract class Base {
   const FORMAT_JSON = 'json';
   const FORMAT_HTML = 'html';
 

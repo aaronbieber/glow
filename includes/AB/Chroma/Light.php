@@ -60,10 +60,17 @@ class Light {
 
   public function as_array() {
     // Get all public properties as an associative array.
-    $light_array = get_object_vars($this);
-
-    // Inject the hex value for this light as well.
-    $light_array['hex'] = $this->as_hex();
+    $light_array = [
+      'id'        => $this->id,
+      'name'      => $this->name,
+      'power'     => $this->power,
+      'colormode' => $this->colormode,
+      'ct'        => $this->ct,
+      'hue'       => $this->hue,
+      'sat'       => $this->sat,
+      'bri'       => $this->bri,
+      'hex'       => $this->as_hex()
+    ];
 
     return $light_array;
   }

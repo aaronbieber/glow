@@ -594,11 +594,11 @@
       name: ""
       power: true
       colormode: ct
-      ct: 400
+      ct: 500
       hue: ~
       sat: ~
-      bri: 60
-      hex: '#c5b4af'
+      bri: 1
+      hex: '#000000'
     4:
       id: 4
       name: ""
