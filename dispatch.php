@@ -21,6 +21,10 @@ Flight::route('/', function() {
   $c->get();
 });
 
+Flight::route('/heartbeat/@mac', function($mac) {
+  echo "$mac\n";
+});
+
 Flight::route('/lights', function() {
   $c = new \AB\Chroma\Controllers\Lights();
   $c->get();
