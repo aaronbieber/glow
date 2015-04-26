@@ -16,7 +16,7 @@ class Lights extends Collection {
 
   public function __construct() {
     $this->hue_interface = Hue::get_instance();
-    $this->load_lights();
+    $this->load();
     usort($this->models, [ $this, 'light_name_compare' ]);
   }
 
@@ -52,7 +52,7 @@ class Lights extends Collection {
     return $lights_array;
   }
 
-  private function load_lights() {
+  public function load() {
     $response = $this->hue_interface->get_lights();
 
     foreach($response as $light_id => $light_data) {

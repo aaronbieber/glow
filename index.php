@@ -1,3 +1,18 @@
+<?php
+// Define the base library path for the application.
+define('LIBRARY_PATH', '/var/www/glow/htdocs/includes');
+
+// Pull in our autoloader, which is the only thing we need to include.
+require_once 'vendor/autoload.php';
+require_once 'includes/autoloader.php';
+
+// Load the data for bootstrapping our models.
+$scenes = new \AB\Chroma\Scenes();
+$scenes->load();
+
+$lights = new \AB\Chroma\Lights();
+$lights->load();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,6 +45,24 @@
   <script src="assets/js/mustache.min.js" type="text/javascript"></script>
   <script src="assets/js/glow.js" type="text/javascript"></script>
   <script src="assets/js/farbtastic.js" type="text/javascript"></script>
+
+  <script type="text/javascript">
+   $(document).ready(function() {
+     // Start everything
+     app.sceneCollection = new app.SceneCollection(<?= json_encode($scenes->as_array()); ?>);
+     app.lightCollection = new app.LightCollection(<?= json_encode($lights->as_array()); ?>);
+     app.navigationLinkCollection = new app.NavigationLinkCollection([
+       (new app.NavigationLink({ alias: 'scenes', name: 'Scenes', active: true })),
+       (new app.NavigationLink({ alias: 'lights', name: 'Lights' }))
+     ]);
+     app.navigationView = new app.NavigationView({ collection: app.navigationLinkCollection });
+
+     app.loadingToast = $('#loading');
+     //app.appView = new app.AppView();
+     app.router = new app.Router();
+     Backbone.history.start();
+   });
+  </script>
 
   <?php
   // Rip in some templates like a boss.
