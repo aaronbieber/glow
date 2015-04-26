@@ -13,20 +13,35 @@ class Light {
   public $hex = null;
   private $hue_interface;
 
-  public function __construct($state = []) {
-    if (!empty($state)) {
-      $this->load_state($state);
+  public function __construct($data = []) {
+    if (!empty($data)) {
+      $this->populate($data);
       $this->hex = $this->as_hex();
     }
     $this->hue_interface = Hue::get_instance();
   }
 
-  public function load_state(Array $state) {
-    foreach($state as $setting => $value) {
+  public function populate(Array $data) {
+    foreach($data as $setting => $value) {
       if (property_exists($this, $setting)) {
         $this->{$setting} = $value;
       }
     }
+
+    if (!empty($data['state'])) {
+      foreach($data['state'] as $setting => $value) {
+        if (property_exists($this, $setting)) {
+          $this->{$setting} = $value;
+        } elseif ($setting == 'on') {
+          $this->power = $value;
+        }
+      }
+    }
+  }
+
+  public function load_by_id($light_id) {
+    $this->id = $light_id;
+    $this->populate($this->hue_interface->get_light($light_id));
   }
 
   public function save() {

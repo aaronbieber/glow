@@ -80,7 +80,7 @@ class Scenes extends Collection {
     foreach ($this->models as $scene_id => $scene) {
       $scene_lights = [];
       foreach ($scene->lights as $light) {
-        $scene_lights[$light->id] = $light->as_array();
+        $scene_lights[] = $light->as_array();
       }
       $self_array[$scene_id] = [
         'id'     => $scene_id,

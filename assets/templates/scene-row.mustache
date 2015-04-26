@@ -1,0 +1,22 @@
+<div class="scene-row">
+  <div class="row">
+    <div class="col-xs-5 scene-name">
+      <span id="scene_name_label_{{ id }}">{{ name }}</span>
+    </div>
+
+    <div class="col-xs-7">
+      <button
+        style="float: right;"
+        data-scene-id="{{ id }}"
+        class="btn btn-primary js-button-scene scene-button">
+        <span class="glyphicon glyphicon-off"></span>
+      </button>
+
+      <div class="light-bar">
+        {{#lights}}
+          <div style="background-color: {{ hex }};"><div>&nbsp;</div></div>
+        {{/lights}}
+      </div>
+    </div>
+  </div>
+</div>

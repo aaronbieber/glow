@@ -10,7 +10,7 @@
  */
 
 // Define the base library path for the application.
-define('LIBRARY_PATH', '/var/www/lights/htdocs/includes');
+define('LIBRARY_PATH', '/var/www/glow/htdocs/includes');
 
 // Pull in our autoloader, which is the only thing we need to include.
 require_once 'vendor/autoload.php';
@@ -25,12 +25,17 @@ Flight::route('/heartbeat/@mac', function($mac) {
   echo "$mac\n";
 });
 
-Flight::route('/lights', function() {
+Flight::route('GET /lights', function() {
   $c = new \AB\Chroma\Controllers\Lights();
   $c->get();
 });
 
-Flight::route('POST /light/@number', function($number) {
+Flight::route('GET /light/@number', function($number) {
+  $c = new \AB\Chroma\Controllers\Light();
+  $c->get($number);
+});
+
+Flight::route('PUT|POST /light/@number', function($number) {
   $c = new \AB\Chroma\Controllers\Light();
   $c->post($number);
 });

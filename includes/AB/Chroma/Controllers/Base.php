@@ -38,6 +38,10 @@ abstract class Base {
     ) {
       parse_str(file_get_contents('php://input'), $raw_params);
       $this->params = array_merge($this->params, $raw_params);
+    } elseif (strtolower($_SERVER['CONTENT_TYPE']) == 'application/json') {
+      $raw_json = file_get_contents('php://input');
+      $json_data = json_decode($raw_json);
+      $this->params = array_merge($this->params, (array) $json_data);
     }
   }
 

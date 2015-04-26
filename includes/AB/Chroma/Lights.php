@@ -11,11 +11,11 @@
 namespace AB\Chroma;
 
 class Lights extends Collection {
-  private $hue;
+  private $hue_interface;
   private $bridge_ip = '192.168.10.30';
 
   public function __construct() {
-    $this->hue = Hue::get_instance();
+    $this->hue_interface = Hue::get_instance();
     $this->load_lights();
     usort($this->models, [ $this, 'light_name_compare' ]);
   }
@@ -28,7 +28,7 @@ class Lights extends Collection {
     if ($light_id == 0) {
       $success = true;
       foreach ($this as $light) {
-        $ret = $this->hue->set_light_state($light->id, $state);
+        $ret = $this->hue_interface->set_light_state($light->id, $state);
         if (!$ret) {
           $success = false;
           break;
@@ -37,7 +37,7 @@ class Lights extends Collection {
       }
       return $success;
     } else {
-      return $this->hue->set_light_state($light_id, $state);
+      return $this->hue_interface->set_light_state($light_id, $state);
     }
   }
 
@@ -53,13 +53,12 @@ class Lights extends Collection {
   }
 
   private function load_lights() {
-    $response = $this->hue->get_lights();
+    $response = $this->hue_interface->get_lights();
 
     foreach($response as $light_id => $light_data) {
       $light = new Light();
       $light->id = $light_id;
-      $light->name = $light_data['name'];
-      $light->load_state($this->hue->get_light_state($light_id));
+      $light->populate($light_data);
       $this->models[] = $light;
     }
   }

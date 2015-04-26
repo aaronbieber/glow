@@ -2,9 +2,16 @@
 namespace AB\Chroma\Controllers;
 
 class Light extends Base {
+  public function get($light_id) {
+    $light = new \AB\Chroma\Light();
+    $light->load_by_id($light_id);
+    $this->render($light->as_array(), Base::FORMAT_JSON);
+  }
+
   public function post($light_id) {
     $light = new \AB\Chroma\Light([
         'id'    => $light_id,
+        'name'  => $this->param('name'),
         'ct'    => $this->param('ct'),
         'hue'   => $this->param('hue'),
         'sat'   => $this->param('sat'),
@@ -18,6 +25,6 @@ class Light extends Base {
 
     $light->save();
 
-    $this->render(['success' => true], Base::FORMAT_JSON);
+    $this->render($light->as_array(), Base::FORMAT_JSON);
   }
 }

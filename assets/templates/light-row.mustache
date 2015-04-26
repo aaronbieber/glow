@@ -1,0 +1,21 @@
+<div class="light-row">
+  <div class="row">
+    <div class="col-xs-6 light-name">
+      <a href="#light/{{ id }}">{{ name }}</a>
+    </div>
+    <div class="col-xs-6" style="text-align: right;">
+      <button
+        style="float: right;"
+        data-light-id="{{ id }}"
+        data-power="{{ power_text }}"
+        class="btn btn-default{{#power}} btn-success{{/power}} js-button-light light-button">
+        <span class="glyphicon glyphicon-off"></span>
+      </button>
+
+      <span
+        id="light_swatch_{{ id }}"
+        class="color-swatch"
+        style="float: right; background-color: {{ hex }}">&nbsp;</span>
+    </div>
+  </div>
+</div>

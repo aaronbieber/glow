@@ -53,4 +53,13 @@ abstract class Collection implements \Iterator, \ArrayAccess {
   public function offsetGet($offset) {
     return isset($this->models[$offset]) ? $this->models[$offset] : null;
   }
+
+  public function scan($property, $value) {
+    foreach ($this->models as $model) {
+      if (!empty($model[$property]) && $model[$property] == $value) {
+        return $model;
+      }
+    }
+    return false;
+  }
 }

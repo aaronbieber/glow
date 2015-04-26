@@ -64,7 +64,7 @@ class Hue {
     return true;
   }
 
-  public function get_light_state($light_id) {
+  public function get_light($light_id) {
     $service_url = $this->get_service_url('/lights/' . $light_id . '/');
     $ch = curl_init($service_url);
 
@@ -79,7 +79,7 @@ class Hue {
     }
     curl_close($ch);
 
-    $light_state = \json_decode($response, true);
+    $light_data = \json_decode($response, true);
 
     if (!empty($light_state['state'])) {
       // Translate values.
@@ -87,8 +87,20 @@ class Hue {
         $light_state['state']['power'] = $light_state['state']['on'];
         unset($light_state['state']['on']);
       }
+    }
 
-      return $light_state['state'];
+    if (!empty($light_data)) {
+      return $light_data;
+    }
+
+    return false;
+  }
+
+  public function get_light_state($light_id) {
+    $light_data = $this->get_light($light_id);
+
+    if(!empty($light_data['state'])) {
+      return $light_data['state'];
     }
 
     return false;

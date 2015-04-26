@@ -44,15 +44,37 @@ pre#response {
 }
 
 .color-swatch {
+  display: inline-block;
   width: 32px;
   height: 32px;
   font-size: 1px;
   border-radius: 3px;
-  float: left;
   margin-right: 5px;
   text-align: center;
   line-height: 32px;
-  font-size: 1.3em;
+  font-size: 0.8em;
+}
+
+.light-row .color-swatch {
+  float: left;
+}
+
+.light-editor .main-controls {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.light-editor .main-controls button {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
+.light-editor .main-controls .color-swatch {
+  display: inline-block;
+  vertical-align: middle;
+  width: 80px;
+  height: 80px;
 }
 
 .swatch-sm {
@@ -66,6 +88,17 @@ pre#response {
   height: 32px;
   line-height: 32px;
   font-weight: bold;
+  font-size: 18px;
+}
+
+.scene-name > span {
+  display: inline-block;
+  line-height: 1em;
+  vertical-align: middle;
+}
+
+.scene-lights {
+  height: 32px;
 }
 
 .scene-controls {
@@ -116,9 +149,18 @@ button.scene-button {
 }
 
 div.light-name {
+  font-size: 18px;
   font-weight: bold;
   height: 32px;
   line-height: 32px;
+}
+
+a,
+a:hover,
+a:active,
+a:visited {
+  color: black;
+  text-decoration: none;
 }
 
 span.save-scene-name-button {
@@ -130,25 +172,75 @@ div.navigation {
   margin-bottom: 10px;
 }
 
+#navigation-bar h1 {
+  float: left;
+  font-size: 25px;
+  font-weight: bold;
+  line-height: 40px;
+  text-transform: uppercase;
+  margin: 10px 20px 0px 0;
+  padding:  0;
+  text-shadow: 0px 0px 10px gold;
+  color: black;
+}
+
 ul.nav {
   margin: 10px 0;
 }
 
 div.light-bar {
-  margin-top: 8px;
+  margin-right: 10px;
+  margin-top: 3px;
   display: table;
-  table-layout: fixed;
-  width: 100%;
-  line-height: 10px;
+  border-spacing: 2px;
+  float: right;
 }
 
 div.light-bar > div {
   display: table-cell;
-  border-right-color: white;
-  border-right-width: 2px;
-  border-right-style: solid;
+  width: 25px;
+  height: 25px;
+  border-radius: 12px;
+  font-size: 1px;
 }
 
-div.light-bar > div:last-child {
-  border-right-width: 0;
+div.light-bar > div > div {
+  width: 25px;
+}
+
+@media only screen and (max-width: 400px) {
+  div.light-bar {
+    margin-top: 7px;
+  }
+
+  div.light-bar > div {
+    width: 15px;
+    height: 15px;
+    border-radius: 7px;
+  }
+
+  div.light-bar > div > div {
+    width: 15px;
+  }
+}
+
+.light-editor {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.light-editor input {
+  width: 100%;
+}
+
+.light-editor h1 {
+  font-size: 30px;
+  margin-top: 0;
+  padding-bottom: 0.25em;
+  border-bottom: 1px solid silver;
+}
+
+.light-editor h1 a {
+  font-size: 0.5em;
+  vertical-align: middle;
 }
