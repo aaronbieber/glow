@@ -61,6 +61,7 @@ class Scenes extends Collection {
         $light_id = $light['id'];
         $scenes[$scene_id]->lights[$light_id] = new Light([
           'id'        => $light_id,
+          'name'      => $light['name'],
           'power'     => (bool) $light['power'],
           'colormode' => $light['colormode'],
           'ct'        => $light['ct'],

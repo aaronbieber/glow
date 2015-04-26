@@ -2,631 +2,571 @@
 - id: 0
   name: All Off
   lights:
-    1:
-      id: 1
-      name: ""
-      power: false
-      colormode: ct
-      ct: ~
-      hue: ~
-      sat: ~
-      bri: ~
-      hex: '#000000'
-    2:
-      id: 2
-      name: ""
-      power: false
-      colormode: ct
-      ct: ~
-      hue: ~
-      sat: ~
-      bri: ~
-      hex: '#000000'
-    3:
-      id: 3
-      name: ""
-      power: false
-      colormode: ct
-      ct: ~
-      hue: ~
-      sat: ~
-      bri: ~
-      hex: '#000000'
-    4:
-      id: 4
-      name: ""
-      power: false
-      colormode: ct
-      ct: 400
-      hue: ~
-      sat: ~
-      bri: 255
-      hex: '#000000'
-    5:
-      id: 5
-      name: ""
-      power: false
-      colormode: ct
-      ct: 400
-      hue: ~
-      sat: ~
-      bri: 255
-      hex: '#000000'
-    6:
-      id: 6
-      name: ""
-      power: false
-      colormode: ct
-      ct: 497
-      hue: 22197
-      sat: 83
-      bri: 75
-      hex: '#000000'
+  - id: 1
+    name: Entryway
+    power: false
+    colormode: ct
+    ct: ~
+    hue: ~
+    sat: ~
+    bri: ~
+    hex: '#000000'
+  - id: 2
+    name: Living Room West
+    power: false
+    colormode: ct
+    ct: ~
+    hue: ~
+    sat: ~
+    bri: ~
+    hex: '#000000'
+  - id: 3
+    name: Bedroom
+    power: false
+    colormode: ct
+    ct: ~
+    hue: ~
+    sat: ~
+    bri: ~
+    hex: '#000000'
+  - id: 4
+    name: Living Room East
+    power: false
+    colormode: ct
+    ct: 400
+    hue: ~
+    sat: ~
+    bri: 255
+    hex: '#000000'
+  - id: 5
+    name: Hallway
+    power: false
+    colormode: ct
+    ct: 400
+    hue: ~
+    sat: ~
+    bri: 255
+    hex: '#000000'
+  - id: 6
+    name: Flood
+    power: false
+    colormode: ct
+    ct: 497
+    hue: 22197
+    sat: 83
+    bri: 75
+    hex: '#000000'
 - id: 1
   name: Dark Bedroom
   lights:
-    1:
-      id: 1
-      name: ""
-      power: true
-      colormode: ct
-      ct: 400
-      hue: ~
-      sat: ~
-      bri: 255
-      hex: '#c5b4af'
-    2:
-      id: 2
-      name: ""
-      power: true
-      colormode: ct
-      ct: 400
-      hue: ~
-      sat: ~
-      bri: 255
-      hex: '#c5b4af'
-    3:
-      id: 3
-      name: ""
-      power: false
-      colormode: ct
-      ct: 400
-      hue: ~
-      sat: ~
-      bri: 255
-      hex: '#000000'
-    4:
-      id: 4
-      name: ""
-      power: true
-      colormode: ct
-      ct: 400
-      hue: ~
-      sat: ~
-      bri: 255
-      hex: '#c5b4af'
-    5:
-      id: 5
-      name: ""
-      power: true
-      colormode: ct
-      ct: 400
-      hue: ~
-      sat: ~
-      bri: 255
-      hex: '#c5b4af'
-    6:
-      id: 6
-      name: ""
-      power: false
-      colormode: ct
-      ct: 497
-      hue: 22197
-      sat: 83
-      bri: 75
-      hex: '#000000'
+  - id: 1
+    name: Entryway
+    power: true
+    colormode: ct
+    ct: 400
+    hue: ~
+    sat: ~
+    bri: 255
+    hex: '#c5b4af'
+  - id: 2
+    name: Living Room West
+    power: true
+    colormode: ct
+    ct: 400
+    hue: ~
+    sat: ~
+    bri: 255
+    hex: '#c5b4af'
+  - id: 3
+    name: Bedroom
+    power: false
+    colormode: ct
+    ct: 400
+    hue: ~
+    sat: ~
+    bri: 255
+    hex: '#000000'
+  - id: 4
+    name: Living Room East
+    power: true
+    colormode: ct
+    ct: 400
+    hue: ~
+    sat: ~
+    bri: 255
+    hex: '#c5b4af'
+  - id: 5
+    name: Hallway
+    power: true
+    colormode: ct
+    ct: 400
+    hue: ~
+    sat: ~
+    bri: 255
+    hex: '#c5b4af'
+  - id: 6
+    name: Flood
+    power: false
+    colormode: ct
+    ct: 497
+    hue: 22197
+    sat: 83
+    bri: 75
+    hex: '#000000'
 - id: 2
   name: Groovy
   lights:
-    1:
-      id: 1
-      name: ""
-      power: true
-      colormode: hs
-      ct: 500
-      hue: 48815
-      sat: 240
-      bri: 121
-      hex: '#7107ea'
-    2:
-      id: 2
-      name: ""
-      power: true
-      colormode: hs
-      ct: 500
-      hue: 48815
-      sat: 240
-      bri: 121
-      hex: '#7107ea'
-    3:
-      id: 3
-      name: ""
-      power: true
-      colormode: hs
-      ct: 500
-      hue: 48815
-      sat: 240
-      bri: 121
-      hex: '#7107ea'
-    4:
-      id: 4
-      name: ""
-      power: true
-      colormode: hs
-      ct: 500
-      hue: 48815
-      sat: 240
-      bri: 121
-      hex: '#7107ea'
-    5:
-      id: 5
-      name: ""
-      power: true
-      colormode: hs
-      ct: 500
-      hue: 48815
-      sat: 240
-      bri: 121
-      hex: '#7107ea'
-    6:
-      id: 6
-      name: ""
-      power: false
-      colormode: hs
-      ct: 497
-      hue: 48768
-      sat: 240
-      bri: 121
-      hex: '#000000'
+  - id: 1
+    name: Entryway
+    power: true
+    colormode: hs
+    ct: 500
+    hue: 48815
+    sat: 240
+    bri: 121
+    hex: '#7107ea'
+  - id: 2
+    name: Living Room West
+    power: true
+    colormode: hs
+    ct: 500
+    hue: 48815
+    sat: 240
+    bri: 121
+    hex: '#7107ea'
+  - id: 3
+    name: Bedroom
+    power: true
+    colormode: hs
+    ct: 500
+    hue: 48815
+    sat: 240
+    bri: 121
+    hex: '#7107ea'
+  - id: 4
+    name: Living Room East
+    power: true
+    colormode: hs
+    ct: 500
+    hue: 48815
+    sat: 240
+    bri: 121
+    hex: '#7107ea'
+  - id: 5
+    name: Hallway
+    power: true
+    colormode: hs
+    ct: 500
+    hue: 48815
+    sat: 240
+    bri: 121
+    hex: '#7107ea'
+  - id: 6
+    name: Flood
+    power: false
+    colormode: hs
+    ct: 497
+    hue: 48768
+    sat: 240
+    bri: 121
+    hex: '#000000'
 - id: 3
   name: Hellish
   lights:
-    1:
-      id: 1
-      name: ""
-      power: true
-      colormode: hs
-      ct: 500
-      hue: 2660
-      sat: 226
-      bri: 211
-      hex: '#f9beac'
-    2:
-      id: 2
-      name: ""
-      power: true
-      colormode: hs
-      ct: 500
-      hue: 2660
-      sat: 226
-      bri: 211
-      hex: '#f9beac'
-    3:
-      id: 3
-      name: ""
-      power: true
-      colormode: hs
-      ct: 500
-      hue: 2660
-      sat: 226
-      bri: 211
-      hex: '#f9beac'
-    4:
-      id: 4
-      name: ""
-      power: true
-      colormode: hs
-      ct: 500
-      hue: 2660
-      sat: 226
-      bri: 211
-      hex: '#f9beac'
-    5:
-      id: 5
-      name: ""
-      power: true
-      colormode: hs
-      ct: 500
-      hue: 2660
-      sat: 226
-      bri: 211
-      hex: '#f9beac'
-    6:
-      id: 6
-      name: ""
-      power: true
-      colormode: hs
-      ct: 497
-      hue: 2660
-      sat: 226
-      bri: 211
-      hex: '#f9beac'
+  - id: 1
+    name: Entryway
+    power: true
+    colormode: hs
+    ct: 500
+    hue: 2660
+    sat: 226
+    bri: 211
+    hex: '#f9beac'
+  - id: 2
+    name: Living Room West
+    power: true
+    colormode: hs
+    ct: 500
+    hue: 2660
+    sat: 226
+    bri: 211
+    hex: '#f9beac'
+  - id: 3
+    name: Bedroom
+    power: true
+    colormode: hs
+    ct: 500
+    hue: 2660
+    sat: 226
+    bri: 211
+    hex: '#f9beac'
+  - id: 4
+    name: Living Room East
+    power: true
+    colormode: hs
+    ct: 500
+    hue: 2660
+    sat: 226
+    bri: 211
+    hex: '#f9beac'
+  - id: 5
+    name: Hallway
+    power: true
+    colormode: hs
+    ct: 500
+    hue: 2660
+    sat: 226
+    bri: 211
+    hex: '#f9beac'
+  - id: 6
+    name: Flood
+    power: true
+    colormode: hs
+    ct: 497
+    hue: 2660
+    sat: 226
+    bri: 211
+    hex: '#f9beac'
 - id: 4
   name: Moody
   lights:
-    1:
-      id: 1
-      name: ""
-      power: true
-      colormode: ct
-      ct: 400
-      hue: ~
-      sat: ~
-      bri: 128
-      hex: '#c5b4af'
-    2:
-      id: 2
-      name: ""
-      power: true
-      colormode: ct
-      ct: 400
-      hue: ~
-      sat: ~
-      bri: 128
-      hex: '#c5b4af'
-    3:
-      id: 3
-      name: ""
-      power: true
-      colormode: ct
-      ct: 400
-      hue: ~
-      sat: ~
-      bri: 128
-      hex: '#c5b4af'
-    4:
-      id: 4
-      name: ""
-      power: true
-      colormode: ct
-      ct: 400
-      hue: ~
-      sat: ~
-      bri: 128
-      hex: '#c5b4af'
-    5:
-      id: 5
-      name: ""
-      power: true
-      colormode: ct
-      ct: 400
-      hue: ~
-      sat: ~
-      bri: 128
-      hex: '#c5b4af'
-    6:
-      id: 6
-      name: ""
-      power: false
-      colormode: ct
-      ct: 497
-      hue: 22197
-      sat: 83
-      bri: 75
-      hex: '#000000'
+  - id: 1
+    name: Entryway
+    power: true
+    colormode: ct
+    ct: 400
+    hue: ~
+    sat: ~
+    bri: 128
+    hex: '#877c78'
+  - id: 2
+    name: Living Room West
+    power: true
+    colormode: ct
+    ct: 400
+    hue: ~
+    sat: ~
+    bri: 128
+    hex: '#877c78'
+  - id: 3
+    name: Bedroom
+    power: true
+    colormode: ct
+    ct: 400
+    hue: ~
+    sat: ~
+    bri: 128
+    hex: '#877c78'
+  - id: 4
+    name: Living Room East
+    power: true
+    colormode: ct
+    ct: 400
+    hue: ~
+    sat: ~
+    bri: 128
+    hex: '#877c78'
+  - id: 5
+    name: Hallway
+    power: true
+    colormode: ct
+    ct: 400
+    hue: ~
+    sat: ~
+    bri: 128
+    hex: '#877c78'
+  - id: 6
+    name: Flood
+    power: false
+    colormode: ct
+    ct: 497
+    hue: 22197
+    sat: 83
+    bri: 75
+    hex: '#000000'
 - id: 5
   name: Movie
   lights:
-    1:
-      id: 1
-      name: ""
-      power: false
-      colormode: ct
-      ct: 399
-      hue: 14393
-      sat: 169
-      bri: 254
-      hex: '#000000'
-    2:
-      id: 2
-      name: ""
-      power: true
-      colormode: ct
-      ct: 399
-      hue: 22197
-      sat: 83
-      bri: 75
-      hex: '#c4b4af'
-    3:
-      id: 3
-      name: ""
-      power: false
-      colormode: ct
-      ct: 497
-      hue: 22197
-      sat: 83
-      bri: 75
-      hex: '#000000'
-    4:
-      id: 4
-      name: ""
-      power: false
-      colormode: hs
-      ct: 399
-      hue: 22197
-      sat: 83
-      bri: 95
-      hex: '#000000'
-    5:
-      id: 5
-      name: ""
-      power: true
-      colormode: ct
-      ct: 497
-      hue: 22197
-      sat: 83
-      bri: 75
-      hex: '#d4b6a0'
-    6:
-      id: 6
-      name: ""
-      power: false
-      colormode: ct
-      ct: 497
-      hue: 22197
-      sat: 83
-      bri: 75
-      hex: '#000000'
+  - id: 1
+    name: Entryway
+    power: false
+    colormode: ct
+    ct: 399
+    hue: 14393
+    sat: 169
+    bri: 254
+    hex: '#000000'
+  - id: 2
+    name: Living Room West
+    power: true
+    colormode: ct
+    ct: 399
+    hue: 22197
+    sat: 83
+    bri: 75
+    hex: '#6d6461'
+  - id: 3
+    name: Bedroom
+    power: false
+    colormode: ct
+    ct: 497
+    hue: 22197
+    sat: 83
+    bri: 75
+    hex: '#000000'
+  - id: 4
+    name: Living Room East
+    power: false
+    colormode: hs
+    ct: 399
+    hue: 22197
+    sat: 83
+    bri: 95
+    hex: '#000000'
+  - id: 5
+    name: Hallway
+    power: true
+    colormode: ct
+    ct: 497
+    hue: 22197
+    sat: 83
+    bri: 75
+    hex: '#766559'
+  - id: 6
+    name: Flood
+    power: false
+    colormode: ct
+    ct: 497
+    hue: 22197
+    sat: 83
+    bri: 75
+    hex: '#000000'
 - id: 6
   name: Reading
   lights:
-    1:
-      id: 1
-      name: ""
-      power: true
-      colormode: ct
-      ct: 413
-      hue: 14101
-      sat: 180
-      bri: 210
-      hex: '#c7b4ad'
-    2:
-      id: 2
-      name: ""
-      power: false
-      colormode: ct
-      ct: 153
-      hue: 34534
-      sat: 240
-      bri: 210
-      hex: '#000000'
-    3:
-      id: 3
-      name: ""
-      power: false
-      colormode: ct
-      ct: 206
-      hue: 34039
-      sat: 113
-      bri: 239
-      hex: '#000000'
-    4:
-      id: 4
-      name: ""
-      power: false
-      colormode: ct
-      ct: 399
-      hue: 14393
-      sat: 169
-      bri: 254
-      hex: '#000000'
-    5:
-      id: 5
-      name: ""
-      power: false
-      colormode: ct
-      ct: 399
-      hue: 14393
-      sat: 169
-      bri: 254
-      hex: '#000000'
-    6:
-      id: 6
-      name: ""
-      power: false
-      colormode: ct
-      ct: 497
-      hue: 22197
-      sat: 83
-      bri: 75
-      hex: '#000000'
+  - id: 1
+    name: Entryway
+    power: true
+    colormode: ct
+    ct: 413
+    hue: 14101
+    sat: 180
+    bri: 210
+    hex: '#b1a09a'
+  - id: 2
+    name: Living Room West
+    power: false
+    colormode: ct
+    ct: 153
+    hue: 34534
+    sat: 240
+    bri: 210
+    hex: '#000000'
+  - id: 3
+    name: Bedroom
+    power: false
+    colormode: ct
+    ct: 206
+    hue: 34039
+    sat: 113
+    bri: 239
+    hex: '#000000'
+  - id: 4
+    name: Living Room East
+    power: false
+    colormode: ct
+    ct: 399
+    hue: 14393
+    sat: 169
+    bri: 254
+    hex: '#000000'
+  - id: 5
+    name: Hallway
+    power: false
+    colormode: ct
+    ct: 399
+    hue: 14393
+    sat: 169
+    bri: 254
+    hex: '#000000'
+  - id: 6
+    name: Flood
+    power: false
+    colormode: ct
+    ct: 497
+    hue: 22197
+    sat: 83
+    bri: 75
+    hex: '#000000'
 - id: 7
   name: Relax
   lights:
-    1:
-      id: 1
-      name: ""
-      power: true
-      colormode: ct
-      ct: 400
-      hue: ~
-      sat: ~
-      bri: 255
-      hex: '#c5b4af'
-    2:
-      id: 2
-      name: ""
-      power: true
-      colormode: ct
-      ct: 400
-      hue: ~
-      sat: ~
-      bri: 255
-      hex: '#c5b4af'
-    3:
-      id: 3
-      name: ""
-      power: true
-      colormode: ct
-      ct: 400
-      hue: ~
-      sat: ~
-      bri: 255
-      hex: '#c5b4af'
-    4:
-      id: 4
-      name: ""
-      power: true
-      colormode: ct
-      ct: 400
-      hue: ~
-      sat: ~
-      bri: 255
-      hex: '#c5b4af'
-    5:
-      id: 5
-      name: ""
-      power: true
-      colormode: ct
-      ct: 400
-      hue: ~
-      sat: ~
-      bri: 255
-      hex: '#c5b4af'
-    6:
-      id: 6
-      name: ""
-      power: true
-      colormode: ct
-      ct: 399
-      hue: 22197
-      sat: 83
-      bri: 255
-      hex: '#c4b4af'
+  - id: 1
+    name: Entryway
+    power: true
+    colormode: ct
+    ct: 400
+    hue: ~
+    sat: ~
+    bri: 255
+    hex: '#c5b4af'
+  - id: 2
+    name: Living Room West
+    power: true
+    colormode: ct
+    ct: 400
+    hue: ~
+    sat: ~
+    bri: 255
+    hex: '#c5b4af'
+  - id: 3
+    name: Bedroom
+    power: true
+    colormode: ct
+    ct: 400
+    hue: ~
+    sat: ~
+    bri: 255
+    hex: '#c5b4af'
+  - id: 4
+    name: Living Room East
+    power: true
+    colormode: ct
+    ct: 400
+    hue: ~
+    sat: ~
+    bri: 255
+    hex: '#c5b4af'
+  - id: 5
+    name: Hallway
+    power: true
+    colormode: ct
+    ct: 400
+    hue: ~
+    sat: ~
+    bri: 255
+    hex: '#c5b4af'
+  - id: 6
+    name: Flood
+    power: true
+    colormode: ct
+    ct: 399
+    hue: 22197
+    sat: 83
+    bri: 255
+    hex: '#c4b4af'
 - id: 8
   name: Relax TV
   lights:
-    1:
-      id: 1
-      name: ""
-      power: true
-      colormode: ct
-      ct: 400
-      hue: ~
-      sat: ~
-      bri: 255
-      hex: '#c5b4af'
-    2:
-      id: 2
-      name: ""
-      power: true
-      colormode: ct
-      ct: 400
-      hue: ~
-      sat: ~
-      bri: 255
-      hex: '#c5b4af'
-    3:
-      id: 3
-      name: ""
-      power: true
-      colormode: ct
-      ct: 400
-      hue: ~
-      sat: ~
-      bri: 255
-      hex: '#c5b4af'
-    4:
-      id: 4
-      name: ""
-      power: true
-      colormode: ct
-      ct: 400
-      hue: ~
-      sat: ~
-      bri: 32
-      hex: '#c5b4af'
-    5:
-      id: 5
-      name: ""
-      power: true
-      colormode: ct
-      ct: 400
-      hue: ~
-      sat: ~
-      bri: 255
-      hex: '#c5b4af'
-    6:
-      id: 6
-      name: ""
-      power: true
-      colormode: hs
-      ct: 397
-      hue: 2427
-      sat: 13
-      bri: 82
-      hex: '#564f4d'
+  - id: 1
+    name: Entryway
+    power: true
+    colormode: ct
+    ct: 400
+    hue: ~
+    sat: ~
+    bri: 255
+    hex: '#c5b4af'
+  - id: 2
+    name: Living Room West
+    power: true
+    colormode: ct
+    ct: 400
+    hue: ~
+    sat: ~
+    bri: 255
+    hex: '#c5b4af'
+  - id: 3
+    name: Bedroom
+    power: true
+    colormode: ct
+    ct: 400
+    hue: ~
+    sat: ~
+    bri: 255
+    hex: '#c5b4af'
+  - id: 4
+    name: Living Room East
+    power: true
+    colormode: ct
+    ct: 400
+    hue: ~
+    sat: ~
+    bri: 32
+    hex: '#58514f'
+  - id: 5
+    name: Hallway
+    power: true
+    colormode: ct
+    ct: 400
+    hue: ~
+    sat: ~
+    bri: 255
+    hex: '#c5b4af'
+  - id: 6
+    name: Flood
+    power: true
+    colormode: hs
+    ct: 397
+    hue: 2427
+    sat: 13
+    bri: 82
+    hex: '#564f4d'
 - id: 9
   name: Wake Up
   lights:
-    1:
-      id: 1
-      name: ""
-      power: true
-      colormode: ct
-      ct: 400
-      hue: ~
-      sat: ~
-      bri: 255
-      hex: '#c5b4af'
-    2:
-      id: 2
-      name: ""
-      power: true
-      colormode: ct
-      ct: 400
-      hue: ~
-      sat: ~
-      bri: 255
-      hex: '#c5b4af'
-    3:
-      id: 3
-      name: ""
-      power: true
-      colormode: ct
-      ct: 500
-      hue: ~
-      sat: ~
-      bri: 1
-      hex: '#000000'
-    4:
-      id: 4
-      name: ""
-      power: true
-      colormode: ct
-      ct: 400
-      hue: ~
-      sat: ~
-      bri: 255
-      hex: '#c5b4af'
-    5:
-      id: 5
-      name: ""
-      power: true
-      colormode: ct
-      ct: 400
-      hue: ~
-      sat: ~
-      bri: 255
-      hex: '#c5b4af'
-    6:
-      id: 6
-      name: ""
-      power: false
-      colormode: ct
-      ct: 497
-      hue: 22197
-      sat: 83
-      bri: 75
-      hex: '#000000'
+  - id: 1
+    name: Entryway
+    power: true
+    colormode: ct
+    ct: 400
+    hue: ~
+    sat: ~
+    bri: 255
+    hex: '#c5b4af'
+  - id: 2
+    name: Living Room West
+    power: true
+    colormode: ct
+    ct: 400
+    hue: ~
+    sat: ~
+    bri: 255
+    hex: '#c5b4af'
+  - id: 3
+    name: Bedroom
+    power: true
+    colormode: ct
+    ct: 500
+    hue: ~
+    sat: ~
+    bri: 1
+    hex: '#4f443c'
+  - id: 4
+    name: Living Room East
+    power: true
+    colormode: ct
+    ct: 400
+    hue: ~
+    sat: ~
+    bri: 255
+    hex: '#c5b4af'
+  - id: 5
+    name: Hallway
+    power: true
+    colormode: ct
+    ct: 400
+    hue: ~
+    sat: ~
+    bri: 255
+    hex: '#c5b4af'
+  - id: 6
+    name: Flood
+    power: false
+    colormode: ct
+    ct: 497
+    hue: 22197
+    sat: 83
+    bri: 75
+    hex: '#000000'
 ...

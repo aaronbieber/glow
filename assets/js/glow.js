@@ -62,26 +62,26 @@ app.LightCollection = Backbone.Collection.extend({
   url: '/lights'
 });
 
-app.RegionManager = (function (Backbone, $) {
+app.RegionManager = (function(Backbone, $) {
   var currentView;
   var el = "#container";
   var region = {};
 
-  var closeView = function (view) {
-    if (view && view.close) {
+  var closeView = function(view) {
+    if(view && view.close) {
       view.close();
     }
   };
 
-  var openView = function (view) {
+  var openView = function(view) {
     view.render();
     $(el).html(view.el);
-    if (view.onShow) {
+    if(view.onShow) {
       view.onShow();
     }
   };
 
-  region.show = function (view) {
+  region.show = function(view) {
     closeView(currentView);
     currentView = view;
     openView(currentView);
@@ -146,16 +146,6 @@ app.ScenePageView = Backbone.View.extend({
   }
 });
 
-app.LightPageView = Backbone.View.extend({
-  tagName: 'div',
-  render: function() {
-    this.collection.each(function(light) {
-      var view = new app.LightRowView({ model: light });
-      this.$el.append(view.render().el);
-    }, this);
-  }
-});
-
 app.SceneRowView = Backbone.View.extend({
   tagName: 'div',
 
@@ -182,6 +172,36 @@ app.SceneRowView = Backbone.View.extend({
   render: function() {
     this.$el.html(Mustache.render(this.template, this.model.toJSON()));
     return this;
+  }
+});
+
+app.SceneView = Backbone.View.extend({
+  tagName: 'div',
+
+  initialize: function() {
+    this.template = app.util.get_template('scene');
+    //this.model.on(
+    //  'sync',
+    //  function () { this.render(); this.onShow(); },
+    //  this
+    //);
+  },
+
+  render: function() {
+    var scene = this.model.toJSON();
+    this.$el.html(Mustache.render(this.template, scene));
+
+    return this;
+  }
+});
+
+app.LightPageView = Backbone.View.extend({
+  tagName: 'div',
+  render: function() {
+    this.collection.each(function(light) {
+      var view = new app.LightRowView({ model: light });
+      this.$el.append(view.render().el);
+    }, this);
   }
 });
 
@@ -221,7 +241,7 @@ app.LightView = Backbone.View.extend({
     this.template = app.util.get_template('light');
     this.model.on(
       'sync',
-      function () { this.render(); this.onShow(); },
+      function() { this.render(); this.onShow(); },
       this
     );
   },
@@ -273,7 +293,7 @@ app.LightView = Backbone.View.extend({
   },
 
   onShow: function() {
-    if ($('#picker').length) {
+    if($('#picker').length) {
       delete app.picker;
       app.picker = $.farbtastic($('#picker'));
       app.picker.setHSL(
@@ -301,32 +321,43 @@ app.Router = Backbone.Router.extend({
   routes: {
     '':             'scenes',
     'scenes':       'scenes',
+    'scene/:scene': 'scene',
     'lights':       'lights',
     'light/:light': 'light'
   },
 
   scenes: function() {
     app.RegionManager.show(new app.ScenePageView({ collection: app.sceneCollection }));
-    //app.appView.$el.html('');
-    //app.sceneCollection.fetch();
-    //app.sceneCollection.trigger('reset');
 
     app.navigationLinkCollection.select('scenes');
     app.navigationView.render();
   },
 
+  scene: function(scene_id) {
+    if(!app.sceneCollection.length) {
+      var model = new app.Scene({ id: scene_id });
+      model.fetch();
+    } else {
+      var model = app.sceneCollection.get(scene_id);
+    }
+
+    console.log(model);
+
+    app.RegionManager.show(new app.SceneView({ model: model }));
+
+    app.navigationLinkCollection.select('');
+    app.navigationView.render();
+  },
+
   lights: function() {
     app.RegionManager.show(new app.LightPageView({ collection: app.lightCollection }));
-    //app.appView.$el.html('');
-    //app.lightCollection.fetch();
-    //app.lightCollection.trigger('reset');
 
     app.navigationLinkCollection.select('lights');
     app.navigationView.render();
   },
 
   light: function(light_id) {
-    if (!app.lightCollection.length) {
+    if(!app.lightCollection.length) {
       var model = new app.Light({ id: light_id });
       model.fetch();
     } else {
@@ -334,7 +365,6 @@ app.Router = Backbone.Router.extend({
     }
 
     app.RegionManager.show(new app.LightView({ model: model }));
-    //app.appView.$el.append(view.render().el);
 
     app.navigationLinkCollection.select('');
     app.navigationView.render();
