@@ -3,7 +3,7 @@
     <a href="#lights"><span class="glyphicon glyphicon-chevron-left"></span></a> {{ name }}
   </h1>
 
-  <div class="main-controls">
+  <div class="main-controls divider-bottom">
     <button
       data-light-id="{{ id }}"
       data-power="{{ power_text }}"
@@ -17,7 +17,7 @@
       style="background-color: {{ hex }}">&nbsp;</span>
   </div>
 
-  <div class="light-controls-ct">
+  <div class="light-controls-ct divider-bottom">
     <div class="row">
       <div class="col-xs-5">
         <strong>Brightness</strong>
@@ -45,4 +45,12 @@
     </div>
   </div>
 
+  <div class="row">
+    <div class="col-xs-5">
+      <strong>Hue/Sat/Bri</strong>
+    </div>
+    <div class="col-xs-7">
+      <div id="picker"></div>
+    </div>
+  </div>
 </div>

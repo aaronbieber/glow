@@ -97,7 +97,7 @@ class Light {
     }
 
     if ($this->colormode == 'ct') {
-      return $this->_ct_to_hex($this->ct);
+      return $this->_ct_to_hex($this->ct, $this->bri);
     } else {
       return $this->_hsl_to_hex(
         $this->hue,
@@ -117,16 +117,23 @@ class Light {
     );
   }
 
-  private function _ct_to_hex($ct) {
+  private function _ct_to_hex($ct, $bri) {
     $percent = (($ct - 153) / 347) * 100;
+    $bri = (($bri * 160) / 255) + 95;
+    $darken = 1 - ((255 - $bri) / 255);
 
     $first  = [ 158, 175, 213 ];
     $last   = [ 213, 183, 160 ];
     $deltas = [ ($last[0] - $first[0]) / 100, ($last[1] - $first[1]) / 100, ($last[2] - $first[2]) / 100 ];
+
+    $r = floor(($first[0] + $percent * $deltas[0]) * $darken);
+    $g = floor(($first[1] + $percent * $deltas[1]) * $darken);
+    $b = floor(($first[2] + $percent * $deltas[2]) * $darken);
+
     $color  = '#' .
-      sprintf('%02s', dechex(floor($first[0] + $percent * $deltas[0]))) .
-      sprintf('%02s', dechex(floor($first[1] + $percent * $deltas[1]))) .
-      sprintf('%02s', dechex(floor($first[2] + $percent * $deltas[2])));
+      sprintf('%02s', dechex($r)) .
+      sprintf('%02s', dechex($g)) .
+      sprintf('%02s', dechex($b));
 
     return $color;
   }

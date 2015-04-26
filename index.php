@@ -6,9 +6,10 @@
   <meta name="mobile-web-app-capable" content="yes">
   <title>Glow</title>
 
-  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/css/lights.css">
-  <link rel="stylesheet" href="assets/css/colorpicker.css">
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="assets/css/lights.css" />
+  <link rel="stylesheet" href="assets/css/colorpicker.css" />
+  <link rel="stylesheet" href="assets/css/farbtastic.css" />
   <link rel="shortcut icon" type="image/x-icon" href="/favicon.png" />
 </head>
 <body>
@@ -28,6 +29,7 @@
   <script src="assets/js/backbone-min.js" type="text/javascript"></script>
   <script src="assets/js/mustache.min.js" type="text/javascript"></script>
   <script src="assets/js/glow.js" type="text/javascript"></script>
+  <script src="assets/js/farbtastic.js" type="text/javascript"></script>
 
   <?php
   // Rip in some templates like a boss.

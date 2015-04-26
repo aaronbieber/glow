@@ -44,6 +44,7 @@ pre#response {
 }
 
 .color-swatch {
+  border: 1px solid #dfdfdf;
   display: inline-block;
   width: 32px;
   height: 32px;
@@ -243,4 +244,10 @@ div.light-bar > div > div {
 .light-editor h1 a {
   font-size: 0.5em;
   vertical-align: middle;
+}
+
+.light-editor .divider-bottom {
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid silver;
 }

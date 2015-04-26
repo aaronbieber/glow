@@ -1,7 +1,8 @@
 Backbone.emulateHTTP = true;
 
+var app = {};
+
 $(document).ready(function() {
-  var app = {};
 
   app.util = {
     get_template: function(template_name) {
@@ -169,19 +170,49 @@ $(document).ready(function() {
 
     brightness: function(e) {
       var brightness = e.target.value;
+      this.model.set('colormode', 'ct');
       this.model.set('bri', brightness);
       this.model.save();
     },
 
     temperature: function(e) {
       var ct = e.target.value;
+      this.model.set('colormode', 'ct');
       this.model.set('ct', ct);
+      this.model.save();
+    },
+
+    picker_change: function() {
+      window.clearTimeout(app.picker_timer);
+      app.picker_timer = window.setTimeout(
+        _.bind(this.hsl, this),
+        500
+      );
+    },
+
+    hsl: function() {
+      this.model.set('colormode', 'hs');
+      color = {
+        hue: Math.round(app.picker.hsl[0] * 65535),
+        sat: Math.round(app.picker.hsl[1] * 255),
+        bri: Math.round(app.picker.hsl[2] * 255)
+      }
+      this.model.set('hue', color.hue);
+      this.model.set('sat', color.sat);
+      this.model.set('bri', color.bri);
       this.model.save();
     },
 
     render: function() {
       var light = this.model.toJSON();
       this.$el.html(Mustache.render(this.template, light));
+      app.picker = $.farbtastic(this.$el.find('#picker'));
+      app.picker.setHSL(
+        [ this.model.get('hue')/65535,
+          this.model.get('sat')/255,
+          this.model.get('bri')/255 ]
+      );
+      app.picker.linkTo(_.bind(this.picker_change, this));
       return this;
     }
   });
@@ -210,6 +241,7 @@ $(document).ready(function() {
       app.appView.$el.html('');
       app.sceneCollection.fetch();
       app.sceneCollection.trigger('reset');
+
       app.navigation.select('scenes');
       app.navigationView.render();
     },
@@ -218,21 +250,27 @@ $(document).ready(function() {
       app.appView.$el.html('');
       app.lightCollection.fetch({ success: function() {}});
       app.lightCollection.trigger('reset');
+
       app.navigation.select('lights');
       app.navigationView.render();
     },
 
     light: function(light_id) {
       app.appView.$el.html('');
-      var model = new app.Light({ id: light_id });
-      model.fetch();
+
+      if (!app.lightCollection.length) {
+        var model = new app.Light({ id: light_id });
+        model.fetch();
+      } else {
+        var model = app.lightCollection.get(light_id);
+      }
       var view = new app.LightView({ model: model });
       app.appView.$el.append(view.render().el);
 
       app.navigation.select('');
       app.navigationView.render();
     }
-});
+  });
 
   // Start everything
   app.navigation = new app.NavigationLinkCollection([
