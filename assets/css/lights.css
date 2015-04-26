@@ -182,7 +182,7 @@ div.navigation {
   margin: 10px 20px 0px 0;
   padding:  0;
   text-shadow: 0px 0px 10px gold;
-  color: black;
+  color: white;
 }
 
 ul.nav {
@@ -250,4 +250,8 @@ div.light-bar > div > div {
   padding-bottom: 15px;
   margin-bottom: 15px;
   border-bottom: 1px solid silver;
+}
+
+.space-below {
+  margin-bottom: 15px;
 }
