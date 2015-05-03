@@ -1,0 +1,27 @@
+<div class="scene-editor">
+  <h2>
+    <a href="#scenes"><span class="glyphicon glyphicon-chevron-left"></span></a>
+    <span class="name-label">{{ name }}</span>
+    <span class="name-edit" style="display: none;">
+      <input class="name-entry form-control" style="display: inline; width: 200px;" value="{{ name }}" />
+      <button class="btn btn-success js-name-edit-save"><span class="glyphicon glyphicon-ok"></span></button>
+      <button class="btn btn-warning js-name-edit-cancel"><span class="glyphicon glyphicon-remove"></span></button>
+    </span>
+    <button class="btn btn-default js-name-edit"><span class="glyphicon glyphicon-pencil"></span></button>
+  </h2>
+
+  {{#lights}}
+    <div class="light-row">
+      <div class="row">
+        <div class="col-xs-6">
+          <strong>{{ name }}</strong>
+        </div>
+        <div class="col-xs-6">
+          <div class="light-bar">
+            <div style="background-color: {{ hex }};"><div>&nbsp;</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {{/lights}}
+</div>
