@@ -32,7 +32,7 @@ class Scene extends Base {
     }
 
     $this->_scenes->save();
-    $this->render(['success' => true], Base::FORMAT_JSON);
+    $this->render($this->_scenes->as_array(), Base::FORMAT_JSON);
   }
 
   /**
@@ -40,37 +40,41 @@ class Scene extends Base {
    *
    * @return void
    */
-  public function patch($scene_id) {
+  public function put($scene_id) {
     $scene = $this->_scenes->find_by_id($scene_id);
-    $updates = ['scene' => $scene_id];
 
     /* Indiscriminately set all scene values that exist in the post. Right now, the only value that can be set at
      * the scene level is "name." */
     foreach ($this->params as $key => $value) {
-      if (isset($scene->{$key})) {
+      if (isset($scene->{$key}) && is_scalar($scene->{$key})) {
         $scene->{$key} = $value;
-        $updates[$key] = $value;
         unset($this->params[$key]);
       }
     }
 
-    if (!empty($this->params['light'])) {
-      $light_id = $this->params['light'];
-      foreach ($this->params as $key => $value) {
-        if (isset($scene->lights[$light_id]->{$key})) {
-          if (is_numeric($value)) {
-            $value = (int) $value;
-          } elseif ($value == 'true') {
-            $value = true;
-          } elseif ($value == 'false') {
-            $value = false;
+    if (!empty($this->params['lights'])) {
+      foreach ($this->params['lights'] as $light) {
+        $light_id = $light->id;
+        foreach($light as $property => $value) {
+
+          if (isset($scene->lights[$light_id]->{$property})) {
+            if (is_numeric($value)) {
+              $value = (int) $value;
+            } elseif ($property == 'power') {
+              $value = (bool) $value;
+            }
+            $scene->lights[$light_id]->{$property} = $value;
           }
-          $scene->lights[$light_id]->{$key} = $value;
-          unset($this->params[$key]);
         }
       }
     }
 
-    $this->_scenes->save();
+    //var_dump($this->_scenes);
+
+    if ($this->_scenes->save()) {
+      $this->render($this->_scenes->as_array(), Base::FORMAT_JSON);
+    } else {
+      $this->render_error([ 'errors' => $this->_scenes->errors ], Base::FORMAT_JSON);
+    }
   }
 }

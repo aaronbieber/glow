@@ -14,6 +14,23 @@ class Scenes extends Base {
     $this->render($this->scenes->as_array(), Base::FORMAT_JSON);
   }
 
+  public function put() {
+    // Index the scene sort values by scene ID.
+    $scenes = [];
+    foreach($this->params as $model) {
+      $scenes[$model->id] = $model->sort;
+    }
+
+    // Set the sort values of the actual scenes to their new sort values.
+    foreach($this->scenes as $scene) {
+      $scene->sort = $scenes[$scene->id];
+    }
+
+    if ($this->scenes->save()) {
+      $this->render([ 'success' => true ], Base::FORMAT_JSON);
+    }
+  }
+
   /**
    * Select a scene by name (/scenes/by_name/:name)
    *

@@ -104,7 +104,6 @@ pre#response {
 
 .scene-controls {
   display: block;
-  margin-top: 4px;
 }
 
 .scene-controls .row {
@@ -142,6 +141,34 @@ div.scene-row {
   padding-bottom: 5px;
   border-bottom: 1px solid silver;
   margin-bottom: 5px;
+}
+
+.scene-row .handle {
+  color: black;
+  margin-top: -4px;
+  cursor: move;
+}
+
+#scene-list .sortable-placeholder {
+  height: 38px;
+  margin: 2px 2px 5px 2px;
+  border: 1px dashed silver;
+}
+
+#scene-list .ghost {
+  border: 1px dashed silver;
+  background-color: white;
+}
+
+#scenes-page .scene-commands,
+#lights-page .light-commands {
+  margin-top: 20px;
+  padding-top: 9px;
+}
+
+#scenes-page .scene-commands button,
+#lights-page .light-commands button {
+  margin-top: 10px;
 }
 
 button.light-button,
@@ -234,14 +261,14 @@ div.light-bar > div > div {
   width: 100%;
 }
 
-.light-editor h1 {
+h2 {
   font-size: 30px;
   margin-top: 0;
   padding-bottom: 0.25em;
   border-bottom: 1px solid silver;
 }
 
-.light-editor h1 a {
+h2 a {
   font-size: 0.5em;
   vertical-align: middle;
 }
@@ -254,4 +281,20 @@ div.light-bar > div > div {
 
 .space-below {
   margin-bottom: 15px;
+}
+
+.scene-editor .name-entry {
+  font-size: large;
+}
+
+#modal {
+  padding: 10px;
+  position: absolute;
+  z-index: 50;
+  background-color: white;
+  width: 80%;
+  left: 10%;
+  top: 10%;
+  border: 1px solid silver;
+  box-shadow: 0px 5px 10px gray;
 }

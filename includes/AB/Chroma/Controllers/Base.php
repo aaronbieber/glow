@@ -18,6 +18,18 @@ abstract class Base {
   const FORMAT_JSON = 'json';
   const FORMAT_HTML = 'html';
 
+  const HTTP_OK = 200;
+  const HTTP_BAD_REQUEST = 400;
+  const HTTP_NOT_FOUND = 404;
+  const HTTP_INTERNAL_SERVER_ERROR = 500;
+
+  protected $http_status_messages = [
+      self::HTTP_OK => 'OK',
+      self::HTTP_BAD_REQUEST => 'Bad Request',
+      self::HTTP_NOT_FOUND => 'Not Found',
+      self::HTTP_INTERNAL_SERVER_ERROR => 'Internal Server Error'
+  ];
+
   protected $args = [];
   protected $params = [];
   protected $method = '';
@@ -47,6 +59,15 @@ abstract class Base {
 
   protected function param($param) {
     return isset($this->params[$param]) ? $this->params[$param] : null;
+  }
+
+  protected function render_error($params, $format = self::FORMAT_HTML, $code = self::HTTP_INTERNAL_SERVER_ERROR) {
+    if (!in_array($code, $this->http_status_messages)) {
+      $code = self::HTTP_INTERNAL_SERVER_ERROR;
+    }
+
+    header(sprintf('HTTP/1.1 %s %s', $code, $this->http_status_messages[$code]));
+    $this->render($params, $format);
   }
 
   protected function render($params, $format = self::FORMAT_HTML) {

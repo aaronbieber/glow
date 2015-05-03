@@ -21,7 +21,7 @@ $lights->load();
   <meta name="mobile-web-app-capable" content="yes">
   <title>Glow</title>
 
-  <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="assets/css/bootstrap-3.3.4.min.css" />
   <link rel="stylesheet" href="assets/css/lights.css" />
   <link rel="stylesheet" href="assets/css/colorpicker.css" />
   <link rel="stylesheet" href="assets/css/farbtastic.css" />
@@ -45,6 +45,7 @@ $lights->load();
   <script src="assets/js/mustache.min.js" type="text/javascript"></script>
   <script src="assets/js/glow.js" type="text/javascript"></script>
   <script src="assets/js/farbtastic.js" type="text/javascript"></script>
+  <script src="assets/js/Sortable.js" type="text/javascript"></script>
 
   <script type="text/javascript">
    $(document).ready(function() {

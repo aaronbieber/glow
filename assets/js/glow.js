@@ -5,6 +5,10 @@ var app = {};
 app.util = {
   get_template: function(template_name) {
     return $('#t-' + template_name).html();
+  },
+
+  move_array_element: function (array, old_index, new_index) {
+    array.splice(new_index, 0, array.splice(old_index, 1)[0]);
   }
 }
 
@@ -34,12 +38,34 @@ app.Scene = Backbone.Model.extend({
     id: 0,
     name: '',
     lights: []
-  }
+  },
+  urlRoot: '/scene'
 });
 
 app.SceneCollection = Backbone.Collection.extend({
   model: app.Scene,
-  url: '/scenes'
+  url: '/scenes',
+
+  save: function() {
+    var collection = _.reduce(
+      this.models,
+      function(memo, model) {
+        memo.push(model);
+        return memo;
+      },
+      []
+    );
+    $.ajax(this.url, {
+      method: 'POST',
+      headers: { 'X-HTTP-Method-Override': 'PUT' },
+      contentType: 'application/json',
+      data: JSON.stringify(collection),
+      success: function() {
+      },
+      failure: function() {
+      }
+    });
+  }
 });
 
 app.Light = Backbone.Model.extend({
@@ -64,7 +90,7 @@ app.LightCollection = Backbone.Collection.extend({
 
 app.RegionManager = (function(Backbone, $) {
   var currentView;
-  var el = "#container";
+  var el = '#container';
   var region = {};
 
   var closeView = function(view) {
@@ -90,38 +116,41 @@ app.RegionManager = (function(Backbone, $) {
   return region;
 })(Backbone, jQuery);
 
-app.AppView = Backbone.View.extend({
-  el: $('#container'),
+app.ModalManager = (function(Backbone, $) {
+  var currentModal;
+  var el = '#container';
+  var id = 'modal';
+  var modal_el = $('<div>').attr('id', id);
+  var modal = {};
 
-  initialize: function() {
-    app.sceneCollection.on('add', this.addScene, this);
-    app.sceneCollection.on('reset', this.addAllScenes, this);
-    app.lightCollection.on('add', this.addLight, this);
-    app.lightCollection.on('reset', this.addAllLights, this);
+  var closeModal = function(view) {
+    if(view && view.close) {
+      view.close();
+    }
+    $(el).find('#'+id).remove();
+  };
 
-    app.navigationView.render();
-  },
+  var openModal = function(view) {
+    view.render();
+    $(modal_el).html(view.el);
+    $(el).append(modal_el);
+    if(view.onShow) {
+      view.onShow();
+    }
+  };
 
-  addScene: function(scene) {
-    var view = new app.SceneRowView({ model: scene });
-    this.$el.append(view.render().el);
-  },
+  modal.show = function(view) {
+    closeModal(currentModal);
+    currentModal = view;
+    openModal(currentModal);
+  };
 
-  addAllScenes: function(scenes) {
-    this.$el.html('');
-    app.sceneCollection.each(this.addScene, this);
-  },
+  modal.hide = function() {
+    closeModal(currentModal);
+  };
 
-  addLight: function(light) {
-    var view = new app.LightRowView({ model: light });
-    this.$el.append(view.render().el);
-  },
-
-  addAllLights: function(lights) {
-    this.$el.html('');
-    app.lightCollection.each(this.addLight, this);
-  }
-});
+  return modal;
+})(Backbone, jQuery);
 
 app.NavigationView = Backbone.View.extend({
   el: $('#navigation'),
@@ -136,18 +165,79 @@ app.NavigationView = Backbone.View.extend({
   }
 });
 
+app.ModalView = Backbone.View.extend({
+  id: 'modal',
+
+  render: function() {
+    $('#container').append(this.$el);
+  }
+});
+
 app.ScenePageView = Backbone.View.extend({
   tagName: 'div',
+  id: 'scenes-page',
+
+  events: {
+    'click .js-sort': 'sort_toggle'
+  },
+
+  initialize: function() {
+    this.template = app.util.get_template('scenes');
+    this.sorting = false;
+  },
+
+  sort_toggle: function() {
+    if (!this.sorting) {
+      this.$('.scene-commands .js-sort').addClass('btn-success').html('Save Sorting');
+      this.$('#scene-list .scene-controls').hide();
+      // This is dodgy.
+      this.$('#scene-list .scene-name').removeClass('col-xs-5').addClass('col-xs-12');
+      this.$('#scene-list .handle').show();
+      this.sortable = Sortable.create($('#scene-list')[0], {
+        handle: '.handle',
+        ghostClass: 'ghost',
+        onEnd: function(e) {
+          // Move scene within the models array; we'll re-set the sort properties later.
+          // Javascript is better at re-indexing arrays than I am.
+          app.util.move_array_element(app.sceneCollection.models, e.oldIndex, e.newIndex);
+        }
+      });
+      this.sorting = true;
+    } else {
+      this.$('.scene-commands .js-sort').removeClass('btn-success').html('Sort Scenes');
+      // This is dodgy.
+      this.$('#scene-list .scene-name').addClass('col-xs-5').removeClass('col-xs-12');
+      this.$('#scene-list .scene-controls').show();
+      this.$('#scene-list .handle').hide();
+      this.sortable.destroy();
+      this.sorting = false;
+
+      // Apply the sort to the collection by setting each model's
+      // "sort" property to its index in the array. The "sort"
+      // property gives us a concrete representation of the order of
+      // things that we can persist into the file, and which is
+      // neither implied nor magical.
+      for(var i = 0; i < this.collection.models.length; i++) {
+        this.collection.models[i].set('sort', i);
+      }
+
+      this.collection.save();
+    }
+  },
+
   render: function() {
+    this.$el.html(Mustache.render(this.template));
+
     this.collection.each(function(scene) {
       var view = new app.SceneRowView({ model: scene });
-      this.$el.append(view.render().el);
+      this.$el.find('#scene-list').append(view.render().el);
     }, this);
   }
 });
 
 app.SceneRowView = Backbone.View.extend({
   tagName: 'div',
+  className: 'scene-row',
 
   initialize: function() {
     this.template = app.util.get_template('scene-row');
@@ -177,14 +267,39 @@ app.SceneRowView = Backbone.View.extend({
 
 app.SceneView = Backbone.View.extend({
   tagName: 'div',
+  id: 'scene-page',
 
   initialize: function() {
     this.template = app.util.get_template('scene');
-    //this.model.on(
-    //  'sync',
-    //  function () { this.render(); this.onShow(); },
-    //  this
-    //);
+    this.model.on('sync', this.render, this);
+  },
+
+  events: {
+    'click .js-name-edit':        'edit_start',
+    'click .js-name-edit-cancel': 'edit_cancel',
+    'click .js-name-edit-save':   'edit_save'
+  },
+
+  edit_start: function() {
+    this.$el.find('.name-edit').show();
+    this.$el.find('.js-name-edit').hide();
+    this.$el.find('.name-label').hide();
+  },
+
+  edit_cancel: function() {
+    this.$el.find('.name-edit').hide();
+    this.$el.find('.name-entry').val(this.model.get('name'));
+    this.$el.find('.js-name-edit').show();
+    this.$el.find('.name-label').show();
+  },
+
+  edit_save: function() {
+    this.model.set('name', $('.name-entry').val());
+    this.model.save(null, {
+      error: _.bind(function(model, response, options) {
+        this.$el.find('.name-edit').addClass('has-error');
+      }, this)
+    });
   },
 
   render: function() {
@@ -197,10 +312,19 @@ app.SceneView = Backbone.View.extend({
 
 app.LightPageView = Backbone.View.extend({
   tagName: 'div',
+  id: 'lights-page',
+
+  initialize: function() {
+    this.template = app.util.get_template('lights');
+  },
+
   render: function() {
+    this.$el.html(Mustache.render(this.template));
+    var $lights_list = this.$el.find('#light-list');
+
     this.collection.each(function(light) {
       var view = new app.LightRowView({ model: light });
-      this.$el.append(view.render().el);
+      $lights_list.append(view.render().el);
     }, this);
   }
 });
@@ -236,6 +360,7 @@ app.LightRowView = Backbone.View.extend({
 
 app.LightView = Backbone.View.extend({
   tagName: 'div',
+  id: 'light-page',
 
   initialize: function() {
     this.template = app.util.get_template('light');
@@ -327,7 +452,8 @@ app.Router = Backbone.Router.extend({
   },
 
   scenes: function() {
-    app.RegionManager.show(new app.ScenePageView({ collection: app.sceneCollection }));
+    app.scenePageView = new app.ScenePageView({ collection: app.sceneCollection });
+    app.RegionManager.show(app.scenePageView);
 
     app.navigationLinkCollection.select('scenes');
     app.navigationView.render();
@@ -341,8 +467,6 @@ app.Router = Backbone.Router.extend({
       var model = app.sceneCollection.get(scene_id);
     }
 
-    console.log(model);
-
     app.RegionManager.show(new app.SceneView({ model: model }));
 
     app.navigationLinkCollection.select('');
@@ -350,7 +474,8 @@ app.Router = Backbone.Router.extend({
   },
 
   lights: function() {
-    app.RegionManager.show(new app.LightPageView({ collection: app.lightCollection }));
+    var lightPageView = new app.LightPageView({ collection: app.lightCollection });
+    app.RegionManager.show(lightPageView);
 
     app.navigationLinkCollection.select('lights');
     app.navigationView.render();

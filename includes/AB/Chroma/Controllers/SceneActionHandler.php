@@ -8,10 +8,10 @@ class SceneActionHandler extends Base {
     $scenes->load();
 
     // Grab the scene we want to use.
-    $scene = $scenes[$scene_id];
+    $scene = $scenes->find_by_id($scene_id);
     // Save each light in the scene, effectively setting it.
     $scene->set();
 
-    $this->render(['success' => true], Base::FORMAT_JSON);
+    $this->render(['success' => true, 'id' => $scene->id, 'name' => $scene->name ], Base::FORMAT_JSON);
   }
 }

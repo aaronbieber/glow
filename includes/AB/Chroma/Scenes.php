@@ -3,6 +3,7 @@ namespace AB\Chroma;
 
 class Scenes extends Collection {
   const FLAG_ICASE = 1;
+  public $errors = [];
 
   /**
    * Get the Scene with the given ID, and leave the internal pointer pointed at that scene object.
@@ -34,32 +35,53 @@ class Scenes extends Collection {
   public function load() {
     $scenes_yaml = file_get_contents('data/scenes.yml');
     $this->models = $this->from_array(\yaml_parse($scenes_yaml));
-    usort($this->models, array($this, '_compare_scene_names'));
+    usort($this->models, array($this, 'compare_scene_sorts'));
   }
 
   public function save() {
-    $scenes_yaml = yaml_emit($this->as_array());
-    $fp = fopen('data/scenes.yml', 'w');
-    fwrite($fp, $scenes_yaml);
-    fclose($fp);
+    if ($this->validate()) {
+      $scenes_yaml = yaml_emit($this->as_array());
+      $fp = fopen('data/scenes.yml', 'w');
+      fwrite($fp, $scenes_yaml);
+      fclose($fp);
+      return true;
+    }
+
+    return false;
   }
 
-  private function _compare_scene_names($a, $b) {
+  public function validate() {
+    foreach ($this->models as $scene) {
+      if (!$scene->validate()) {
+        $this->errors[] = 'Errors in scene ' . $scene->id . ': ' . implode(', ', $scene->errors);
+      }
+    }
+
+    return empty($this->errors);
+  }
+
+  private function compare_scene_names($a, $b) {
     return strcmp($a->name, $b->name);
+  }
+
+  private function compare_scene_sorts($a, $b) {
+    if ($a->sort == $b->sort) return 0;
+    if ($a->sort < $b->sort)  return -1;
+    if ($a->sort > $b->sort)  return 1;
   }
 
   private function from_array($self_array) {
     $scenes = [];
 
     foreach ($self_array as $scene) {
-      $scene_id = $scene['id'];
-      $scenes[$scene_id] = new Scene();
-      $scenes[$scene_id]->id = $scene_id;
-      $scenes[$scene_id]->name = $scene['name'];
+      $new_scene       = new Scene();
+      $new_scene->id   = $scene['id'];
+      $new_scene->name = $scene['name'];
+      $new_scene->sort = $scene['sort'];
 
       foreach ($scene['lights'] as $light) {
         $light_id = $light['id'];
-        $scenes[$scene_id]->lights[$light_id] = new Light([
+        $new_scene->lights[$light_id] = new Light([
           'id'        => $light_id,
           'name'      => $light['name'],
           'power'     => (bool) $light['power'],
@@ -70,6 +92,8 @@ class Scenes extends Collection {
           'bri'       => $light['bri']
         ]);
       }
+
+      $scenes[] = $new_scene;
     }
 
     return $scenes;
@@ -84,8 +108,9 @@ class Scenes extends Collection {
         $scene_lights[] = $light->as_array();
       }
       $self_array[$scene_id] = [
-        'id'     => $scene_id,
+        'id'     => $scene->id,
         'name'   => $scene->name,
+        'sort'   => $scene->sort,
         'lights' => $scene_lights
       ];
     }

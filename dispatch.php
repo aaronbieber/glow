@@ -45,19 +45,29 @@ Flight::route('POST /scene/@scene/choose', function($scene) {
   $c->post($scene);
 });
 
+Flight::route('POST /scene/choose', function() {
+  $c = new \AB\Chroma\Controllers\SceneActionHandler();
+  $c->post($scene);
+});
+
 Flight::route('POST /scenes/by_name/@scene', function($scene) {
   $c = new \AB\Chroma\Controllers\Scenes();
   $c->post($scene);
 });
 
-Flight::route('PATCH /scene/@scene', function($scene) {
+Flight::route('PUT|POST /scene/@scene', function($scene) {
   $c = new \AB\Chroma\Controllers\Scene();
-  $c->patch($scene);
+  $c->put($scene);
 });
 
 Flight::route('GET /scenes', function() {
   $c = new \AB\Chroma\Controllers\Scenes();
   $c->get();
+});
+
+Flight::route('PUT /scenes', function() {
+  $c = new \AB\Chroma\Controllers\Scenes();
+  $c->put();
 });
 
 Flight::route('GET /config', function() {
