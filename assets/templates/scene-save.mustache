@@ -1,0 +1,15 @@
+<div class="form-group">
+  <label for="scene-save-name">Name</label>
+  <input id="scene-save-name" name="scene-name" type="text" class="js-scene-name form-control" list="scenes" />
+  <datalist id="scenes">
+    {{#scenes}}
+    <option>{{name}}</option>
+    {{/scenes}}
+  </datalist>
+</div>
+
+<div class="form-group">
+  <button class="btn btn-success js-scene-save">Save</button>
+  or
+  <a class="text-cancel js-scene-save-cancel" href="#">Cancel</a>
+</div>
