@@ -42,6 +42,64 @@ app.Scene = Backbone.Model.extend({
   urlRoot: '/scene'
 });
 
+app.SceneSaveView = Backbone.View.extend({
+  id: 'scene-save-view',
+
+  events: {
+    'click .js-scene-save': 'save',
+    'click .js-scene-save-cancel': 'cancel',
+    'keyup .js-scene-name': 'check_name',
+    'click .js-scene-name': 'check_name',
+    'change .js-scene-name': 'check_name'
+  },
+
+  initialize: function() {
+    this.template = app.util.get_template('scene-save');
+  },
+
+  save: function() {
+    console.log(this.$el.find('#scene-save-name').val());
+  },
+
+  cancel: function() {
+    app.ModalManager.hide();
+    return false;
+  },
+
+  check_name: function() {
+    var scene_exists = function(name) {
+      return !!_.filter(app.sceneCollection.models, function(m) { return m.get('name') == name; }).length;
+    };
+    var name = this.$el.find('#scene-save-name').val().trim();
+    if(scene_exists(name)) {
+      this.$el.find('.js-scene-save').html('Overwrite ' + '"' + name + '"');
+    } else {
+      this.$el.find('.js-scene-save').html('Save');
+    }
+  },
+
+  onShow: function() {
+    $(window).on('scroll', function() {
+      $('#modal-overlay').css({ top: window.pageYOffset + 'px' });
+    });
+  },
+
+  close: function() {
+    $(window).off('scroll');
+  },
+
+  render: function() {
+    var scenes = _.map(
+      app.sceneCollection.models,
+      function(s) {
+        return { name: s.get('name') };
+      }
+    );
+    console.log(scenes);
+    this.$el.html(Mustache.render(this.template, { scenes: scenes }));
+  }
+});
+
 app.SceneCollection = Backbone.Collection.extend({
   model: app.Scene,
   url: '/scenes',
@@ -119,8 +177,7 @@ app.RegionManager = (function(Backbone, $) {
 app.ModalManager = (function(Backbone, $) {
   var currentModal;
   var el = '#container';
-  var id = 'modal';
-  var modal_el = $('<div>').attr('id', id);
+  var id = 'modal-overlay';
   var modal = {};
 
   var closeModal = function(view) {
@@ -132,8 +189,11 @@ app.ModalManager = (function(Backbone, $) {
 
   var openModal = function(view) {
     view.render();
-    $(modal_el).html(view.el);
-    $(el).append(modal_el);
+
+    var target = $('<div>').attr('id', id).append($('<div>').attr('id', 'modal'));
+    target.find('#modal').html(view.el);
+    $(el).append(target);
+
     if(view.onShow) {
       view.onShow();
     }
@@ -314,8 +374,17 @@ app.LightPageView = Backbone.View.extend({
   tagName: 'div',
   id: 'lights-page',
 
+  events: {
+    'click .js-save-current': 'save_current'
+  },
+
   initialize: function() {
     this.template = app.util.get_template('lights');
+  },
+
+  save_current: function() {
+    var tpl = new app.SceneSaveView();
+    app.ModalManager.show(tpl);
   },
 
   render: function() {
@@ -343,7 +412,7 @@ app.LightRowView = Backbone.View.extend({
 
   toggle: function(e) {
     this.model.set('power', !this.model.get('power'));
-    this.model.save();
+    this.save();
   },
 
   close: function() {
@@ -410,7 +479,7 @@ app.LightView = Backbone.View.extend({
       hue: Math.round(app.picker.hsl[0] * 65535),
       sat: Math.round(app.picker.hsl[1] * 255),
       bri: Math.round(app.picker.hsl[2] * 255)
-    }
+    };
     this.model.set('hue', color.hue);
     this.model.set('sat', color.sat);
     this.model.set('bri', color.bri);
