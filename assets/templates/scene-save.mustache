@@ -8,8 +8,14 @@
   </datalist>
 </div>
 
-<div class="form-group">
+<div class="form-group js-save-buttons">
   <button class="btn btn-success js-scene-save">Save</button>
   or
   <a class="text-cancel js-scene-save-cancel" href="#">Cancel</a>
+</div>
+
+<div class="form-group js-overwrite-confirm" style="display:none;">
+  Really overwrite "<span class="js-overwrite-scene-name"></span>?"
+  <button class="btn btn-success js-overwrite-yes">Yes</button> or
+  <button class="btn btn-danger js-overwrite-no">No</button>
 </div>

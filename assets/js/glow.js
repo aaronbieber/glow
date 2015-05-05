@@ -46,19 +46,33 @@ app.SceneSaveView = Backbone.View.extend({
   id: 'scene-save-view',
 
   events: {
-    'click .js-scene-save': 'save',
+    'click .js-scene-save':        'save',
     'click .js-scene-save-cancel': 'cancel',
-    'keyup .js-scene-name': 'check_name',
-    'click .js-scene-name': 'check_name',
-    'change .js-scene-name': 'check_name'
+    'click .js-overwrite-yes':     'overwrite',
+    'click .js-overwrite-no':      'overwrite_cancel',
+
+    'keyup .js-scene-name':        'check_name',
+    'input .js-scene-name':        'check_name'
   },
 
   initialize: function() {
     this.template = app.util.get_template('scene-save');
+    this.overwrite = false;
   },
 
   save: function() {
+    if (this.overwrite) {
+      this.$el.find('.js-save-buttons').hide();
+      this.$el.find('.js-overwrite-confirm').show();
+    } else {
+      // Save!
+    }
     console.log(this.$el.find('#scene-save-name').val());
+  },
+
+  overwrite_cancel: function() {
+    this.$el.find('.js-overwrite-confirm').hide();
+    this.$el.find('.js-save-buttons').show();
   },
 
   cancel: function() {
@@ -68,13 +82,24 @@ app.SceneSaveView = Backbone.View.extend({
 
   check_name: function() {
     var scene_exists = function(name) {
-      return !!_.filter(app.sceneCollection.models, function(m) { return m.get('name') == name; }).length;
+      for(idx in app.sceneCollection.models) {
+        var model = app.sceneCollection.models[idx];
+        if (model.get('name').toLowerCase() == name.toLowerCase()) {
+          return model.get('name');
+        }
+      }
+      return false;
     };
+
     var name = this.$el.find('#scene-save-name').val().trim();
-    if(scene_exists(name)) {
-      this.$el.find('.js-scene-save').html('Overwrite ' + '"' + name + '"');
+    var found = scene_exists(name);
+    if(found !== false) {
+      this.$el.find('.js-scene-save').html('Overwrite ' + '"' + found + '"');
+      this.$el.find('.js-overwrite-scene-name').html(found);
+      this.overwrite = true;
     } else {
       this.$el.find('.js-scene-save').html('Save');
+      this.overwrite = false;
     }
   },
 
@@ -95,7 +120,6 @@ app.SceneSaveView = Backbone.View.extend({
         return { name: s.get('name') };
       }
     );
-    console.log(scenes);
     this.$el.html(Mustache.render(this.template, { scenes: scenes }));
   }
 });
