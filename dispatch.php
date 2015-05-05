@@ -55,6 +55,11 @@ Flight::route('POST /scenes/by_name/@scene', function($scene) {
   $c->post($scene);
 });
 
+Flight::route('POST /scene', function() {
+  $c = new \AB\Chroma\Controllers\Scene();
+  $c->post();
+});
+
 Flight::route('PUT|POST /scene/@scene', function($scene) {
   $c = new \AB\Chroma\Controllers\Scene();
   $c->put($scene);

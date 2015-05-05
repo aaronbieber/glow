@@ -65,9 +65,22 @@ app.SceneSaveView = Backbone.View.extend({
       this.$el.find('.js-save-buttons').hide();
       this.$el.find('.js-overwrite-confirm').show();
     } else {
-      // Save!
+      // Save a new scene.
+      var new_scene = new app.Scene;
+      new_scene.set('name', this.$el.find('#scene-save-name').val());
+      new_scene.set('lights', app.lightCollection);
+
+      $.ajax('/scene', {
+        method: 'POST',
+        data: new_scene,
+        contentType: 'application/json',
+        data: JSON.stringify(new_scene),
+        success: function() {
+        },
+        failure: function() {
+        }
+      });
     }
-    console.log(this.$el.find('#scene-save-name').val());
   },
 
   overwrite_cancel: function() {

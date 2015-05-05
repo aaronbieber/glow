@@ -2,14 +2,14 @@
 namespace AB\Chroma\Controllers;
 
 class Scene extends Base {
-  private $_scenes;
+  private $scenes;
 
   public function __construct() {
     parent::__construct();
 
     // Get our scenes.
-    $this->_scenes = new \AB\Chroma\Scenes();
-    $this->_scenes->load();
+    $this->scenes = new \AB\Chroma\Scenes();
+    $this->scenes->load();
   }
 
   /**
@@ -19,20 +19,33 @@ class Scene extends Base {
    */
   public function post() {
     // What is our new scene ID?
-    $scene_id = max(array_keys($this->_scenes->scenes));
+    $scene_id = array_reduce(
+        $this->scenes->as_array(),
+        function($carry, $item) {
+          if ($item['id'] > $carry) {
+            return $item['id'];
+          } else {
+            return $carry;
+          }
+        },
+        0 // Initial value
+    );
     $scene_id++;
 
-    $this->_scenes->scenes[$scene_id] = new \AB\Chroma\Scene();
-    $this->_scenes->scenes[$scene_id]->name = 'Untitled Scene';
+    $new_scene = new \AB\Chroma\Scene();
+    $new_scene->id = $scene_id;
+    $new_scene->name = $this->params['name'];
 
-    // Load up the current lights.
-    $Lights = new \AB\Chroma\Lights();
-    foreach ($Lights->lights as $light) {
-      $this->_scenes->scenes[$scene_id]->lights[$light->id] = $light;
+    foreach ($this->params['lights'] as $light) {
+      $light_model = new \AB\Chroma\Light();
+      $light_model->populate((array) $light);
+      $new_scene->lights[] = $light_model;
     }
 
-    $this->_scenes->save();
-    $this->render($this->_scenes->as_array(), Base::FORMAT_JSON);
+    $this->scenes[] = $new_scene;
+    var_dump($this->scenes);
+    var_dump($this->scenes->save());
+    //$this->render($this->scenes->as_array(), Base::FORMAT_JSON);
   }
 
   /**
@@ -41,7 +54,7 @@ class Scene extends Base {
    * @return void
    */
   public function put($scene_id) {
-    $scene = $this->_scenes->find_by_id($scene_id);
+    $scene = $this->scenes->find_by_id($scene_id);
 
     /* Indiscriminately set all scene values that exist in the post. Right now, the only value that can be set at
      * the scene level is "name." */
@@ -69,12 +82,10 @@ class Scene extends Base {
       }
     }
 
-    //var_dump($this->_scenes);
-
-    if ($this->_scenes->save()) {
-      $this->render($this->_scenes->as_array(), Base::FORMAT_JSON);
+    if ($this->scenes->save()) {
+      $this->render($this->scenes->as_array(), Base::FORMAT_JSON);
     } else {
-      $this->render_error([ 'errors' => $this->_scenes->errors ], Base::FORMAT_JSON);
+      $this->render_error([ 'errors' => $this->scenes->errors ], Base::FORMAT_JSON);
     }
   }
 }
