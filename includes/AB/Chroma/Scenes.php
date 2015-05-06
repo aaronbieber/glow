@@ -36,6 +36,10 @@ class Scenes extends Collection {
     $scenes_yaml = file_get_contents('data/scenes.yml');
     $this->models = $this->from_array(\yaml_parse($scenes_yaml));
     usort($this->models, array($this, 'compare_scene_sorts'));
+
+    foreach ($this as $scene) {
+      usort($scene->lights, array($this, 'compare_light_names'));
+    }
   }
 
   public function save() {
@@ -68,6 +72,10 @@ class Scenes extends Collection {
     if ($a->sort == $b->sort) return 0;
     if ($a->sort < $b->sort)  return -1;
     if ($a->sort > $b->sort)  return 1;
+  }
+
+  private function compare_light_names($a, $b) {
+    return strcmp($a->name, $b->name);
   }
 
   private function from_array($self_array) {
