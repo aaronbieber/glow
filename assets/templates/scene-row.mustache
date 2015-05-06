@@ -1,20 +1,20 @@
 <div class="row">
   <div class="col-xs-5 scene-name">
     <span class="glyphicon glyphicon-menu-hamburger handle" style="display: none;"></span>
-    <a href="#scene/{{ id }}">{{ name }}</a>
+    <a href="#scene/{{id}}">{{name}}</a>
   </div>
 
   <div class="col-xs-7 scene-controls">
     <button
       style="float: right;"
-      data-scene-id="{{ id }}"
+      data-scene-id="{{id}}"
       class="btn btn-primary js-button-scene scene-button">
       <span class="glyphicon glyphicon-off"></span>
     </button>
 
     <div class="light-bar">
       {{#lights}}
-        <div style="background-color: {{ hex }};"><div>&nbsp;</div></div>
+        <div class="light-swatch" style="background-color: {{hex}};" title="{{name}}"><div>&nbsp;</div></div>
       {{/lights}}
     </div>
   </div>

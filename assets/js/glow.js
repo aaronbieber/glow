@@ -283,6 +283,10 @@ app.ScenePageView = Backbone.View.extend({
     this.sorting = false;
   },
 
+  onShow: function() {
+    Tipped.create('.light-swatch');
+  },
+
   sort_toggle: function() {
     if (!this.sorting) {
       this.$('.scene-commands .js-sort').addClass('btn-success').html('Save Sorting');

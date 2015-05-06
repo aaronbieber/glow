@@ -25,6 +25,7 @@ $lights->load();
   <link rel="stylesheet" href="assets/css/lights.css" />
   <link rel="stylesheet" href="assets/css/colorpicker.css" />
   <link rel="stylesheet" href="assets/css/farbtastic.css" />
+  <link rel="stylesheet" href="assets/css/tipped.css" />
   <link rel="shortcut icon" type="image/x-icon" href="/favicon.png" />
 </head>
 <body>
@@ -46,6 +47,7 @@ $lights->load();
   <script src="assets/js/glow.js" type="text/javascript"></script>
   <script src="assets/js/farbtastic.js" type="text/javascript"></script>
   <script src="assets/js/Sortable.js" type="text/javascript"></script>
+  <script src="assets/js/tipped.js" type="text/javascript"></script>
 
   <script type="text/javascript">
    $(document).ready(function() {

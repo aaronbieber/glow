@@ -1,62 +1,4 @@
 ---
-- id: 9
-  name: Helldiver
-  sort: 9
-  lights:
-  - id: 1
-    name: Entryway
-    power: true
-    colormode: hs
-    ct: 500
-    hue: 2660
-    sat: 226
-    bri: 211
-    hex: '#f9beac'
-  - id: 2
-    name: Living Room West
-    power: true
-    colormode: hs
-    ct: 500
-    hue: 2660
-    sat: 226
-    bri: 211
-    hex: '#f9beac'
-  - id: 3
-    name: Bedroom
-    power: true
-    colormode: hs
-    ct: 500
-    hue: 2660
-    sat: 226
-    bri: 211
-    hex: '#f9beac'
-  - id: 4
-    name: Living Room East
-    power: true
-    colormode: hs
-    ct: 500
-    hue: 2660
-    sat: 226
-    bri: 211
-    hex: '#f9beac'
-  - id: 5
-    name: Hallway
-    power: true
-    colormode: hs
-    ct: 500
-    hue: 2660
-    sat: 226
-    bri: 211
-    hex: '#f9beac'
-  - id: 6
-    name: Flood
-    power: true
-    colormode: hs
-    ct: 497
-    hue: 2660
-    sat: 226
-    bri: 211
-    hex: '#f9beac'
 - id: 0
   name: All Off
   sort: 0
@@ -579,4 +521,120 @@
     sat: 240
     bri: 121
     hex: '#000000'
+- id: 9
+  name: Helldiver
+  sort: 9
+  lights:
+  - id: 1
+    name: Entryway
+    power: true
+    colormode: hs
+    ct: 500
+    hue: 2660
+    sat: 226
+    bri: 211
+    hex: '#f9beac'
+  - id: 2
+    name: Living Room West
+    power: true
+    colormode: hs
+    ct: 500
+    hue: 2660
+    sat: 226
+    bri: 211
+    hex: '#f9beac'
+  - id: 3
+    name: Bedroom
+    power: true
+    colormode: hs
+    ct: 500
+    hue: 2660
+    sat: 226
+    bri: 211
+    hex: '#f9beac'
+  - id: 4
+    name: Living Room East
+    power: true
+    colormode: hs
+    ct: 500
+    hue: 2660
+    sat: 226
+    bri: 211
+    hex: '#f9beac'
+  - id: 5
+    name: Hallway
+    power: true
+    colormode: hs
+    ct: 500
+    hue: 2660
+    sat: 226
+    bri: 211
+    hex: '#f9beac'
+  - id: 6
+    name: Flood
+    power: true
+    colormode: hs
+    ct: 497
+    hue: 2660
+    sat: 226
+    bri: 211
+    hex: '#f9beac'
+- id: 10
+  name: Abracadabra
+  sort: 0
+  lights:
+  - id: 3
+    name: Bedroom
+    power: true
+    colormode: ct
+    ct: 400
+    hue: 14393
+    sat: 169
+    bri: 254
+    hex: '#c4b4ae'
+  - id: 1
+    name: Entryway
+    power: true
+    colormode: ct
+    ct: 399
+    hue: 14393
+    sat: 169
+    bri: 254
+    hex: '#c4b4ae'
+  - id: 6
+    name: Flood
+    power: true
+    colormode: hs
+    ct: ~
+    hue: 2427
+    sat: 13
+    bri: 82
+    hex: '#564f4d'
+  - id: 5
+    name: Hallway
+    power: true
+    colormode: ct
+    ct: 399
+    hue: 14393
+    sat: 169
+    bri: 254
+    hex: '#c4b4ae'
+  - id: 4
+    name: Living Room East
+    power: true
+    colormode: ct
+    ct: 399
+    hue: 14393
+    sat: 169
+    bri: 32
+    hex: '#58514f'
+  - id: 2
+    name: Living Room West
+    power: true
+    colormode: ct
+    ct: 399
+    hue: 14393
+    sat: 169
+    bri: 254
+    hex: '#c4b4ae'
 ...
