@@ -453,7 +453,7 @@ app.LightRowView = Backbone.View.extend({
 
   toggle: function(e) {
     this.model.set('power', !this.model.get('power'));
-    this.save();
+    this.model.save();
   },
 
   close: function() {
