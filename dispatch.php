@@ -21,8 +21,14 @@ Flight::route('/', function() {
   $c->get();
 });
 
-Flight::route('/heartbeat/@mac', function($mac) {
-  echo "$mac\n";
+Flight::route('GET /heartbeat/get', function() {
+  $c = new \AB\Lamplighter\Controllers\Heartbeat();
+  $c->get();
+});
+
+Flight::route('GET /heartbeat/set', function () {
+  $c = new \AB\Lamplighter\Controllers\Heartbeat();
+  $c->set();
 });
 
 Flight::route('GET /lights', function() {
