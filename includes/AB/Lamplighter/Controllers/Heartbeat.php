@@ -62,7 +62,7 @@ class Heartbeat {
 
     if (stristr($ua, 'Nexus')) {
       $who = 'aaron';
-    } elseif (stristr($ua, 'Galaxy')) {
+    } elseif (stristr($ua, 'SAMSUNG')) {
       $who = 'veronica';
     } else {
       $who = 'unknown';
