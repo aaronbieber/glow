@@ -5,12 +5,15 @@ class Light {
   public $id = 0;
   public $name = '';
   public $power = true;
+  public $has_ct = true;
+  public $has_hs = true;
   public $colormode = 'ct';
   public $ct = null;
   public $hue = null;
   public $sat = null;
   public $bri = null;
   public $hex = null;
+  private $modelid;
   private $hue_interface;
 
   public function __construct($data = []) {
@@ -37,6 +40,10 @@ class Light {
         }
       }
     }
+
+    $capabilities = $this->_capabilities();
+    $this->has_ct = $capabilities['ct'];
+    $this->has_hs = $capabilities['hs'];
   }
 
   public function load_by_id($light_id) {
@@ -79,6 +86,8 @@ class Light {
       'id'        => $this->id,
       'name'      => $this->name,
       'power'     => $this->power,
+      'has_ct'    => $this->has_ct,
+      'has_hs'    => $this->has_hs,
       'colormode' => $this->colormode,
       'ct'        => $this->ct,
       'hue'       => $this->hue,
@@ -94,6 +103,12 @@ class Light {
     // Exception if the light is off.
     if (!$this->power) {
       return '#000000';
+    }
+
+    if (   !$this->_capabilities()['ct']
+        && !$this->_capabilities()['hs']) {
+      // Bulbs like Hue White cannot change color; they are fixed at 2700K, or 370 in the Mired system.
+      return $this->_ct_to_hex(370, $this->bri);
     }
 
     if ($this->colormode == 'ct') {
@@ -115,6 +130,32 @@ class Light {
       $this->sat,
       $this->bri
     );
+  }
+
+  private function _capabilities() {
+    $capabilities = [
+        'ct' => true,
+        'hs' => true
+    ];
+
+    switch ($this->modelid) {
+      case 'LWB006':
+        // Hue White
+        $capabilities['ct'] = false;
+        $capabilities['hs'] = false;
+        break;
+
+      case 'LLC010':
+        // Living Color Iris
+        $capabilities['ct'] = false;
+        break;
+
+      case 'LCT001':
+        // Standard Hue color
+        break;
+    }
+
+    return $capabilities;
   }
 
   private function _ct_to_hex($ct, $bri) {

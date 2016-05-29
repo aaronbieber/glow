@@ -10,6 +10,7 @@ class Light extends Base {
 
   public function post($light_id) {
     $light = new \AB\Chroma\Light();
+    $light->load_by_id($light_id);
     $light->populate($this->params);
 
     // Only set the power attribute if it was supplied.

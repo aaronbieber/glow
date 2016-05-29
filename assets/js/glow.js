@@ -168,6 +168,8 @@ app.Light = Backbone.Model.extend({
     id: 0,
     name: '',
     power: false,
+    has_ct: true,
+    has_hs: true,
     colormode: 'ct',
     ct: 400,
     hue: 0,

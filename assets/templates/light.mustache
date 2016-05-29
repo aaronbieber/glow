@@ -31,6 +31,7 @@
       </div>
     </div>
 
+    {{#has_ct}}
     <div class="row">
       <div class="col-xs-5">
         <strong>Temperature</strong>
@@ -43,8 +44,10 @@
           class="js-slider-ct" />
       </div>
     </div>
+    {{/has_ct}}
   </div>
 
+  {{#has_hs}}
   <div class="row">
     <div class="col-xs-5">
       <strong>Hue/Sat/Bri</strong>
@@ -53,4 +56,5 @@
       <div id="picker"></div>
     </div>
   </div>
+  {{/has_hs}}
 </div>
