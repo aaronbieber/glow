@@ -230,10 +230,19 @@ div.light-bar > div {
   height: 25px;
   border-radius: 12px;
   font-size: 1px;
+  line-height: 1px;
 }
 
 div.light-bar > div > div {
   width: 25px;
+}
+
+.light-bar .hollow {
+    width: 23px;
+    height: 23px;
+    border-radius: 14px;
+  background-color: white;
+  border: 1px solid silver;
 }
 
 @media only screen and (max-width: 450px) {

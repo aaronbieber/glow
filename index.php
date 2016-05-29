@@ -7,11 +7,11 @@ require_once 'vendor/autoload.php';
 require_once 'includes/autoloader.php';
 
 // Load the data for bootstrapping our models.
-$scenes = new \AB\Chroma\Scenes();
-$scenes->load();
-
 $lights = new \AB\Chroma\Lights();
 $lights->load();
+
+$scenes = new \AB\Chroma\Scenes();
+$scenes->load($lights);
 ?>
 <!DOCTYPE html>
 <html lang="en">

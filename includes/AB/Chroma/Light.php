@@ -18,7 +18,7 @@ class Light
 {
     public $id = 0;
     public $name = '';
-    public $power = true;
+    public $power = false;
     public $has_ct = true;
     public $has_hs = true;
     public $colormode = 'ct';

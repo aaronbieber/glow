@@ -48,10 +48,10 @@ class Scenes extends Collection
         return false;
     }
 
-    public function load()
+    public function load(\AB\Chroma\Lights $lights = null)
     {
         $scenes_yaml = file_get_contents('data/scenes.yml');
-        $this->models = $this->fromArray(\yaml_parse($scenes_yaml));
+        $this->models = $this->fromArray(\yaml_parse($scenes_yaml), $lights);
         usort($this->models, array($this, 'compareSceneSorts'));
 
         foreach ($this as $scene) {
@@ -106,19 +106,31 @@ class Scenes extends Collection
         return strcmp($a->name, $b->name);
     }
 
-    private function fromArray($self_array)
+    private function fromArray($self_array, $lights = [])
     {
+        if ($lights instanceof \AB\Chroma\Lights) {
+            $new_lights = [];
+            foreach ($lights as $light) {
+                $new_light = new SceneLight();
+                $new_light->populate($light->asArray());
+                $new_light->included = false;
+                $new_light->power = false;
+                $new_lights[$light->id] = $new_light;
+            }
+            $lights = $new_lights;
+        }
         $scenes = [];
 
         foreach ($self_array as $scene) {
-            $new_scene       = new Scene();
-            $new_scene->id   = $scene['id'];
-            $new_scene->name = $scene['name'];
-            $new_scene->sort = $scene['sort'];
+            $new_scene         = new Scene();
+            $new_scene->id     = $scene['id'];
+            $new_scene->name   = $scene['name'];
+            $new_scene->sort   = $scene['sort'];
+            $new_scene->lights = $lights;
 
             foreach ($scene['lights'] as $light) {
                 $light_id = $light['id'];
-                $new_scene->lights[$light_id] = new Light([
+                $new_scene->lights[$light_id] = new SceneLight([
                 'id'        => $light_id,
                 'name'      => $light['name'],
                 'power'     => (bool) $light['power'],
@@ -126,7 +138,8 @@ class Scenes extends Collection
                 'ct'        => $light['ct'],
                 'hue'       => $light['hue'],
                 'sat'       => $light['sat'],
-                'bri'       => $light['bri']
+                'bri'       => $light['bri'],
+                'included'  => true
                 ]);
             }
 

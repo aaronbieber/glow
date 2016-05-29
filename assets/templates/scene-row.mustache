@@ -14,7 +14,10 @@
 
     <div class="light-bar">
       {{#lights}}
-        <div class="light-swatch" style="background-color: {{hex}};" title="{{name}}"><div>&nbsp;</div></div>
+        <div
+          class="light-swatch{{^included}} hollow{{/included}}"
+          {{#included}}style="background-color: {{hex}};"{{/included}}
+          title="{{name}}"><div>&nbsp;</div></div>
       {{/lights}}
     </div>
   </div>
