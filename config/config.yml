@@ -1,5 +1,5 @@
 ---
 app_base: /var/www/lights/htdocs/
-bridge_ip: 192.168.10.30
+bridge_ip: 192.168.10.175
 api_key: abcdef101010
 ...
