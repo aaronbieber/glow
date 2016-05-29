@@ -1,335 +1,335 @@
 pre#response {
-  font-size: 0.7em;
+    font-size: 0.7em;
 }
 
 .toggle-response-row {
-  margin: 10px 0;
+    margin: 10px 0;
 }
 
 .response-row {
-  border-top: 1px solid silver;
-  margin-top: 30px;
+    border-top: 1px solid silver;
+    margin-top: 30px;
 }
 
 .loading {
-  background-color: white;
-  -webkit-animation: throb 0.5s linear infinite;
+    background-color: white;
+    -webkit-animation: throb 0.5s linear infinite;
 }
 
 @-webkit-keyframes throb {
-  50% { background-color: #ffe18f; }
-  100% { background-color: #fff; }
+    50% { background-color: #ffe18f; }
+    100% { background-color: #fff; }
 }
 
 .clickable {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .light-controls-type {
-  /*text-align: right;*/
-  margin-bottom: 5px;
+    /*text-align: right;*/
+    margin-bottom: 5px;
 }
 
 .light-controls {
-  float: right;
-  width: 200px;
-  border: 1px solid silver;
-  padding: 5px;
-  border-radius: 3px;
+    float: right;
+    width: 200px;
+    border: 1px solid silver;
+    padding: 5px;
+    border-radius: 3px;
 }
 
 .light-control-hs {
-  border: none;
-  width: 100%;
+    border: none;
+    width: 100%;
 }
 
 .color-swatch {
-  border: 1px solid #dfdfdf;
-  display: inline-block;
-  width: 32px;
-  height: 32px;
-  font-size: 1px;
-  border-radius: 3px;
-  margin-right: 5px;
-  text-align: center;
-  line-height: 32px;
-  font-size: 0.8em;
+    border: 1px solid #dfdfdf;
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    font-size: 1px;
+    border-radius: 3px;
+    margin-right: 5px;
+    text-align: center;
+    line-height: 32px;
+    font-size: 0.8em;
 }
 
 .light-row .color-swatch {
-  float: left;
+    float: left;
 }
 
 .light-editor .main-controls {
-  text-align: center;
-  margin-bottom: 10px;
+    text-align: center;
+    margin-bottom: 10px;
 }
 
 .light-editor .main-controls button {
-  display: inline-block;
-  vertical-align: middle;
-  margin-right: 10px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
 }
 
 .light-editor .main-controls .color-swatch {
-  display: inline-block;
-  vertical-align: middle;
-  width: 80px;
-  height: 80px;
+    display: inline-block;
+    vertical-align: middle;
+    width: 80px;
+    height: 80px;
 }
 
 .swatch-sm {
-  width: 16px;
-  height: 16px;
-  margin-top: 8px;
-  margin-bottom: 8px;
+    width: 16px;
+    height: 16px;
+    margin-top: 8px;
+    margin-bottom: 8px;
 }
 
 .scene-name {
-  height: 32px;
-  line-height: 32px;
-  font-weight: bold;
-  font-size: 18px;
+    height: 32px;
+    line-height: 32px;
+    font-weight: bold;
+    font-size: 18px;
 }
 
 .scene-name > span {
-  display: inline-block;
-  line-height: 1em;
-  vertical-align: middle;
+    display: inline-block;
+    line-height: 1em;
+    vertical-align: middle;
 }
 
 .scene-lights {
-  height: 32px;
+    height: 32px;
 }
 
 .scene-controls {
-  display: block;
+    display: block;
 }
 
 .scene-controls .row {
-  margin-bottom: 5px;
+    margin-bottom: 5px;
 }
 
 .scene-controls .row:last-child {
-  margin-bottom: 0px;
+    margin-bottom: 0px;
 }
 
 input[type=color] {
-  width: 100%;
+    width: 100%;
 }
 
 #loading {
-  position: fixed;
-  padding: 3px;
-  z-index: 2000;
-  top: 0px;
-  left: 50%;
-  width: 140px;
-  height: 30px;
-  margin-left: -70px;
-  text-align: center;
-  border-bottom-right-radius: 3px;
-  border-bottom-left-radius: 3px;
-  background-color: #FFF3A1;
-  border-left: 1px solid #D1C784;
-  border-bottom: 1px solid #D1C784;
-  border-right: 1px solid #D1C784;
+    position: fixed;
+    padding: 3px;
+    z-index: 2000;
+    top: 0px;
+    left: 50%;
+    width: 140px;
+    height: 30px;
+    margin-left: -70px;
+    text-align: center;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    background-color: #FFF3A1;
+    border-left: 1px solid #D1C784;
+    border-bottom: 1px solid #D1C784;
+    border-right: 1px solid #D1C784;
 }
 
 div.light-row,
 div.scene-row {
-  padding-bottom: 5px;
-  border-bottom: 1px solid silver;
-  margin-bottom: 5px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid silver;
+    margin-bottom: 5px;
 }
 
 .scene-row .handle {
-  color: black;
-  margin-top: -4px;
-  cursor: move;
+    color: black;
+    margin-top: -4px;
+    cursor: move;
 }
 
 #scene-list .sortable-placeholder {
-  height: 38px;
-  margin: 2px 2px 5px 2px;
-  border: 1px dashed silver;
+    height: 38px;
+    margin: 2px 2px 5px 2px;
+    border: 1px dashed silver;
 }
 
 #scene-list .ghost {
-  border: 1px dashed silver;
-  background-color: white;
+    border: 1px dashed silver;
+    background-color: white;
 }
 
 #scenes-page .scene-commands,
 #lights-page .light-commands {
-  margin-top: 20px;
-  padding-top: 9px;
+    margin-top: 20px;
+    padding-top: 9px;
 }
 
 #scenes-page .scene-commands button,
 #lights-page .light-commands button {
-  margin-top: 10px;
+    margin-top: 10px;
 }
 
 button.light-button,
 button.scene-button {
-  height: 32px;
+    height: 32px;
 }
 
 div.light-name {
-  font-size: 18px;
-  font-weight: bold;
-  height: 32px;
-  line-height: 32px;
+    font-size: 18px;
+    font-weight: bold;
+    height: 32px;
+    line-height: 32px;
 }
 
 a,
 a:hover,
 a:active,
 a:visited {
-  color: black;
-  text-decoration: none;
+    color: black;
+    text-decoration: none;
 }
 
 span.save-scene-name-button {
 }
 
 div.navigation {
-  background-color: #efefef;
-  border-bottom: 2px solid #dedede;
-  margin-bottom: 10px;
+    background-color: #efefef;
+    border-bottom: 2px solid #dedede;
+    margin-bottom: 10px;
 }
 
 #navigation-bar h1 {
-  float: left;
-  font-size: 25px;
-  font-weight: bold;
-  line-height: 40px;
-  text-transform: uppercase;
-  margin: 10px 20px 0px 0;
-  padding:  0;
-  text-shadow: 0px 0px 10px gold;
-  color: white;
+    float: left;
+    font-size: 25px;
+    font-weight: bold;
+    line-height: 40px;
+    text-transform: uppercase;
+    margin: 10px 20px 0px 0;
+    padding:  0;
+    text-shadow: 0px 0px 10px gold;
+    color: white;
 }
 
 ul.nav {
-  margin: 10px 0;
+    margin: 10px 0;
 }
 
 div.light-bar {
-  margin-right: 10px;
-  margin-top: 3px;
-  display: table;
-  border-spacing: 2px;
-  float: right;
+    margin-right: 10px;
+    margin-top: 3px;
+    display: table;
+    border-spacing: 2px;
+    float: right;
 }
 
 div.light-bar > div {
-  display: table-cell;
-  width: 25px;
-  height: 25px;
-  border-radius: 12px;
-  font-size: 1px;
-  line-height: 1px;
+    display: table-cell;
+    width: 25px;
+    height: 25px;
+    border-radius: 12px;
+    font-size: 1px;
+    line-height: 1px;
 }
 
 div.light-bar > div > div {
-  width: 25px;
+    width: 25px;
 }
 
 .light-bar .hollow {
-  width: 23px;
-  height: 23px;
-  border-radius: 14px;
-  background-color: white;
-  border: 1px solid silver;
+    width: 23px;
+    height: 23px;
+    border-radius: 14px;
+    background-color: white;
+    border: 1px solid silver;
 }
 
 .light-bar .hollow > div {
-  width: 23px;
-  height: 23px;
+    width: 23px;
+    height: 23px;
 }
 
 @media only screen and (max-width: 450px) {
-  div.light-bar {
-    margin-top: 7px;
-  }
+    div.light-bar {
+        margin-top: 7px;
+    }
 
-  div.light-bar > div {
-    width: 15px;
-    height: 15px;
-    border-radius: 7px;
-  }
+    div.light-bar > div {
+        width: 15px;
+        height: 15px;
+        border-radius: 7px;
+    }
 
-  div.light-bar > div > div {
-    width: 15px;
-  }
+    div.light-bar > div > div {
+        width: 15px;
+    }
 }
 
 .light-editor {
-  max-width: 500px;
-  margin: 0 auto;
+    max-width: 500px;
+    margin: 0 auto;
 }
 
 .light-editor input {
-  width: 100%;
+    width: 100%;
 }
 
 h2 {
-  font-size: 30px;
-  margin-top: 0;
-  padding-bottom: 0.25em;
-  border-bottom: 1px solid silver;
+    font-size: 30px;
+    margin-top: 0;
+    padding-bottom: 0.25em;
+    border-bottom: 1px solid silver;
 }
 
 h2 a {
-  font-size: 0.5em;
-  vertical-align: middle;
+    font-size: 0.5em;
+    vertical-align: middle;
 }
 
 .light-editor .divider-bottom {
-  padding-bottom: 15px;
-  margin-bottom: 15px;
-  border-bottom: 1px solid silver;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid silver;
 }
 
 .space-below {
-  margin-bottom: 15px;
+    margin-bottom: 15px;
 }
 
 .scene-editor .name-entry {
-  font-size: large;
+    font-size: large;
 }
 
 #modal-overlay {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(255, 255, 255, 0.8);
-  z-index: 10;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    z-index: 10;
 }
 
 #modal {
-  padding: 10px 10px 0px 10px;
-  position: absolute;
-  z-index: 50;
-  background-color: white;
-  width: 80%;
-  left: 10%;
-  top: 30px;
-  border: 1px solid silver;
-  box-shadow: 0px 5px 10px gray;
+    padding: 10px 10px 0px 10px;
+    position: absolute;
+    z-index: 50;
+    background-color: white;
+    width: 80%;
+    left: 10%;
+    top: 30px;
+    border: 1px solid silver;
+    box-shadow: 0px 5px 10px gray;
 }
 
 .text-cancel,
 .text-cancel:visited,
 .text-cancel:active {
-  color: #F23B31;
+    color: #F23B31;
 }
 
 .text-cancel:hover {
-  color: #F23B31;
-  text-decoration: underline;
+    color: #F23B31;
+    text-decoration: underline;
 }
