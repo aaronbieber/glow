@@ -238,11 +238,16 @@ div.light-bar > div > div {
 }
 
 .light-bar .hollow {
-    width: 23px;
-    height: 23px;
-    border-radius: 14px;
+  width: 23px;
+  height: 23px;
+  border-radius: 14px;
   background-color: white;
   border: 1px solid silver;
+}
+
+.light-bar .hollow > div {
+  width: 23px;
+  height: 23px;
 }
 
 @media only screen and (max-width: 450px) {

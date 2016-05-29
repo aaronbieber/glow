@@ -19,7 +19,9 @@
         </div>
         <div class="col-xs-6">
           <div class="light-bar">
-            <div style="background-color: {{ hex }};"><div>&nbsp;</div></div>
+            <div
+              {{^included}}class="hollow"{{/included}}
+              {{#included}}style="background-color: {{ hex }};"{{/included}}><div>&nbsp;</div></div>
           </div>
         </div>
       </div>
