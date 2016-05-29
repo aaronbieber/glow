@@ -5,7 +5,7 @@
  * PHP Version 5
  *
  * @author    Aaron Bieber <aaron@aaronbieber.com>
- * @copyright 2013 All Rights Reserved
+ * @copyright 2016 All Rights Reserved
  * @version   git: $Id$
  */
 namespace AB\Chroma;
