@@ -1,4 +1,5 @@
 <?php
+
 namespace AB\Chroma\Controllers;
 
 class Light extends Base {

@@ -1,4 +1,17 @@
 <?php
+/**
+ * A scene, comprising the settings of all lights in the system.
+ *
+ * PHP Version 5
+ *
+ * @category  Glow
+ * @package   Glow
+ * @author    Aaron Bieber <aaron@aaronbieber.com>
+ * @copyright 2016 All Rights Reserved
+ * @license   GNU GPLv3
+ * @version   GIT: $Id$
+ * @link      http://github.com/aaronbieber/glow
+ */
 namespace AB\Chroma;
 
 class Scene {

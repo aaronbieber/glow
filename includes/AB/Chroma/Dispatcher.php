@@ -1,12 +1,18 @@
 <?php
 /**
- * Basic dispatcher. This script receives all requests from the browser and parses the URI to figure out where to send
- * them. Think of it as a super-lightweight RESTful router.
+ * Basic dispatcher. This script receives all requests from the browser and parses
+ * the URI to figure out where to send them. Think of it as a super-lightweight
+ * RESTful router.
  *
  * PHP Version 5
  *
+ * @category  Glow
+ * @package   Glow
  * @author    Aaron Bieber <aaron@aaronbieber.com>
- * @copyright 2013 Aaron Bieber, All Rights Reserved
+ * @copyright 2016 All Rights Reserved
+ * @license   GNU GPLv3
+ * @version   GIT: $Id$
+ * @link      http://github.com/aaronbieber/glow
  */
 namespace AB\Chroma;
 
