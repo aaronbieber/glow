@@ -52,8 +52,8 @@ $lights->load();
   <script type="text/javascript">
    $(document).ready(function() {
      // Start everything
-     app.sceneCollection = new app.SceneCollection(<?= json_encode($scenes->as_array()); ?>);
-     app.lightCollection = new app.LightCollection(<?= json_encode($lights->as_array()); ?>);
+     app.sceneCollection = new app.SceneCollection(<?= json_encode($scenes->asArray()); ?>);
+     app.lightCollection = new app.LightCollection(<?= json_encode($lights->asArray()); ?>);
      app.navigationLinkCollection = new app.NavigationLinkCollection([
        (new app.NavigationLink({ alias: 'scenes', name: 'Scenes', active: true })),
        (new app.NavigationLink({ alias: 'lights', name: 'Lights' }))

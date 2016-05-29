@@ -14,14 +14,16 @@
  */
 namespace AB\Chroma;
 
-class Util {
+class Util
+{
   /**
    * Do not allow construction.
    *
    * @return void
    */
-  private function __construct() {
-  }
+    private function __construct()
+    {
+    }
 
 
   /**
@@ -29,9 +31,10 @@ class Util {
    *
    * @return void
    */
-  public static function d($value) {
-    echo '<pre>';
-    var_dump($value);
-    echo '</pre>';
-  }
+    public static function d($value)
+    {
+        echo '<pre>';
+        var_dump($value);
+        echo '</pre>';
+    }
 }

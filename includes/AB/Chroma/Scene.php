@@ -14,72 +14,77 @@
  */
 namespace AB\Chroma;
 
-class Scene {
-  public $name = '';
-  public $lights = [];
-  public $sort = 0;
+class Scene
+{
+    public $name = '';
+    public $lights = [];
+    public $sort = 0;
 
-  public function __construct() {
-  }
-
-  public function validate() {
-    if (empty($this->name)) {
-      $this->errors[] = 'Name is empty!';
-    }
-    if (empty($this->lights)) {
-      $this->errors[] = 'Scene has no lights!';
+    public function __construct()
+    {
     }
 
-    return empty($this->errors);
-  }
+    public function validate()
+    {
+        if (empty($this->name)) {
+            $this->errors[] = 'Name is empty!';
+        }
+        if (empty($this->lights)) {
+            $this->errors[] = 'Scene has no lights!';
+        }
+
+        return empty($this->errors);
+    }
 
   /**
-   * Function as_array
+   * Function asArray
    *
    * @return array Array of light data.
    */
-  public function as_array() {
-    $lights = [];
-    foreach ($this->lights as $light) {
-      $lights[] = $light->as_array();
+    public function asArray()
+    {
+        $lights = [];
+        foreach ($this->lights as $light) {
+            $lights[] = $light->asArray();
+        }
+
+        return $lights;
     }
 
-    return $lights;
-  }
-
   /**
-   * Function as_settings_array
+   * Function asSettingsArray
    *
    * @return array An array suitable for setting light state.
    */
-  public function as_settings_array() {
-    $lights_arrays   = $this->as_array();
-    $lights_settings = [];
+    public function asSettingsArray()
+    {
+        $lights_arrays   = $this->asArray();
+        $lights_settings = [];
 
-    // Remove unnecessary elements.
-    foreach ($lights_arrays as $light) {
-      $lights_settings[$light['id']] = [];
-      foreach ($light as $setting => $value) {
+        // Remove unnecessary elements.
+        foreach ($lights_arrays as $light) {
+            $lights_settings[$light['id']] = [];
+            foreach ($light as $setting => $value) {
+                $acceptable_settings =
+                array_merge(
+                    ['power'],
+                    $light['colormode'] == 'ct' ? ['ct', 'bri'] : ['hue', 'sat', 'bri']
+                );
 
-        $acceptable_settings =
-          array_merge(
-            ['power'],
-            $light['colormode'] == 'ct' ? ['ct', 'bri'] : ['hue', 'sat', 'bri']
-          );
-
-        if (in_array($setting, $acceptable_settings)) {
-          $lights_settings[$light['id']][$setting] = $value;
+                if (in_array($setting, $acceptable_settings)) {
+                    $lights_settings[$light['id']][$setting] = $value;
+                }
+            }
         }
-      }
+
+        return $lights_settings;
     }
 
-    return $lights_settings;
-  }
-
-  public function set() {
-    foreach($this->lights as $light) {
-      $light->save();
-      usleep(100000);
+    public function set()
+    {
+        foreach ($this->lights as $light) {
+            $light->save();
+            usleep(100000);
+        }
     }
-  }
 }

@@ -22,7 +22,7 @@
         $swatch->color = '#efefef';
         $swatch->text  = '?';
       } else {
-        $swatch->color = $light->as_hex();
+        $swatch->color = $light->asHex();
         $swatch->text  = '&nbsp;';
       }
       ?>
@@ -60,7 +60,7 @@
             data-light="light_<?=$light->id?>_hs"
             class="js-light-control-hs"
             name="light_<?=$light->id?>_hs"
-            value="<?=$light->as_hex()?>">
+            value="<?=$light->asHex()?>">
         </div>
       </div>
 

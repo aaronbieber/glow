@@ -12,36 +12,42 @@
  */
 namespace AB\Chroma;
 
-class Config {
-  private static $instance = null;
-  public $options = [];
+class Config
+{
+    private static $instance = null;
+    public $options = [];
 
-  public function __construct() {
-    $this->load();
-  }
-
-  public static function get_instance() {
-    if (static::$instance === null) {
-      static::$instance = new static();
+    public function __construct()
+    {
+        $this->load();
     }
 
-    return static::$instance;
-  }
+    public static function getInstance()
+    {
+        if (static::$instance === null) {
+            static::$instance = new static();
+        }
 
-  private function load() {
-    $config_yaml = file_get_contents('config/config.yml');
-    $this->options = \yaml_parse($config_yaml);
-  }
-
-  public function get($key) {
-    if (isset($this->options[$key])) {
-      return $this->options[$key];
-    } else {
-      return false;
+        return static::$instance;
     }
-  }
 
-  public function get_all() {
-    return $this->options;
-  }
+    private function load()
+    {
+        $config_yaml = file_get_contents('config/config.yml');
+        $this->options = \yaml_parse($config_yaml);
+    }
+
+    public function get($key)
+    {
+        if (isset($this->options[$key])) {
+            return $this->options[$key];
+        } else {
+            return false;
+        }
+    }
+
+    public function getAll()
+    {
+        return $this->options;
+    }
 }

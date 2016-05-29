@@ -14,10 +14,12 @@
  */
 namespace AB\Chroma\Controllers;
 
-class Config extends Base {
-  public function get() {
-    echo "Configuration*";
-    $config = \AB\Chroma\Config::get_instance();
-    $this->render($config->get_all(), Base::FORMAT_JSON);
-  }
+class Config extends Base
+{
+    public function get()
+    {
+        echo "Configuration*";
+        $config = \AB\Chroma\Config::getInstance();
+        $this->render($config->getAll(), Base::FORMAT_JSON);
+    }
 }

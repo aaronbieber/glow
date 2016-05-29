@@ -19,7 +19,7 @@
           // Reverse the array because the floated elements will appear backwards.
           foreach(array_reverse($scene->lights) as $light):
             ?>
-            <span class="color-swatch swatch-sm" style="float: right; background-color: <?=$light->as_hex()?>">&nbsp;</span>
+            <span class="color-swatch swatch-sm" style="float: right; background-color: <?=$light->asHex()?>">&nbsp;</span>
             <?php
           endforeach;
           ?>
@@ -86,7 +86,7 @@
                     data-light-id="<?=$light->id?>"
                     class="js-scene-control-hs"
                     name="scene_<?=$scene->id?>_light_<?=$light->id?>_hs"
-                    value="<?=$light->as_hex()?>">
+                    value="<?=$light->asHex()?>">
                 </div>
               </div>
 
