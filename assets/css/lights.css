@@ -220,7 +220,7 @@ div.light-bar {
     float: right;
 }
 
-div.light-bar > div {
+.light-bar > div {
     display: table-cell;
     width: 25px;
     height: 25px;
@@ -229,35 +229,27 @@ div.light-bar > div {
     line-height: 1px;
 }
 
-div.light-bar > div > div {
+.light-bar > div > div {
     width: 25px;
 }
 
 .light-bar .hollow {
-    width: 23px;
-    height: 23px;
-    border-radius: 14px;
     background-color: white;
     border: 1px solid silver;
 }
 
-.light-bar .hollow > div {
-    width: 23px;
-    height: 23px;
-}
-
-@media only screen and (max-width: 450px) {
-    div.light-bar {
+@media only screen and (max-width: 540px) {
+    .light-bar {
         margin-top: 7px;
     }
 
-    div.light-bar > div {
+    .light-bar > div {
         width: 15px;
         height: 15px;
         border-radius: 7px;
     }
 
-    div.light-bar > div > div {
+    .light-bar > div > div {
         width: 15px;
     }
 }
