@@ -33,7 +33,32 @@ app.NavigationLinkCollection = Backbone.Collection.extend({
     }
 });
 
+app.Light = Backbone.Model.extend({
+    defaults: {
+        id: 0,
+        name: '',
+        power: false,
+        has_ct: true,
+        has_hs: true,
+        colormode: 'ct',
+        ct: 400,
+        hue: 0,
+        sat: 0,
+        bri: 0,
+        hex: '#000000'
+    },
+    urlRoot: '/light'
+});
+
+app.LightCollection = Backbone.Collection.extend({
+    model: app.Light,
+    url: '/lights'
+});
+
 app.Scene = Backbone.Model.extend({
+    relations: {
+        lights: app.LightCollection
+    },
     defaults: {
         id: 0,
         name: '',
@@ -161,28 +186,6 @@ app.SceneCollection = Backbone.Collection.extend({
             }
         });
     }
-});
-
-app.Light = Backbone.Model.extend({
-    defaults: {
-        id: 0,
-        name: '',
-        power: false,
-        has_ct: true,
-        has_hs: true,
-        colormode: 'ct',
-        ct: 400,
-        hue: 0,
-        sat: 0,
-        bri: 0,
-        hex: '#000000'
-    },
-    urlRoot: '/light'
-});
-
-app.LightCollection = Backbone.Collection.extend({
-    model: app.Light,
-    url: '/lights'
 });
 
 app.RegionManager = (function(Backbone, $) {
@@ -407,8 +410,17 @@ app.SceneView = Backbone.View.extend({
     },
 
     light_edit: function(e) {
-        var light_id = $(e.currentTarget).data('light-id');
-        console.log(light_id);
+        var $target = $(e.currentTarget);
+        var light_id = $target.data('light-id');
+        var light = this.model.attributes.lights.get(light_id);
+        var light_edit_panel = $target.parents('.light-row').find('.js-light-edit-panel');
+
+        light_edit_panel.html(
+            Mustache.render(
+                app.util.get_template('light-editor'),
+                light.toJSON()
+            )
+        );
     },
 
     render: function() {
@@ -554,7 +566,15 @@ app.LightView = Backbone.View.extend({
 
     render: function() {
         var light = this.model.toJSON();
-        this.$el.html(Mustache.render(this.template, light));
+        this.$el.html(
+            Mustache.render(
+                this.template,
+                light,
+                {
+                    'light-editor': app.util.get_template('light-editor')
+                }
+            )
+        );
 
         return this;
     }
@@ -578,11 +598,12 @@ app.Router = Backbone.Router.extend({
     },
 
     scene: function(scene_id) {
+        var model;
         if(!app.sceneCollection.length) {
-            var model = new app.Scene({ id: scene_id });
+            model = new app.Scene({ id: scene_id });
             model.fetch();
         } else {
-            var model = app.sceneCollection.get(scene_id);
+            model = app.sceneCollection.get(scene_id);
         }
 
         app.RegionManager.show(new app.SceneView({ model: model }));

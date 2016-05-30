@@ -1,0 +1,56 @@
+<div class="light-editor">
+  <div class="main-controls divider-bottom">
+    <button
+      data-light-id="{{ id }}"
+      data-power="{{ power_text }}"
+      class="btn btn-default{{#power}} btn-success{{/power}} js-button-light light-button">
+        <span class="glyphicon glyphicon-off"></span>
+    </button>
+
+    <span
+      id="light_swatch_{{ id }}"
+      class="color-swatch"
+      style="background-color: {{ hex }}">&nbsp;</span>
+  </div>
+
+  <div class="light-controls-ct divider-bottom">
+    <div class="row">
+      <div class="col-xs-5 space-below">
+        <strong>Brightness</strong>
+      </div>
+      <div class="col-xs-7">
+        <input
+          type="range" min="1" max="255"
+          data-light-id="{{ id }}"
+          name="light_{{ id }}_bri" value="{{ bri }}"
+          class="js-slider-bri" />
+      </div>
+    </div>
+
+    {{#has_ct}}
+    <div class="row">
+      <div class="col-xs-5">
+        <strong>Temperature</strong>
+      </div>
+      <div class="col-xs-7">
+        <input
+          type="range" min="153" max="500"
+          data-light-id="{{ id }}"
+          name="light_{{ id }}_ct" value="{{ ct }}"
+          class="js-slider-ct" />
+      </div>
+    </div>
+    {{/has_ct}}
+  </div>
+
+  {{#has_hs}}
+  <div class="row">
+    <div class="col-xs-5">
+      <strong>Hue/Sat/Bri</strong>
+    </div>
+    <div class="col-xs-7">
+      <div id="picker"></div>
+    </div>
+  </div>
+  {{/has_hs}}
+</div>
