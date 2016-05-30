@@ -1,16 +1,16 @@
-<div class="scene-editor">
-  <h2>
-    <a href="#scenes"><span class="glyphicon glyphicon-chevron-left"></span></a>
-    <span class="name-label">{{ name }}</span>
-    <span class="name-edit" style="display: none;">
-      <input class="name-entry form-control" style="display: inline; width: 200px;" value="{{ name }}" />
-      <button class="btn btn-success js-name-edit-save"><span class="glyphicon glyphicon-ok"></span></button>
-      <button class="btn btn-warning js-name-edit-cancel"><span class="glyphicon glyphicon-remove"></span></button>
-    </span>
-    <button class="btn btn-default js-name-edit"><span class="glyphicon glyphicon-pencil"></span></button>
-    <button class="btn btn-default js-name-delete"><span class="glyphicon glyphicon-trash"></span></button>
-  </h2>
+<h2>
+  <a href="#scenes"><span class="glyphicon glyphicon-chevron-left"></span></a>
+  <span class="name-label">{{ name }}</span>
+  <span class="name-edit" style="display: none;">
+    <input class="name-entry form-control" style="display: inline; width: 200px;" value="{{ name }}" />
+    <button class="btn btn-success js-name-edit-save"><span class="glyphicon glyphicon-ok"></span></button>
+    <button class="btn btn-warning js-name-edit-cancel"><span class="glyphicon glyphicon-remove"></span></button>
+  </span>
+  <button class="btn btn-default js-name-edit"><span class="glyphicon glyphicon-pencil"></span></button>
+  <button class="btn btn-default js-name-delete"><span class="glyphicon glyphicon-trash"></span></button>
+</h2>
 
+<div class="scene-editor">
   {{#lights}}
     <div class="light-row">
       <div class="row">
@@ -23,6 +23,11 @@
               {{^included}}class="hollow"{{/included}}
               {{#included}}style="background-color: {{ hex }};"{{/included}}><div>&nbsp;</div></div>
           </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12 js-light-edit-panel">
         </div>
       </div>
     </div>
