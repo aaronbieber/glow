@@ -64,11 +64,40 @@ class Scene extends Base
         //$this->render($this->scenes->asArray(), Base::FORMAT_JSON);
     }
 
-  /**
-   * Edit a scene (patch).
-   *
-   * @return void
-   */
+    public function postLight($scene_id, $light_id)
+    {
+        $scene = $this->scenes->findById($scene_id);
+
+        var_dump($scene->lights);
+
+        if (!empty($scene->lights[$light_id])) {
+            $light = $scene->lights[$light_id];
+            foreach ($this->params as $property => $value) {
+                if (property_exists($light, $property)) {
+                    if (is_numeric($value)) {
+                        $value = (int) $value;
+                    } elseif ($property == 'power') {
+                        $value = (bool) $value;
+                    }
+                    $scene->lights[$light_id]->{$property} = $value;
+                }
+            }
+        }
+
+        var_dump($scene->lights);
+
+        // if ($this->scenes->save()) {
+        //     $this->render($this->scenes->asArray(), Base::FORMAT_JSON);
+        // } else {
+        //     $this->renderError([ 'errors' => $this->scenes->errors ], Base::FORMAT_JSON);
+        // }
+    }
+
+    /**
+     * Edit a scene (patch).
+     *
+     * @return void
+     */
     public function put($scene_id)
     {
         $scene = $this->scenes->findById($scene_id);
