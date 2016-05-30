@@ -413,14 +413,14 @@ app.SceneView = Backbone.View.extend({
         var $target = $(e.currentTarget);
         var light_id = $target.data('light-id');
         var light = this.model.attributes.lights.get(light_id);
+        light.urlRoot = '/scene/' + this.model.attributes.id + '/light/';
         var light_edit_panel = $target.parents('.light-row').find('.js-light-edit-panel');
 
-        light_edit_panel.html(
-            Mustache.render(
-                app.util.get_template('light-editor'),
-                light.toJSON()
-            )
-        );
+        var light_view = new app.LightView({ model: light });
+        light_view.template = app.util.get_template('light-editor');
+        light_view.render();
+        light_edit_panel.html(light_view.el);
+        light_view.onShow();
     },
 
     render: function() {
