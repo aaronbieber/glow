@@ -22,13 +22,6 @@ class Lights extends Collection
     public function __construct()
     {
         $this->hue_interface = Hue::getInstance();
-        $this->load();
-        usort($this->models, [ $this, 'lightNameCompare' ]);
-    }
-
-    private function lightNameCompare($a, $b)
-    {
-        return strcmp($a->name, $b->name);
     }
 
     public function setState(array $state, $light_id = 0)
@@ -49,6 +42,26 @@ class Lights extends Collection
         }
     }
 
+    public function fromArray($lights_data)
+    {
+        foreach ($lights_data as $light_data) {
+            $light_id = $light_data['id'];
+            $light = $this->getModel();
+            $light->populate([
+                'id'        => $light_id,
+                'name'      => $light_data['name'],
+                'power'     => (bool) $light_data['power'],
+                'colormode' => $light_data['colormode'],
+                'ct'        => $light_data['ct'],
+                'hue'       => $light_data['hue'],
+                'sat'       => $light_data['sat'],
+                'bri'       => $light_data['bri'],
+                'included'  => array_key_exists('included', $light_data) ? $light_data['included'] : true
+            ]);
+            $this->models[] = $light;
+        }
+    }
+
     public function asArray()
     {
         $lights_array = [];
@@ -66,10 +79,22 @@ class Lights extends Collection
         $response = $this->hue_interface->getLights();
 
         foreach ($response as $light_id => $light_data) {
-            $light = new Light();
+            $light = $this->getModel();
             $light->id = $light_id;
             $light->populate($light_data);
             $this->models[] = $light;
         }
+
+        usort($this->models, [ $this, 'lightNameCompare' ]);
+    }
+
+    protected function getModel()
+    {
+        return new Light();
+    }
+
+    private function lightNameCompare($a, $b)
+    {
+        return strcmp($a->name, $b->name);
     }
 }

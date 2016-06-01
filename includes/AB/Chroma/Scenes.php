@@ -51,12 +51,8 @@ class Scenes extends Collection
     public function load(\AB\Chroma\Lights $lights = null)
     {
         $scenes_yaml = file_get_contents('data/scenes.yml');
-        $this->models = $this->fromArray(\yaml_parse($scenes_yaml), $lights);
+        $this->fromArray(\yaml_parse($scenes_yaml), $lights);
         usort($this->models, array($this, 'compareSceneSorts'));
-
-        foreach ($this as $scene) {
-            usort($scene->lights, array($this, 'compareLightNames'));
-        }
     }
 
     public function save()
@@ -108,64 +104,57 @@ class Scenes extends Collection
 
     private function fromArray($self_array, $lights = [])
     {
+        $scenes = [];
+
         if ($lights instanceof \AB\Chroma\Lights) {
             $new_lights = [];
             foreach ($lights as $light) {
-                $new_light = new SceneLight();
-                $new_light->populate($light->asArray());
-                $new_light->included = false;
-                $new_light->power = false;
-                $new_lights[$light->id] = $new_light;
+                $new_light = $light->asArray();
+                $new_light['included'] = false;
+                $new_lights[] = $new_light;
             }
             $lights = $new_lights;
         }
-        $scenes = [];
 
         foreach ($self_array as $scene) {
-            $new_scene         = new Scene();
+            array_walk(
+                $scene['lights'],
+                function (&$light) {
+                    $light['included'] = true;
+                }
+            );
+
+            $new_scene         = $this->getModel();
             $new_scene->id     = $scene['id'];
             $new_scene->name   = $scene['name'];
             $new_scene->sort   = $scene['sort'];
-            $new_scene->lights = $lights;
-
-            foreach ($scene['lights'] as $light) {
-                $light_id = $light['id'];
-                $new_scene->lights[$light_id] = new SceneLight([
-                'id'        => $light_id,
-                'name'      => $light['name'],
-                'power'     => (bool) $light['power'],
-                'colormode' => $light['colormode'],
-                'ct'        => $light['ct'],
-                'hue'       => $light['hue'],
-                'sat'       => $light['sat'],
-                'bri'       => $light['bri'],
-                'included'  => true
-                ]);
-            }
+            $new_scene->fromArray($lights);
+            $new_scene->replaceFromArray($scene['lights']);
 
             $scenes[] = $new_scene;
         }
 
-        return $scenes;
+        $this->models = $scenes;
     }
 
     public function asArray()
     {
         $self_array = [];
 
-        foreach ($this->models as $scene_id => $scene) {
-            $scene_lights = [];
-            foreach ($scene->lights as $light) {
-                $scene_lights[] = $light->asArray();
-            }
-            $self_array[$scene_id] = [
-            'id'     => $scene->id,
-            'name'   => $scene->name,
-            'sort'   => $scene->sort,
-            'lights' => $scene_lights
+        foreach ($this as $scene) {
+            $self_array[] = [
+                'id'     => $scene->id,
+                'name'   => $scene->name,
+                'sort'   => $scene->sort,
+                'lights' => $scene->asArray()
             ];
         }
 
         return $self_array;
+    }
+
+    protected function getModel()
+    {
+        return new Scene();
     }
 }

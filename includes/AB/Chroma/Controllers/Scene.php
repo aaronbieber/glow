@@ -22,9 +22,13 @@ class Scene extends Base
     {
         parent::__construct();
 
+        // Get all lights to overlay scenes onto.
+        $lights = new \AB\Chroma\Lights();
+        $lights->load();
+
         // Get our scenes.
         $this->scenes = new \AB\Chroma\Scenes();
-        $this->scenes->load();
+        $this->scenes->load($lights);
     }
 
   /**

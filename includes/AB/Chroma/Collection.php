@@ -79,4 +79,6 @@ abstract class Collection implements \Iterator, \ArrayAccess
         }
         return false;
     }
+
+    abstract protected function getModel();
 }

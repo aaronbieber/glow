@@ -14,10 +14,9 @@
  */
 namespace AB\Chroma;
 
-class Scene
+class Scene extends Collection
 {
     public $name = '';
-    public $lights = [];
     public $sort = 0;
 
     public function __construct()
@@ -36,26 +35,59 @@ class Scene
         return empty($this->errors);
     }
 
-  /**
-   * Function asArray
-   *
-   * @return array Array of light data.
-   */
+    public function fromArray($lights)
+    {
+        foreach ($lights as $light) {
+            $sceneLight = $this->getModel();
+
+            $sceneLight->populate([
+                'id'        => $light['id'],
+                'name'      => $light['name'],
+                'power'     => (bool) $light['power'],
+                'colormode' => $light['colormode'],
+                'ct'        => $light['ct'],
+                'hue'       => $light['hue'],
+                'sat'       => $light['sat'],
+                'bri'       => $light['bri'],
+                'included'  => array_key_exists('included', $light) ? $light['included'] : true
+            ]);
+
+            $this->models[] = $sceneLight;
+        }
+    }
+
+    public function replaceFromArray($lights)
+    {
+        foreach ($lights as $light) {
+            $index = $this->findById($light['id']);
+            if ($index !== false) {
+                $new_light = $this->getModel();
+                $new_light->populate($light);
+                $this->models[$index] = $new_light;
+            }
+        }
+    }
+
+    /**
+     * Function asArray
+     *
+     * @return array Array of light data.
+     */
     public function asArray()
     {
         $lights = [];
-        foreach ($this->lights as $light) {
+        foreach ($this as $light) {
             $lights[] = $light->asArray();
         }
 
         return $lights;
     }
 
-  /**
-   * Function asSettingsArray
-   *
-   * @return array An array suitable for setting light state.
-   */
+    /**
+     * Function asSettingsArray
+     *
+     * @return array An array suitable for setting light state.
+     */
     public function asSettingsArray()
     {
         $lights_arrays   = $this->asArray();
@@ -80,11 +112,27 @@ class Scene
         return $lights_settings;
     }
 
+    public function findById($id)
+    {
+        for ($i = 0; $i < count($this); $i++) {
+            if ($this->models[$i]->id == $id) {
+                return $i;
+            }
+        }
+
+        return false;
+    }
+
     public function set()
     {
-        foreach ($this->lights as $light) {
+        foreach ($this->models as $light) {
             $light->save();
             usleep(100000);
         }
+    }
+
+    protected function getModel()
+    {
+        return new SceneLight();
     }
 }
