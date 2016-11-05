@@ -72,23 +72,15 @@ class Scene extends Base
     {
         $scene = $this->scenes->findById($scene_id);
 
-        var_dump($scene->lights);
-
-        if (!empty($scene->lights[$light_id])) {
-            $light = $scene->lights[$light_id];
-            foreach ($this->params as $property => $value) {
-                if (property_exists($light, $property)) {
-                    if (is_numeric($value)) {
-                        $value = (int) $value;
-                    } elseif ($property == 'power') {
-                        $value = (bool) $value;
-                    }
-                    $scene->lights[$light_id]->{$property} = $value;
-                }
-            }
+        foreach ($scene as $light) {
+            echo "{$light->name}: id: {$light->id}, pow: {$light->power}, bri: {$light->bri}, ct: {$light->ct}, hue: {$light->hue}, sat: {$light->sat}\n";
         }
 
-        var_dump($scene->lights);
+        $scene->replaceOrInsertFromArray($this->params);
+
+        foreach ($scene as $light) {
+            echo "{$light->name}: id: {$light->id}, pow: {$light->power}, bri: {$light->bri}, ct: {$light->ct}, hue: {$light->hue}, sat: {$light->sat}\n";
+        }
 
         // if ($this->scenes->save()) {
         //     $this->render($this->scenes->asArray(), Base::FORMAT_JSON);

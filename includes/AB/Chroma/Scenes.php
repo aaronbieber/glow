@@ -19,35 +19,6 @@ class Scenes extends Collection
     const FLAG_ICASE = 1;
     public $errors = [];
 
-  /**
-   * Get the Scene with the given ID, and leave the internal pointer pointed at that scene object.
-   *
-   * @param int $id The ID of the Scene you're looking for.
-   *
-   * @return bool|\AB\Chroma\Scene The Scene with the ID given, or FALSE if not found.
-   */
-    public function findById($id)
-    {
-        foreach ($this as $scene) {
-            if ($scene->id == $id) {
-                return $scene;
-            }
-        }
-        return false;
-    }
-
-    public function findByName($name, $flags = null)
-    {
-        $name = ($flags & self::FLAG_ICASE) ? strtolower($name) : $name;
-        foreach ($this as $scene) {
-            $scene_name = ($flags & self::FLAG_ICASE) ? strtolower($scene->name) : $scene->name;
-            if ($scene_name == $name) {
-                return $scene;
-            }
-        }
-        return false;
-    }
-
     public function load(\AB\Chroma\Lights $lights = null)
     {
         $scenes_yaml = file_get_contents('data/scenes.yml');
@@ -77,6 +48,35 @@ class Scenes extends Collection
         }
 
         return empty($this->errors);
+    }
+
+    /**
+     * Get the Scene with the given ID, and leave the internal pointer pointed at that scene object.
+     *
+     * @param int $id The ID of the Scene you're looking for.
+     *
+     * @return bool|\AB\Chroma\Scene The Scene with the ID given, or FALSE if not found.
+     */
+    public function findById($id)
+    {
+        foreach ($this as $scene) {
+            if ($scene->id == $id) {
+                return $scene;
+            }
+        }
+        return false;
+    }
+
+    public function findByName($name, $flags = null)
+    {
+        $name = ($flags & self::FLAG_ICASE) ? strtolower($name) : $name;
+        foreach ($this as $scene) {
+            $scene_name = ($flags & self::FLAG_ICASE) ? strtolower($scene->name) : $scene->name;
+            if ($scene_name == $name) {
+                return $scene;
+            }
+        }
+        return false;
     }
 
     private function compareSceneNames($a, $b)

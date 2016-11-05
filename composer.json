@@ -1,6 +1,7 @@
 {
     "require": {
         "twig/twig": "1.*",
-        "mikecao/flight": "dev-master"
+        "mikecao/flight": "dev-master",
+        "phpunit/phpunit": "5.4.*"
     }
 }

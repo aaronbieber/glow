@@ -56,16 +56,38 @@ class Scene extends Collection
         }
     }
 
+    public function replaceOrInsertFromArray($lights)
+    {
+        if (!$this->replaceFromArray($lights)) {
+            $new_light = $this->getModel();
+            $new_light->populate($lights);
+            $this->models[] = $new_light;
+        }
+    }
+
     public function replaceFromArray($lights)
     {
+        if (empty($lights)) {
+            return false;
+        }
+
+        // If we're given just one light, pretend we got a list with one light in it.
+        if (array_key_exists('id', $lights)) {
+            $lights = [$lights];
+        }
+
         foreach ($lights as $light) {
             $index = $this->findById($light['id']);
             if ($index !== false) {
                 $new_light = $this->getModel();
                 $new_light->populate($light);
                 $this->models[$index] = $new_light;
+
+                return true;
             }
         }
+
+        return false;
     }
 
     /**
